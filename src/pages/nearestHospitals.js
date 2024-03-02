@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { getNearbyHospitals } from "../../lib/getNearbyHospitals";
 import Pin from "../../components/Pin";
-import MapComponent from "../../components/GoogleMap";
+import MapComponent from "../../components/Map/GoogleMap";
 import useTrackUserLocation from "../../hooks/trackUserLocation";
 
 const FindNearestHospitals = () => {
   const [hospitalDetails, setHospitalDetails] = useState([]);
   const coords = useTrackUserLocation();
   // console.log({coords});
-  const {latitude, longitude} = coords;
-  
+  const { latitude, longitude } = coords;
+
   useEffect(() => {
     const fetchNearbyHospitals = async () => {
       try {
-        const hospitals = await getNearbyHospitals({latitude, longitude});
+        const hospitals = await getNearbyHospitals({ latitude, longitude });
         setHospitalDetails(hospitals);
       } catch (error) {
         console.error("Error fetching hospitals:", error);
@@ -34,7 +34,13 @@ const FindNearestHospitals = () => {
     };
   });
 
-  return <MapComponent locations={coordinatesArray} latitude={latitude} longitude={longitude} />;
+  return (
+    <MapComponent
+      locations={coordinatesArray}
+      latitude={latitude}
+      longitude={longitude}
+    />
+  );
 };
 
 export default FindNearestHospitals;

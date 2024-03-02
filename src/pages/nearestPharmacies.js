@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getNearbyPharmacies } from "../../lib/getNearbyPharmacies";
 import Pin from "../../components/Pin";
-import MapComponent from "../../components/GoogleMap";
+import MapComponent from "../../components/Map/GoogleMap";
 import useTrackUserLocation from "../../hooks/trackUserLocation";
 
 const FindNearestPharmacies = () => {

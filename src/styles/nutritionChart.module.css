@@ -1,0 +1,30 @@
+.inputWrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+}
+
+.hght {
+    height: 100px;
+}
+.fullpage {
+    background-color: var(--bgshade); 
+    margin-bottom: 20px;
+    padding: 32px;
+}
+.weight_input {
+    margin-left: 20px
+}
+.option_wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.input_box {
+    
+}
