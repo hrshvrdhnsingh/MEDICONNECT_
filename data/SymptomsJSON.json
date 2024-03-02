@@ -7,6 +7,7 @@
       { "Sinus Pressure": "sinus_pressure" },
       { "Runny Nose": "runny_nose" },
       { "Congestion": "congestion" },
+      { "Rusty Sputum": "rusty_sputum" },
       { "Chest Pain": "chest_pain" },
       { "Mucoid Sputum": "mucoid_sputum" },
       { "Phlegm": "phlegm" },
@@ -18,6 +19,7 @@
     "symptoms": [
       { "Stomach Pain": "stomach_pain" },
       { "Belly Pain": "belly_pain" },
+      { "Passage of Gases":"passage_of_gases"},
       { "Acidity": "acidity" },
       { "Ulcers on Tongue": "ulcers_on_tongue" },
       { "Vomiting": "vomiting" },
@@ -56,6 +58,7 @@
     "symptoms": [
       { "Shivering": "shivering" },
       { "Chills": "chills" },
+      { "Internal Itching":"internal_itching"},
       { "Puffy Eyes and face": "puffy_face_and_eyes" },
       { "Headache": "headache" },
       { "Dizziness": "dizziness" },
@@ -127,6 +130,7 @@
   "Other General Symptoms": {
     "symptoms": [
       { "Obesity": "obesity" },
+      {"Dehydration":"dehydration"},
       { "High Fever": "high_fever" },
       { "Mild Fever": "mild_fever" },
       { "Fatigue": "fatigue" },
@@ -136,10 +140,11 @@
       { "Swelling of Extremities": "swollen_extremeties" },
       { "Excessive Hunger": "excessive_hunger" },
       { "Drying and Tingling Lips": "drying_and_tingling_lips" },
-      { "Rusty Sputum": "rusty_sputum" },
       { "Painful Walking": "painful_walking" },
       { "Malaise": "malaise" },
+      { "Typhus Fever":"toxic_look_(typhos)"},
       { "Bruising": "bruising" },
+      { "Cold Hands and Feet": "cold_hands_and_feets" },
       { "weating": "sweating" }
     ]
   },
@@ -148,7 +153,8 @@
       { "Family History": "family_history" },
       { "Receiving Blood Transfusion": "receiving_blood_transfusion" },
       { "Receiving Unsterile Injections": "receiving_unsterile_injections" },
-      { "History of Alcohol Consumption": "history_of_alcohol_consumption" }
+      { "History of Alcohol Consumption": "history_of_alcohol_consumption" },
+      { "Extra Marital Contacts": "extra_marital_contacts" }
     ]
   },
   "Serious Conditions and Complications": {
