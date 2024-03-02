@@ -1,0 +1,167 @@
+{
+  "Respiratory Symptoms": {
+    "symptoms": [
+      { "Continuous Sneezing": "continuous_sneezing" },
+      { "Cough": "cough" },
+      { "Breathlessness": "breathlessness" },
+      { "Sinus Pressure": "sinus_pressure" },
+      { "Runny Nose": "runny_nose" },
+      { "Congestion": "congestion" },
+      { "Chest Pain": "chest_pain" },
+      { "Mucoid Sputum": "mucoid_sputum" },
+      { "Phlegm": "phlegm" },
+      { "Patches in Throat": "patches_in_throat" },
+      { "Throat Irritation": "throat_irritation" }
+    ]
+  },
+  "Digestive and Stomach Symptoms": {
+    "symptoms": [
+      { "Stomach Pain": "stomach_pain" },
+      { "Belly Pain": "belly_pain" },
+      { "Acidity": "acidity" },
+      { "Ulcers on Tongue": "ulcers_on_tongue" },
+      { "Vomiting": "vomiting" },
+      { "Indigestion": "indigestion" },
+      { "Nausea": "nausea" },
+      { "Loss of Appetite": "loss_of_appetite" },
+      { "Increased Appetite": "increased_appetite" },
+      { "Abdominal Pain": "abdominal_pain" },
+      { "Diarrhea": "diarrhoea" },
+      { "Constipation": "constipation" },
+      { "Patches in Throat": "patches_in_throat" },
+      { "Acute Liver Failure": "acute_liver_failure" },
+      { "Fluid Overload": "fluid_overload" },
+      { "Swelling of Stomach": "swelling_of_stomach" },
+      { "Swelled Lymph Nodes": "swelled_lymph_nodes" }
+    ]
+  },
+  "Musculoskeletal Symptoms": {
+    "symptoms": [
+      { "Joint Pain": "joint_pain" },
+      { "Muscle Wasting": "muscle_wasting" },
+      { "Back Pain": "back_pain" },
+      { "Weakness in Limbs": "weakness_in_limbs" },
+      { "Knee Pain": "knee_pain" },
+      { "Swelling Joints": "swelling_joints" },
+      { "Hip Joint Pain": "hip_joint_pain" },
+      { "Muscle Weakness": "muscle_weakness" },
+      { "Muscle Pain": "muscle_pain" },
+      { "Neck Pain": "neck_pain" },
+      { "Stiff Neck": "stiff_neck" },
+      { "Movement Stiffness": "movement_stiffness" },
+      { "Cramps": "cramps" }
+    ]
+  },
+  "Neurological and Sensory Symptoms": {
+    "symptoms": [
+      { "Shivering": "shivering" },
+      { "Chills": "chills" },
+      { "Puffy Eyes and face": "puffy_face_and_eyes" },
+      { "Headache": "headache" },
+      { "Dizziness": "dizziness" },
+      { "Blurred and Distorted Vision": "blurred_and_distorted_vision" },
+      { "Loss of Balance": "loss_of_balance" },
+      { "Unsteadiness": "unsteadiness" },
+      { "Weakness of One Body Side": "weakness_of_one_body_side" },
+      { "Loss of Smell": "loss_of_smell" },
+      { "Altered Sensorium": "altered_sensorium" },
+      { "Slurred Speech": "slurred_speech" },
+      { "Spinning Movements": "spinning_movements" },
+      { "Lack of Concentration": "lack_of_concentration" },
+      { "Visual Disturbances": "visual_disturbances" },
+      { "Pain Behind the Eyes": "pain_behind_the_eyes" },
+      { "Watering from Eyes": "watering_from_eyes" },
+      { "Sunken Eyes": "sunken_eyes" },
+      { "Yellowing of Eyes": "yellowing_of_eyes" },
+      { "Redness of Eyes": "redness_of_eyes" }
+    ]
+  },
+  "Skin and Dermatological Symptoms": {
+    "symptoms": [
+      { "Yellowish Skin": "yellowish_skin" },
+      { "Itching": "itching" },
+      { "Skin Rash": "skin_rash" },
+      { "Nodal Skin Eruptions": "nodal_skin_eruptions" },
+      { "Red Spots Over Body": "red_spots_over_body" },
+      { "Dischromic Patches": "dischromic _patches" },
+      { "Blackheads": "blackheads" },
+      { "Scurrying": "scurring" },
+      { "Skin Peeling": "skin_peeling" },
+      { "Silver-like Dusting": "silver_like_dusting" },
+      { "Small Dents in Nails": "small_dents_in_nails" },
+      { "Inflammatory Nails": "inflammatory_nails" },
+      { "Brittle Nails": "brittle_nails" },
+      { "Blister": "blister" },
+      { "Red Sore Around Nose": "red_sore_around_nose" },
+      { "Yellow Crust Ooze": "yellow_crust_ooze" },
+      { "Pus-filled Pimples": "pus_filled_pimples" }
+    ]
+  },
+  "Excretion and Reproductive Symptoms": {
+    "symptoms": [
+      { "Irritaion in Anus": "irritation_in_anus" },
+      { "Bloody Stool": "bloody_stool" },
+      { "Bowel Pain": "pain_during_bowel_movements" },
+      { "Pain in Anal Region": "pain_in_anal_region" },
+      { "Burning Micturition": "burning_micturition" },
+      { "Spotting Urination": "spotting_ urination" },
+      { "Polyuria": "polyuria" },
+      { "Abnormal Menstruation": "abnormal_menstruation" },
+      { "Foul Smell of Urine": "foul_smell_of urine" },
+      { "Continuous Feel of Urine": "continuous_feel_of_urine" },
+      { "Dark Urine": "dark_urine" },
+      { "Yellow Urine": "yellow_urine" },
+      { "Bladder Discomfort": "bladder_discomfort" }
+    ]
+  },
+  "Psychological and Emotional Symptoms": {
+    "symptoms": [
+      { "Restlessness": "restlessness" },
+      { "Lethargy": "lethargy" },
+      { "Anxiety": "anxiety" },
+      { "Mood Swings": "mood_swings" },
+      { "Depression": "depression" },
+      { "Irritability": "irritability" }
+    ]
+  },
+  "Other General Symptoms": {
+    "symptoms": [
+      { "Obesity": "obesity" },
+      { "High Fever": "high_fever" },
+      { "Mild Fever": "mild_fever" },
+      { "Fatigue": "fatigue" },
+      { "Weight Gain": "weight_gain" },
+      { "Weight Loss": "weight_loss" },
+      { "Irregular Sugar Level": "irregular_sugar_level" },
+      { "Swelling of Extremities": "swollen_extremeties" },
+      { "Excessive Hunger": "excessive_hunger" },
+      { "Drying and Tingling Lips": "drying_and_tingling_lips" },
+      { "Rusty Sputum": "rusty_sputum" },
+      { "Painful Walking": "painful_walking" },
+      { "Malaise": "malaise" },
+      { "Bruising": "bruising" },
+      { "weating": "sweating" }
+    ]
+  },
+  "Risk Factors and History": {
+    "symptoms": [
+      { "Family History": "family_history" },
+      { "Receiving Blood Transfusion": "receiving_blood_transfusion" },
+      { "Receiving Unsterile Injections": "receiving_unsterile_injections" },
+      { "History of Alcohol Consumption": "history_of_alcohol_consumption" }
+    ]
+  },
+  "Serious Conditions and Complications": {
+    "symptoms": [
+      { "Fast Heart Rate": "fast_heart_rate" },
+      { "Acute Liver Failure": "acute_liver_failure" },
+      { "Fluid Overload": "fluid_overload" },
+      { "Stomach Bleeding": "stomach_bleeding" },
+      { "Distention of Abdomen": "distention_of_abdomen" },
+      { "Blood in Sputum": "blood_in_sputum" },
+      { "Prominent Veins on Calf": "prominent_veins_on_calf" },
+      { "Palpitations": "palpitations" },
+      { "Coma": "coma" }
+    ]
+  }
+}

@@ -1,0 +1,636 @@
+{
+  "diet_plan": {
+    "Losing_Excessive_Weight": {
+      "veg": {
+        "breakfast": {
+          "options": [
+            {
+              "dish": "Green smoothie with spinach, kale, and cucumber",
+              "description": "A nutritious blend of fresh green vegetables providing essential vitamins and minerals.",
+              "recipe": "Blend spinach, kale, cucumber, and water until smooth. Optionally, add a touch of honey or lemon for flavor."
+            },
+            {
+              "dish": "Vegetable oats porridge with flaxseeds",
+              "description": "A hearty and fiber-rich breakfast that keeps you full for longer, aiding in weight loss.",
+              "recipe": "Cook oats with mixed vegetables and flaxseeds. Serve hot with a sprinkle of salt and pepper."
+            },
+            {
+              "dish": "Cabbage soup with a slice of whole wheat bread",
+              "description": "A low-calorie yet satisfying meal rich in fiber and antioxidants.",
+              "recipe": "Simmer shredded cabbage, carrots, onions, and celery in vegetable broth until tender. Serve with whole wheat bread."
+            }
+          ]
+        },
+        "lunch": {
+          "options": [
+            {
+              "dish": "Steamed vegetables with quinoa",
+              "description": "A balanced meal providing protein, fiber, and various vitamins and minerals.",
+              "recipe": "Steam a mix of vegetables like broccoli, carrots, and bell peppers. Serve over cooked quinoa."
+            },
+            {
+              "dish": "Lentil soup with a side salad",
+              "description": "A protein-packed soup paired with a refreshing salad for a light yet fulfilling lunch.",
+              "recipe": "Boil lentils with vegetables and spices until tender. Serve hot with a side salad drizzled with lemon vinaigrette."
+            },
+            {
+              "dish": "Grilled tofu with stir-fried vegetables",
+              "description": "A plant-based protein option served with flavorful stir-fried vegetables.",
+              "recipe": "Marinate tofu in soy sauce and grill until golden. Stir-fry mixed vegetables in a hot skillet. Serve together."
+            }
+          ]
+        },
+        "dinner": {
+          "options": [
+            {
+              "dish": "Baked sweet potato with roasted chickpeas",
+              "description": "A satisfying and nutrient-rich dinner option loaded with fiber, vitamins, and minerals.",
+              "recipe": "Bake sweet potatoes until tender. Roast chickpeas with spices until crispy. Serve together."
+            },
+            {
+              "dish": "Vegetable stir-fry with tofu noodles",
+              "description": "A light and flavorful dinner featuring colorful vegetables and tofu noodles.",
+              "recipe": "Stir-fry assorted vegetables in a pan. Add tofu noodles and toss until heated through. Season with soy sauce and sesame oil."
+            },
+            {
+              "dish": "Zucchini noodles with marinara sauce",
+              "description": "A low-carb alternative to pasta, served with a classic marinara sauce for a healthy and delicious dinner.",
+              "recipe": "Using a spiralizer, create zucchini noodles. Simmer marinara sauce with garlic and herbs. Serve over zucchini noodles."
+            }
+          ]
+        },
+        "snacks": {
+          "options": [
+            {
+              "dish": "Raw vegetable sticks with hummus",
+              "description": "A crunchy and satisfying snack loaded with vitamins, minerals, and healthy fats.",
+              "recipe": "Cut carrots, cucumber, and bell peppers into sticks. Serve with homemade or store-bought hummus."
+            },
+            {
+              "dish": "Chia seed pudding with almond milk",
+              "description": "A nutritious and energizing snack packed with fiber, protein, and omega-3 fatty acids.",
+              "recipe": "Mix chia seeds with almond milk and a sweetener of choice. Refrigerate until thickened. Serve chilled."
+            },
+            {
+              "dish": "Mixed fruit salad with a sprinkle of chaat masala",
+              "description": "A refreshing and tangy fruit salad with a hint of spice, perfect for a quick and healthy snack.",
+              "recipe": "Toss together diced fruits like apple, banana, and orange. Sprinkle with chaat masala for added flavor."
+            }
+          ]
+        }
+      },
+      "non-veg": {
+        "breakfast": {
+          "options": [
+            {
+              "dish": "Egg white omelette with spinach and mushrooms",
+              "description": "A protein-rich breakfast option with the goodness of vegetables.",
+              "recipe": "Whisk egg whites and pour into a hot skillet. Add spinach and mushrooms. Cook until set. Fold and serve hot."
+            },
+            {
+              "dish": "Grilled chicken breast with steamed broccoli",
+              "description": "A lean and protein-packed breakfast option paired with nutritious steamed broccoli.",
+              "recipe": "Marinate chicken breast with herbs and grill until cooked through. Serve with steamed broccoli on the side."
+            },
+            {
+              "dish": "Smoked salmon with avocado on whole grain toast",
+              "description": "A flavorful and omega-3 rich breakfast featuring smoked salmon and creamy avocado on whole grain toast.",
+              "recipe": "Top whole grain toast with mashed avocado and smoked salmon. Sprinkle with lemon juice and black pepper."
+            }
+          ]
+        },
+        "lunch": {
+          "options": [
+            {
+              "dish": "Grilled chicken salad with mixed greens",
+              "description": "A light and nutritious salad featuring grilled chicken and a variety of fresh greens.",
+              "recipe": "Grill chicken breast until cooked through. Slice and toss with mixed greens, cherry tomatoes, and a vinaigrette dressing."
+            },
+            {
+              "dish": "Tuna salad with olive oil and lemon dressing",
+              "description": "A protein-packed salad featuring tuna, olives, and a zesty lemon dressing.",
+              "recipe": "Combine flaked tuna with olives, red onion, and lemon juice. Drizzle with olive oil and toss to coat."
+            },
+            {
+              "dish": "Turkey breast slices with cucumber and tomatoes",
+              "description": "A lean and satisfying lunch option featuring thinly sliced turkey breast with crisp cucumber and juicy tomatoes.",
+              "recipe": "Layer turkey breast slices with cucumber and tomato slices. Season with salt, pepper, and a squeeze of lemon juice."
+            }
+          ]
+        },
+        "dinner": {
+          "options": [
+            {
+              "dish": "Baked fish fillet with steamed asparagus",
+              "description": "A light yet satisfying dinner featuring tender baked fish fillets served with nutritious steamed asparagus.",
+              "recipe": "Season fish fillets with herbs and bake until flaky. Serve with steamed asparagus on the side."
+            },
+            {
+              "dish": "Chicken and vegetable stir-fry with minimal oil",
+              "description": "A flavorful stir-fry featuring tender chicken and crisp vegetables, cooked with minimal oil for a healthier option.",
+              "recipe": "Stir-fry chicken strips with vegetables like bell peppers, broccoli, and snap peas. Season with soy sauce and ginger."
+            },
+            {
+              "dish": "Lean turkey meatballs with zucchini noodles",
+              "description": "Tender turkey meatballs served with spiralized zucchini noodles for a low-carb and protein-rich dinner option.",
+              "recipe": "Mix ground turkey with herbs and spices. Form into meatballs and bake until cooked through. Serve with zucchini noodles."
+            }
+          ]
+        },
+        "snacks": {
+          "options": [
+            {
+              "dish": "Boiled eggs with a sprinkle of black pepper",
+              "description": "A quick and protein-rich snack featuring boiled eggs seasoned with black pepper.",
+              "recipe": "Boil eggs until cooked to desired doneness. Peel and sprinkle with freshly ground black pepper."
+            },
+            {
+              "dish": "Grilled shrimp skewers with lemon wedges",
+              "description": "Tender grilled shrimp skewers served with tangy lemon wedges for a refreshing and protein-packed snack.",
+              "recipe": "Marinate shrimp with olive oil, garlic, and herbs. Thread onto skewers and grill until cooked. Serve with lemon wedges."
+            },
+            {
+              "dish": "Cottage cheese with sliced cucumber",
+              "description": "A simple yet satisfying snack featuring creamy cottage cheese paired with crisp cucumber slices.",
+              "recipe": "Serve cottage cheese with thinly sliced cucumber. Season with salt and pepper, if desired."
+            }
+          ]
+        }
+      }
+    },
+    "Weight_Loss": {
+      "veg": {
+        "breakfast": {
+          "options": [
+            {
+              "dish": "Upma with vegetables",
+              "description": "A traditional Indian breakfast made with semolina and mixed vegetables, light yet filling.",
+              "recipe": "Sautee semolina with mixed vegetables like peas, carrots, and onions. Serve hot with a sprinkle of cilantro."
+            },
+            {
+              "dish": "Poha (flattened rice) with peanuts and vegetables",
+              "description": "A light and nutritious breakfast option featuring flattened rice, peanuts, and colorful vegetables.",
+              "recipe": "Sautee flattened rice with peanuts, mustard seeds, and curry leaves. Add chopped vegetables and cook until tender."
+            },
+            {
+              "dish": "Vegetable paratha with curd",
+              "description": "A wholesome and flavorful breakfast featuring whole wheat flatbread stuffed with spiced vegetables, served with yogurt.",
+              "recipe": "Stuff whole wheat dough with a mixture of cooked and spiced vegetables. Roll out into parathas and cook on a hot skillet. Serve with yogurt."
+            }
+          ]
+        },
+        "lunch": {
+          "options": [
+            {
+              "dish": "Dal (lentil soup) with roti (flatbread) and vegetable sabzi (stir-fry)",
+              "description": "A classic Indian lunch featuring lentil soup, flatbread, and a flavorful vegetable stir-fry.",
+              "recipe": "Cook lentils with spices until tender. Serve with whole wheat roti and a side of mixed vegetable stir-fry."
+            },
+            {
+              "dish": "Chickpea salad with cucumber and tomatoes",
+              "description": "A protein-packed salad featuring chickpeas, crisp cucumber, and juicy tomatoes, perfect for a light yet satisfying lunch.",
+              "recipe": "Combine chickpeas with diced cucumber, tomatoes, and herbs. Dress with lemon juice and olive oil. Serve chilled."
+            },
+            {
+              "dish": "Brown rice with mixed vegetable curry",
+              "description": "A nutritious and filling lunch option featuring fiber-rich brown rice served with a flavorful mixed vegetable curry.",
+              "recipe": "Cook brown rice until tender. Serve with a curry made from mixed vegetables like carrots, peas, and bell peppers."
+            }
+          ]
+        },
+        "dinner": {
+          "options": [
+            {
+              "dish": "Moong dal khichdi (rice and lentil porridge)",
+              "description": "A comforting and easy-to-digest dinner option featuring a soothing blend of rice and lentils.",
+              "recipe": "Cook rice and lentils together until soft. Season with turmeric, cumin, and ghee. Serve hot."
+            },
+            {
+              "dish": "Vegetable soup with whole wheat bread",
+              "description": "A light yet satisfying dinner option featuring a hearty vegetable soup served with whole wheat bread.",
+              "recipe": "Simmer assorted vegetables in vegetable broth until tender. Serve hot with whole wheat bread."
+            },
+            {
+              "dish": "Spinach and paneer (cottage cheese) curry with roti",
+              "description": "A flavorful and protein-rich dinner featuring creamy spinach and paneer curry served with whole wheat roti.",
+              "recipe": "Sautee spinach with spices and blend into a smooth sauce. Add paneer cubes and simmer until heated through. Serve with whole wheat roti."
+            }
+          ]
+        },
+        "snacks": {
+          "options": [
+            {
+              "dish": "Fruit chaat (mixed fruit salad)",
+              "description": "A refreshing and tangy fruit salad featuring a mix of seasonal fruits, perfect for a healthy snack.",
+              "recipe": "Toss together diced fruits like apple, banana, and mango. Sprinkle with chaat masala for a burst of flavor."
+            },
+            {
+              "dish": "Sprouts salad with lemon juice and spices",
+              "description": "A nutritious and protein-rich salad featuring sprouted beans, seasoned with lemon juice and spices.",
+              "recipe": "Combine sprouted beans with chopped onions, tomatoes, and green chilies. Dress with lemon juice and chaat masala. Serve chilled."
+            },
+            {
+              "dish": "Boiled chickpeas with chaat masala",
+              "description": "A simple yet satisfying snack featuring boiled chickpeas seasoned with tangy chaat masala.",
+              "recipe": "Boil chickpeas until tender. Season with chaat masala, salt, and lemon juice. Serve warm or at room temperature."
+            }
+          ]
+        }
+      },
+      "non-veg": {
+        "breakfast": {
+          "options": [
+            {
+              "dish": "Egg bhurji (scrambled eggs) with whole wheat bread",
+              "description": "A protein-rich breakfast featuring scrambled eggs cooked with onions, tomatoes, and spices, served with whole wheat bread.",
+              "recipe": "Sautee onions and tomatoes until soft. Add beaten eggs and scramble until cooked through. Serve with whole wheat bread."
+            },
+            {
+              "dish": "Chicken sandwich with mint chutney",
+              "description": "A hearty breakfast sandwich featuring grilled chicken and fresh mint chutney, perfect for a quick and satisfying meal.",
+              "recipe": "Layer grilled chicken slices between whole wheat bread. Spread mint chutney on one slice. Serve hot or cold."
+            },
+            {
+              "dish": "Omelette with vegetables",
+              "description": "A classic breakfast option featuring a fluffy omelette filled with sauteed vegetables, perfect for a quick and nutritious meal.",
+              "recipe": "Whisk eggs with salt and pepper. Pour into a hot skillet. Add sauteed vegetables like bell peppers and mushrooms. Fold and serve hot."
+            }
+          ]
+        },
+        "lunch": {
+          "options": [
+            {
+              "dish": "Chicken curry with brown rice",
+              "description": "A flavorful and protein-rich lunch featuring tender chicken curry served with fiber-rich brown rice.",
+              "recipe": "Simmer chicken pieces in a flavorful curry sauce until tender. Serve hot with brown rice."
+            },
+            {
+              "dish": "Fish curry with roti",
+              "description": "A delicious and aromatic fish curry served with soft and fluffy roti, perfect for a satisfying lunch.",
+              "recipe": "Simmer fish fillets in a spicy curry sauce until cooked through. Serve hot with roti."
+            },
+            {
+              "dish": "Egg fried rice with mixed vegetables",
+              "description": "A quick and easy lunch option featuring fluffy fried rice tossed with scrambled eggs and colorful mixed vegetables.",
+              "recipe": "Sautee cooked rice with scrambled eggs, mixed vegetables, and soy sauce. Cook until heated through. Serve hot."
+            }
+          ]
+        },
+        "dinner": {
+          "options": [
+            {
+              "dish": "Grilled fish with roasted vegetables",
+              "description": "Tender grilled fish served with flavorful roasted vegetables for a light yet satisfying dinner option.",
+              "recipe": "Marinate fish fillets with herbs and lemon juice. Grill until cooked through. Serve with roasted vegetables."
+            },
+            {
+              "dish": "Chicken tikka with salad",
+              "description": "Tender chicken tikka served with a crisp and refreshing salad, perfect for a flavorful and balanced dinner.",
+              "recipe": "Marinate chicken pieces in yogurt and spices. Grill until charred and cooked through. Serve with salad."
+            },
+            {
+              "dish": "Mutton curry with roti",
+              "description": "A rich and aromatic mutton curry served with soft and fluffy roti, perfect for a satisfying dinner.",
+              "recipe": "Simmer mutton pieces in a flavorful curry sauce until tender. Serve hot with roti."
+            }
+          ]
+        },
+        "snacks": {
+          "options": [
+            {
+              "dish": "Chicken tikka skewers",
+              "description": "Tender chicken pieces marinated in yogurt and spices, skewered and grilled to perfection, perfect for a flavorful snack.",
+              "recipe": "Marinate chicken pieces in yogurt, lemon juice, and spices. Thread onto skewers and grill until cooked through."
+            },
+            {
+              "dish": "Fish cutlets with mint chutney",
+              "description": "Crispy and flavorful fish cutlets served with fresh mint chutney for a delicious and satisfying snack.",
+              "recipe": "Mix cooked fish with mashed potatoes, herbs, and spices. Shape into patties and shallow fry until golden. Serve with mint chutney."
+            },
+            {
+              "dish": "Boiled eggs with pepper and salt",
+              "description": "A simple yet satisfying snack featuring boiled eggs seasoned with freshly ground black pepper and salt.",
+              "recipe": "Boil eggs until cooked to desired doneness. Peel and season with black pepper and salt. Serve warm or chilled."
+            }
+          ]
+        }
+      }
+    },
+    "Maintenance": {
+      "veg": {
+        "breakfast": {
+          "options": [
+            {
+              "dish": "Vegetable upma",
+              "description": "A wholesome and flavorful breakfast option made with semolina and mixed vegetables, perfect for a hearty start to the day.",
+              "recipe": "Sautee semolina with mixed vegetables like carrots, peas, and beans. Serve hot with a sprinkle of cilantro."
+            },
+            {
+              "dish": "Paratha with yogurt",
+              "description": "A classic Indian breakfast featuring flaky whole wheat flatbread served with creamy yogurt for a satisfying meal.",
+              "recipe": "Roll out whole wheat dough into circles. Cook on a hot skillet until golden. Serve with yogurt."
+            },
+            {
+              "dish": "Vegetable uttapam (savory pancake)",
+              "description": "A South Indian specialty featuring thick pancakes made with fermented batter and topped with colorful vegetables.",
+              "recipe": "Pour dosa batter onto a hot skillet. Top with finely chopped vegetables. Cook until golden. Serve hot with chutney."
+            }
+          ]
+        },
+        "lunch": {
+          "options": [
+            {
+              "dish": "Rajma (kidney bean curry) with rice",
+              "description": "A comforting and protein-rich lunch featuring tender kidney bean curry served with fluffy white rice.",
+              "recipe": "Simmer kidney beans in a flavorful curry sauce until tender. Serve hot with steamed white rice."
+            },
+            {
+              "dish": "Mixed vegetable curry with roti",
+              "description": "A nutritious and satisfying lunch featuring a medley of colorful vegetables in a rich and flavorful curry sauce, served with soft roti.",
+              "recipe": "Cook mixed vegetables in a spicy curry sauce until tender. Serve hot with roti."
+            },
+            {
+              "dish": "Paneer tikka with salad",
+              "description": "A protein-rich lunch featuring marinated paneer cubes grilled to perfection, served with a crisp and refreshing salad.",
+              "recipe": "Marinate paneer cubes in yogurt and spices. Grill until charred. Serve with salad."
+            }
+          ]
+        },
+        "dinner": {
+          "options": [
+            {
+              "dish": "Vegetable biryani with raita",
+              "description": "A fragrant and flavorful rice dish featuring basmati rice cooked with mixed vegetables and aromatic spices, served with cooling raita.",
+              "recipe": "Layer cooked rice with mixed vegetables and spices. Cook until heated through. Serve hot with raita."
+            },
+            {
+              "dish": "Dhal tadka (tempered lentils) with rice",
+              "description": "A comforting and protein-rich dinner featuring creamy lentils tempered with spices, served with steamed rice.",
+              "recipe": "Cook lentils until soft. Temper with spices like cumin and mustard seeds. Serve hot with steamed rice."
+            },
+            {
+              "dish": "Vegetable pulao (spiced rice)",
+              "description": "A fragrant and flavorful rice dish featuring basmati rice cooked with mixed vegetables and aromatic spices.",
+              "recipe": "Sautee rice with mixed vegetables and spices. Cook until tender. Serve hot."
+            }
+          ]
+        },
+        "snacks": {
+          "options": [
+            {
+              "dish": "Masala peanuts",
+              "description": "Spicy and flavorful peanuts seasoned with a blend of aromatic spices, perfect for a crunchy and satisfying snack.",
+              "recipe": "Roast peanuts until golden. Toss with spices like chili powder, cumin, and chaat masala. Serve warm or at room temperature."
+            },
+            {
+              "dish": "Vegetable pakoras (fritters)",
+              "description": "Crispy and flavorful fritters made with mixed vegetables and chickpea flour, perfect for a tasty and indulgent snack.",
+              "recipe": "Mix chopped vegetables with chickpea flour and spices. Deep fry until golden and crispy. Serve hot with chutney."
+            },
+            {
+              "dish": "Paneer tikka skewers",
+              "description": "Tender paneer cubes marinated in yogurt and spices, skewered and grilled to perfection, perfect for a flavorful and protein-rich snack.",
+              "recipe": "Marinate paneer cubes in yogurt, lemon juice, and spices. Thread onto skewers and grill until cooked through."
+            }
+          ]
+        }
+      },
+      "non-veg": {
+        "breakfast": {
+          "options": [
+            {
+              "dish": "Egg roll with green chutney",
+              "description": "A delicious and satisfying breakfast roll featuring scrambled eggs wrapped in a soft flatbread, served with spicy green chutney.",
+              "recipe": "Scramble eggs and roll into a flatbread. Serve with a spicy green chutney."
+            },
+            {
+              "dish": "Chicken sandwich with mint chutney",
+              "description": "A hearty breakfast sandwich featuring grilled chicken and fresh mint chutney, perfect for a quick and satisfying meal.",
+              "recipe": "Layer grilled chicken slices between whole wheat bread. Spread mint chutney on one slice. Serve hot or cold."
+            },
+            {
+              "dish": "Masala omelette with toast",
+              "description": "A flavorful and spicy omelette made with eggs, onions, tomatoes, and spices, served with crispy toast for a satisfying breakfast.",
+              "recipe": "Whisk eggs with onions, tomatoes, and spices. Pour into a hot skillet and cook until set. Serve with toast."
+            }
+          ]
+        },
+        "lunch": {
+          "options": [
+            {
+              "dish": "Chicken curry with rice",
+              "description": "A classic and flavorful chicken curry served with steamed white rice for a satisfying and comforting lunch.",
+              "recipe": "Simmer chicken pieces in a spicy curry sauce until tender. Serve hot with steamed white rice."
+            },
+            {
+              "dish": "Fish fry with roti",
+              "description": "Crispy and flavorful fish fry served with soft and fluffy roti for a delicious and satisfying lunch option.",
+              "recipe": "Coat fish fillets with spices and breadcrumbs. Fry until golden and crispy. Serve hot with roti."
+            },
+            {
+              "dish": "Egg curry with paratha",
+              "description": "A comforting and protein-rich egg curry served with flaky and buttery paratha, perfect for a satisfying lunch.",
+              "recipe": "Simmer boiled eggs in a flavorful curry sauce until heated through. Serve hot with paratha."
+            }
+          ]
+        },
+        "dinner": {
+          "options": [
+            {
+              "dish": "Mutton curry with rice",
+              "description": "A rich and aromatic mutton curry served with steamed white rice for a hearty and satisfying dinner option.",
+              "recipe": "Simmer mutton pieces in a flavorful curry sauce until tender. Serve hot with steamed white rice."
+            },
+            {
+              "dish": "Grilled fish with salad",
+              "description": "Tender grilled fish served with a crisp and refreshing salad for a light yet satisfying dinner option.",
+              "recipe": "Marinate fish fillets with herbs and lemon juice. Grill until cooked through. Serve with salad."
+            },
+            {
+              "dish": "Chicken biryani with raita",
+              "description": "A fragrant and flavorful rice dish featuring tender chicken cooked with aromatic spices, served with cooling raita.",
+              "recipe": "Layer cooked rice with marinated chicken and spices. Cook until heated through. Serve hot with raita."
+            }
+          ]
+        },
+        "snacks": {
+          "options": [
+            {
+              "dish": "Chicken kebabs",
+              "description": "Tender chicken pieces marinated in yogurt and spices, skewered and grilled to perfection, perfect for a flavorful and protein-rich snack.",
+              "recipe": "Marinate chicken pieces in yogurt, lemon juice, and spices. Thread onto skewers and grill until cooked through."
+            },
+            {
+              "dish": "Fish fingers with tartar sauce",
+              "description": "Crispy and flavorful fish fingers served with tangy tartar sauce for a delicious and satisfying snack.",
+              "recipe": "Coat fish fillets with breadcrumbs. Fry until golden and crispy. Serve hot with tartar sauce."
+            },
+            {
+              "dish": "Egg bhurji (scrambled eggs)",
+              "description": "A classic Indian snack featuring scrambled eggs cooked with onions, tomatoes, and spices, perfect for a quick and satisfying snack.",
+              "recipe": "Sautee onions and tomatoes until soft. Add beaten eggs and scramble until cooked through. Serve hot."
+            }
+          ]
+        }
+      }
+    },
+    "Weight_Gain": {
+      "veg": {
+        "breakfast": {
+          "options": [
+            {
+              "dish": "Vegetable cheese sandwich",
+              "description": "A hearty and indulgent breakfast sandwich featuring a combination of mixed vegetables and cheese, perfect for a satisfying start to the day.",
+              "recipe": "Layer mixed vegetables and cheese between whole wheat bread slices. Grill until golden and cheese is melted. Serve hot."
+            },
+            {
+              "dish": "Potato stuffed paratha with yogurt",
+              "description": "A comforting and indulgent breakfast featuring flaky whole wheat flatbread stuffed with spiced potatoes, served with creamy yogurt.",
+              "recipe": "Stuff whole wheat dough with a mixture of mashed potatoes and spices. Roll out into parathas and cook until golden. Serve with yogurt."
+            },
+            {
+              "dish": "Banana smoothie with nuts",
+              "description": "A creamy and indulgent smoothie made with ripe bananas and nuts, perfect for a nutritious and satisfying breakfast option.",
+              "recipe": "Blend ripe bananas with milk and nuts of choice until smooth. Serve chilled."
+            }
+          ]
+        },
+        "lunch": {
+          "options": [
+            {
+              "dish": "Paneer (cottage cheese) curry with rice",
+              "description": "A rich and creamy paneer curry served with fluffy white rice for a hearty and satisfying lunch option.",
+              "recipe": "Simmer paneer cubes in a creamy curry sauce until heated through. Serve hot with steamed white rice."
+            },
+            {
+              "dish": "Chole (chickpea curry) with bhatura (fried bread)",
+              "description": "A classic Indian lunch featuring spicy chickpea curry served with crisp and fluffy fried bread for a satisfying meal.",
+              "recipe": "Simmer chickpeas in a spicy curry sauce until heated through. Serve hot with fried bread."
+            },
+            {
+              "dish": "Vegetable pulao with raita",
+              "description": "A fragrant and flavorful rice dish featuring basmati rice cooked with mixed vegetables and aromatic spices, served with cooling raita.",
+              "recipe": "Layer cooked rice with mixed vegetables and spices. Cook until heated through. Serve hot with raita."
+            }
+          ]
+        },
+        "dinner": {
+          "options": [
+            {
+              "dish": "Vegetable korma with naan",
+              "description": "A rich and creamy vegetable korma served with soft and fluffy naan bread for a satisfying and indulgent dinner option.",
+              "recipe": "Simmer mixed vegetables in a creamy curry sauce until tender. Serve hot with naan bread."
+            },
+            {
+              "dish": "Aloo (potato) curry with puri (fried bread)",
+              "description": "A classic Indian dinner featuring spicy potato curry served with crisp and fluffy fried bread for a satisfying meal.",
+              "recipe": "Simmer potatoes in a spicy curry sauce until tender. Serve hot with fried bread."
+            },
+            {
+              "dish": "Vegetable biryani with yogurt",
+              "description": "A fragrant and flavorful rice dish featuring basmati rice cooked with mixed vegetables and aromatic spices, served with creamy yogurt.",
+              "recipe": "Layer cooked rice with mixed vegetables and spices. Cook until heated through. Serve hot with yogurt."
+            }
+          ]
+        },
+        "snacks": {
+          "options": [
+            {
+              "dish": "Paneer tikka",
+              "description": "Tender paneer cubes marinated in yogurt and spices, skewered and grilled to perfection, perfect for a flavorful and protein-rich snack.",
+              "recipe": "Marinate paneer cubes in yogurt, lemon juice, and spices. Thread onto skewers and grill until cooked through."
+            },
+            {
+              "dish": "Aloo chaat (spicy potato snack)",
+              "description": "A spicy and tangy potato snack featuring crispy fried potatoes tossed with spices and chutneys, perfect for a flavorful and indulgent snack.",
+              "recipe": "Fry potatoes until golden and crispy. Toss with spices, chutneys, and herbs. Serve hot."
+            },
+            {
+              "dish": "Fruit yogurt smoothie",
+              "description": "A creamy and refreshing smoothie made with ripe fruits and yogurt, perfect for a nutritious and satisfying snack option.",
+              "recipe": "Blend ripe fruits with yogurt until smooth. Serve chilled."
+            }
+          ]
+        }
+      },
+      "non-veg": {
+        "breakfast": {
+          "options": [
+            {
+              "dish": "Chicken paratha with curd",
+              "description": "A hearty and indulgent breakfast featuring flaky whole wheat flatbread stuffed with spicy chicken, served with creamy yogurt.",
+              "recipe": "Stuff whole wheat dough with a mixture of cooked and spiced chicken. Roll out into parathas and cook until golden. Serve with yogurt."
+            },
+            {
+              "dish": "Egg and chicken sandwich",
+              "description": "A protein-rich breakfast sandwich featuring a combination of scrambled eggs and grilled chicken, perfect for a satisfying start to the day.",
+              "recipe": "Layer scrambled eggs and grilled chicken between whole wheat bread slices. Serve hot or cold."
+            },
+            {
+              "dish": "Omelette with cheese and toast",
+              "description": "A classic breakfast option featuring a fluffy omelette filled with melted cheese, served with crispy toast for a satisfying meal.",
+              "recipe": "Whisk eggs with salt and pepper. Pour into a hot skillet and cook until set. Sprinkle with cheese and fold. Serve with toast."
+            }
+          ]
+        },
+        "lunch": {
+          "options": [
+            {
+              "dish": "Chicken biryani with raita",
+              "description": "A fragrant and flavorful rice dish featuring tender chicken cooked with aromatic spices, served with cooling raita.",
+              "recipe": "Layer cooked rice with marinated chicken and spices. Cook until heated through. Serve hot with raita."
+            },
+            {
+              "dish": "Mutton curry with rice",
+              "description": "A rich and aromatic mutton curry served with steamed white rice for a hearty and satisfying lunch option.",
+              "recipe": "Simmer mutton pieces in a flavorful curry sauce until tender. Serve hot with steamed white rice."
+            },
+            {
+              "dish": "Fish curry with naan",
+              "description": "A flavorful and aromatic fish curry served with soft and fluffy naan bread, perfect for a satisfying lunch.",
+              "recipe": "Simmer fish fillets in a spicy curry sauce until cooked through. Serve hot with naan bread."
+            }
+          ]
+        },
+        "dinner": {
+          "options": [
+            {
+              "dish": "Butter chicken with naan",
+              "description": "A rich and creamy chicken curry served with soft and fluffy naan bread for a satisfying and indulgent dinner option.",
+              "recipe": "Simmer chicken pieces in a creamy curry sauce until tender. Serve hot with naan bread."
+            },
+            {
+              "dish": "Fish tikka masala with rice",
+              "description": "Tender fish pieces marinated in yogurt and spices, grilled and served in a creamy tomato-based sauce with steamed rice.",
+              "recipe": "Marinate fish pieces in yogurt and spices. Grill until cooked through. Simmer in a tomato-based sauce. Serve hot with rice."
+            },
+            {
+              "dish": "Egg curry with roti",
+              "description": "A comforting and protein-rich egg curry served with soft and fluffy roti, perfect for a satisfying dinner.",
+              "recipe": "Simmer boiled eggs in a flavorful curry sauce until heated through. Serve hot with roti."
+            }
+          ]
+        },
+        "snacks": {
+          "options": [
+            {
+              "dish": "Chicken kebabs with mint chutney",
+              "description": "Tender chicken pieces marinated in yogurt and spices, skewered and grilled to perfection, served with fresh mint chutney.",
+              "recipe": "Marinate chicken pieces in yogurt, lemon juice, and spices. Thread onto skewers and grill until cooked through. Serve with mint chutney."
+            },
+            {
+              "dish": "Fish cutlets with ketchup",
+              "description": "Crispy and flavorful fish cutlets served with tangy ketchup for a delicious and satisfying snack.",
+              "recipe": "Mix cooked fish with mashed potatoes, herbs, and spices. Shape into patties and shallow fry until golden. Serve with ketchup."
+            },
+            {
+              "dish": "Egg bhurji (scrambled eggs)",
+              "description": "A classic Indian snack featuring scrambled eggs cooked with onions, tomatoes, and spices, perfect for a quick and satisfying snack.",
+              "recipe": "Sautee onions and tomatoes until soft. Add beaten eggs and scramble until cooked through. Serve hot."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "body_part_name": {
+    "symptoms": [
+      { "Symptom display to user": "Symptom as required to the model" },
+      { "Symptom display to user": "Symptom as required to the model" },
+      { "Symptom display to user": "Symptom as required to the model" }
+    ]
+  },
+  "heart": {
+    "symptoms": [
+      { "heart ache": "heart_ache" },
+      { "chest pain": "chest_pain" }
+    ]
+  },
+
+  "lungs": {
+    "symptoms": [
+      { "shortness of breath": "shortness_of_breath" },
+      { "wheezing": "wheezing" }
+    ]
+  }
+}
