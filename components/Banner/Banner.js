@@ -118,27 +118,7 @@ export function Banner() {
           </div>
         </Carousel>
 
-        <div className={styles.intro_wrapper}>
-          <div className={styles.card_wrapper}>
-            <div className={styles.image_container}>
-              
-            </div>
-            <div className={styles.info_container}>
-
-          </div>
-          <div className={styles.card_wrapper}>
-
-          </div>
-          <div className={styles.card_wrapper}>
-
-          </div>
-          <div className={styles.card_wrapper}>
-
-          </div>
-          <div className={styles.card_wrapper}>
-
-          </div>
-        </div>
+        
       </div>
     </>
   );
