@@ -24,7 +24,7 @@ const FindNearestHospitals = () => {
     if (coords) {
       fetchNearbyHospitals();
     }
-  }, []);
+  }, [latitude, longitude]);
 
   const coordinatesArray = hospitalDetails.map((hospital) => {
     return {
