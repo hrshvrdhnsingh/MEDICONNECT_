@@ -1,6 +1,25 @@
 .banner_wrapper {
     margin-top: 10px;
 }
+.page_wrapper{
+    border: 1px solid black; width: 80vw; min-height: 100vh;
+}
 .intro_wrapper{
     display: flex; justify-content: center; align-items: center;
+}
+.banner_wrapper:first-child{ display: none;}
+.header_page{ font-size: 60px;}
+.carousel_page{
+    width: 100vw; 
+}
+.caro_div{ flex-direction: column; width: 70vw; }
+.carousel_title{ font-size: 55px; font-weight:700; color: #fff;}
+.carousel_desc{ font-size: 23px; color: rgb(207, 207, 205);}
+.carousel_btn{
+    all: unset; 
+    width: 15%; height: 6vh; border: 1px soilid black; background-color: rgb(69, 69, 204); color: white;
+    display: flex; justify-content: center; align-items: center; align-self: center; border: 3px solid rgb(69, 69, 204);
+}
+.carousel_btn:hover{
+    color: rgb(69, 69, 204); background-color: white; 
 }

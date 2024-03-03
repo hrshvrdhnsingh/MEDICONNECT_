@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getNearbyPharmacies } from "../../lib/getNearbyPharmacies";
-import Pin from "../../components/Pin";
 import MapComponent from "../../components/Map/GoogleMap";
 import useTrackUserLocation from "../../hooks/trackUserLocation";
+import Navbar from "../../components/Navbar/Navbar";
 
 const FindNearestPharmacies = () => {
   const [pharmacyDetails, setPharmacyDetails] = useState([]);
@@ -30,15 +30,20 @@ const FindNearestPharmacies = () => {
       lng: pharmacy.longitude,
       lat: pharmacy.latitude,
       name: pharmacy.name,
+      address: pharmacy.address,
+      distance: pharmacy.distance,
     };
   });
 
   return (
-    <MapComponent
+    <>
+    <Navbar />
+      <MapComponent
       locations={coordinatesArray}
       latitude={latitude}
       longitude={longitude}
     />
+    </>
   );
 };
 

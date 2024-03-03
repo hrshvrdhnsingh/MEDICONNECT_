@@ -1,0 +1,68 @@
+.bodyWrapper {
+  padding-top: 20px;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  padding-bottom: 20px;
+}
+
+.btn_predict {
+  margin-right: 10px;
+}
+
+.full_wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.header_wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  margin-bottom: 20px;
+}
+
+.option_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  width: 70vw;
+}
+
+.checkboxWrapper {
+  width: fit-content;
+  margin: 10px;
+  height: 24px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.design_header {
+  background-color: #23679e;
+  border-radius: 10rem;
+  width: 25rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.disease_full_wrapper {
+  display: flex;
+  justify-content: center;
+}
+.disease_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disease {
+  margin-left: 10px;
+  font-size: 50px;
+}

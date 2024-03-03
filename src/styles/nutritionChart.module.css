@@ -25,6 +25,10 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.input_box {
-    
+.nutrition_container{
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    margin-top: 5vh;
+}
+.nutrition_container h3{
+    font-size: 25px; font-weight: 400;
 }

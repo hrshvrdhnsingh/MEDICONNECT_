@@ -1,4 +1,24 @@
-.card {
-    height: 150px;
-    width: 100px
+.nutrition_card {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 20px;
+  width: 55vw;
+  height: 52vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nutrition_option {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  width: 31%;
+  height: 95%;
+  border: 1px solid black;
+  padding: 4px;
+}
+.option_dish {
+  font-size: 18px;
+  font-weight: 500;
 }

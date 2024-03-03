@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import styles from "../styles/medicineDetails.module.css";
+import { Input } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import Navbar from "../../components/Navbar/Navbar";
 
 const MedicineDetails = () => {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -22,37 +26,58 @@ const MedicineDetails = () => {
   };
 
   return (
-    <>
-      <div>
-        <label>
-          Enter medicine name:
-          <input
+    <div>
+      <Navbar />
+      <div className={styles.inputWrapper}>
+        <div>
+          {/* <input
             type="text"
             value={medicineName}
             onChange={(e) => setMedicineName(e.target.value)}
-          />
-        </label>
+          /> */}
+          <div className="flex flex-wrap md:flex-nowrap gap-4">
+            <label>
+              <Input
+                type="text"
+                value={medicineName}
+                label="Enter medicine name"
+                onChange={(e) => setMedicineName(e.target.value)}
+              />
+            </label>
+          </div>
+        </div>
       </div>
 
-      <button onClick={retrieveMedicineDetails}>Retrieve Details</button>
+      {/* <button onClick={retrieveMedicineDetails}>Retrieve Details</button> */}
+      <div className={styles.btnWrapper}>
+        <Button
+          onClick={retrieveMedicineDetails}
+          color="primary"
+          className={styles.btn}
+        >
+          Retrieve Details
+        </Button>
+      </div>
 
-      {errorMsg && <p>{errorMsg}</p>}
-      <div>{foundResults}</div>
-      {medicineData && (
-        <div>
+      <div className={styles.outer_container}>
+        {errorMsg && <p>{errorMsg}</p>}
+          <div>{foundResults}</div>
+             {medicineData && (
+        <div className={styles.medicine_container}>
           {medicineData.map((medicine) => (
-            <div>
-              <div key={medicine.id}>
-                <p>{medicine.name}</p>
-              </div>
-              <div key={medicine.id}>
-                <p>{medicine.price.mrp}</p>
-              </div>
+            <div key={medicine.product_id} className={styles.medicine_box}>
+              <p className={styles.title}>{medicine.name}</p>
+              <p className={styles.price}>Price : {medicine.price.mrp}</p>
+              {medicine.form && <p className={styles.formtype}>Description : {medicine.form}</p>}
+              <button className={styles.buybtn} onClick={() => window.open(medicine.product_url, "_blank")}>
+                Proceed to buy
+              </button>
             </div>
           ))}
         </div>
       )}
-    </>
+      </div>
+    </div>
   );
 };
 

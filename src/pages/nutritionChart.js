@@ -4,6 +4,9 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "../styles/nutritionChart.module.css";
 import { Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
+import { Checkbox } from "@nextui-org/react";
+import NutritionCard from "../../components/NutritionCard/NutritionCard";
+import { Footer } from "../../components/Footer/Footer";
 
 const NutritionChart = () => {
   const [height, setHeight] = useState("");
@@ -143,7 +146,7 @@ const NutritionChart = () => {
           </div>
         </div>
         <div className={styles.option_wrapper}>
-          <div>
+          {/* <div>
             <label>
               <input
                 type="checkbox"
@@ -152,17 +155,19 @@ const NutritionChart = () => {
               />
               Vegetarian
             </label>
-          </div>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                checked={isNonVegetarian}
-                onChange={handleNonVegetarianChange}
-              />
-              Non-Vegetarian
-            </label>
-          </div>
+          </div> */}
+        
+          <Checkbox                     
+            radius="md"
+            checked={isVegetarian}
+            onChange={handleVegetarianChange}
+          >Vegetarian</Checkbox>
+          <Checkbox                     
+            radius="md"
+            checked={isNonVegetarian}
+            onChange={handleNonVegetarianChange}
+          >Non-Vegetarian</Checkbox>
+
         </div>
         <div className={styles.btn}>
           <Button
@@ -173,11 +178,14 @@ const NutritionChart = () => {
             Prepare Diet Chart
           </Button>
         </div>
+        {console.log({ breakfast })}
 
-        {breakfast && (
-          <>
-            <div>Breakfast</div>
-            <div>
+        <div className={styles.nutrition_container}>
+          {breakfast && (
+            <>
+              <h3>Breakfast</h3>
+              <NutritionCard nutritionData={breakfast} />
+              {/* <div>
               {breakfast.options.map((option, index) => (
                 <div key={index}>
                   <div>{option.dish}</div>
@@ -185,13 +193,14 @@ const NutritionChart = () => {
                   <div>{option.recipe}</div>
                 </div>
               ))}
-            </div>
-          </>
-        )}
-        {lunch && (
-          <>
-            <div>Lunch</div>
-            <div>
+            </div> */}
+            </>
+          )}
+          {lunch && (
+            <>
+              <h3>Lunch</h3>
+              <NutritionCard nutritionData={lunch} />
+              {/* <div>
               {lunch.options.map((option, index) => (
                 <div key={index}>
                   <div>{option.dish}</div>
@@ -199,14 +208,14 @@ const NutritionChart = () => {
                   <div>{option.recipe}</div>
                 </div>
               ))}
-            </div>
-          </>
-        )}
-        {snacks && (
-          <>
-            <div>
-              <div>Snacks</div>
-              <div>
+            </div> */}
+            </>
+          )}
+          {snacks && (
+            <>
+              <h3>Snacks</h3>
+              <NutritionCard nutritionData={snacks} />
+              {/* <div>
                 {snacks.options.map((option, index) => (
                   <div key={index}>
                     <div>{option.dish}</div>
@@ -214,14 +223,14 @@ const NutritionChart = () => {
                     <div>{option.recipe}</div>
                   </div>
                 ))}
-              </div>
-            </div>
-          </>
-        )}
-        {dinner && (
-          <>
-            <div>Dinner</div>
-            <div>
+              </div> */}
+            </>
+          )}
+          {dinner && (
+            <>
+              <h3>Dinner</h3>
+              <NutritionCard nutritionData={dinner} />
+              {/* <div>
               {dinner.options.map((option, index) => (
                 <div key={index}>
                   <div>{option.dish}</div>
@@ -229,10 +238,12 @@ const NutritionChart = () => {
                   <div>{option.recipe}</div>
                 </div>
               ))}
-            </div>
-          </>
-        )}
+            </div> */}
+            </>
+          )}
+        </div>
       </div>
+      {/* <Footer /> */}
     </>
   );
 };

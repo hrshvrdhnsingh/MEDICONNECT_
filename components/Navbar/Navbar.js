@@ -6,6 +6,7 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   // State for toggling the menu
   const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // Function to toggle the menu
   const toggleMenu = () => {
@@ -16,8 +17,8 @@ const Navbar = () => {
     setMenuOpen(false);
   };
 
-  const handleCheckboxChange = () => {
-    // Handle checkbox change if needed
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
   };
 
   return (
@@ -27,42 +28,47 @@ const Navbar = () => {
           MediConnect
         </Link>
         {/* Show FaBars icon only on small screens */}
-        <FaBars className={styles.menu_icon} onClick={toggleMenu} />
+        <FaBars
+          className={`${styles.menu_icon} ${menuOpen ? styles.hidden : ""}`}
+          onClick={toggleMenu}
+        />
         <nav className={`navbar ${menuOpen ? "active" : ""}`}>
+          <Link
+            href="/diseasePrediction"
+            onClick={closeMenu}
+            className={styles.navbar_link}
+          >
+            Predict Disease
+          </Link>
+          <Link
+            href="/nearestPharmacies"
+            onClick={closeMenu}
+            className={styles.navbar_link}
+          >
+            Nearest Pharmacies
+          </Link>
           <Link
             href="/nearestHospitals"
             onClick={closeMenu}
             className={styles.navbar_link}
           >
-            Health
+            Nearest Hospitals
           </Link>
           <Link
-            href="/science"
+            href="/medicineDetails"
             onClick={closeMenu}
             className={styles.navbar_link}
           >
-            Science
+            Seach Medicine
           </Link>
           <Link
-            href="/technology"
+            href="/nutritionChart"
             onClick={closeMenu}
             className={styles.navbar_link}
           >
-            Technology
-          </Link>
-          <Link
-            href="/india"
-            onClick={closeMenu}
-            className={styles.navbar_link}
-          >
-            India News
+            Nutrition Chart
           </Link>
         </nav>
-        {/* <input
-          type="checkbox"
-          className={styles.theme_checkbox}
-          onChange={handleCheckboxChange}
-        /> */}
       </header>
 
       <div

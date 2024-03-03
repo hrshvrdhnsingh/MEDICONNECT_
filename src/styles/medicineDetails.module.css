@@ -1,0 +1,36 @@
+.page_wrapper{
+  display: flex; flex-direction: column; 
+}
+.inputWrapper {
+  display: flex;
+  padding: 100px;
+  padding-bottom: 20px;
+  justify-content: center;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+}
+.outer_container{
+  border: 1px solid black; width: 80vw; min-height: fit-content; margin-top: 10vh;
+  display: flex; justify-content: center; margin-left: 10vw;
+  padding: 20px; flex-wrap: wrap; 
+}
+.medicine_container{
+  border: 1px solid black; width: 100%; height: 95%; display: flex; flex-wrap: wrap;
+  gap: 15px; justify-content: center; 
+}
+.medicine_box{
+  border: 1px solid black; width: 30%; height: 30vh; display: flex; align-items: center;
+  flex-direction: column;  padding: 10px; 
+}
+.title{ font-weight: 500; font-size: 18px;}
+.price{ color: green; align-self: left;}
+.formtype{
+   font-weight: 400;
+}
+.buybtn{
+  width: 90%; height: 20%; margin-top: auto; background-color: #305ef6; border-radius: 8px;
+
+}

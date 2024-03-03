@@ -3,6 +3,7 @@ import { getNearbyHospitals } from "../../lib/getNearbyHospitals";
 import Pin from "../../components/Pin";
 import MapComponent from "../../components/Map/GoogleMap";
 import useTrackUserLocation from "../../hooks/trackUserLocation";
+import Navbar from "../../components/Navbar/Navbar"
 
 const FindNearestHospitals = () => {
   const [hospitalDetails, setHospitalDetails] = useState([]);
@@ -31,15 +32,20 @@ const FindNearestHospitals = () => {
       lng: hospital.longitude,
       lat: hospital.latitude,
       name: hospital.name,
+      address: hospital.address,
+      distance: hospital.distance
     };
   });
 
   return (
-    <MapComponent
-      locations={coordinatesArray}
-      latitude={latitude}
-      longitude={longitude}
-    />
+    <>  
+      <Navbar />
+      <MapComponent
+        locations={coordinatesArray}
+        latitude={latitude}
+        longitude={longitude}
+      />
+    </>
   );
 };
 
