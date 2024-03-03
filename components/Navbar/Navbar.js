@@ -45,14 +45,14 @@ const Navbar = () => {
             onClick={closeMenu}
             className={styles.navbar_link}
           >
-            Nearest Pharmacies
+            Pharmacies
           </Link>
           <Link
             href="/nearestHospitals"
             onClick={closeMenu}
             className={styles.navbar_link}
           >
-            Nearest Hospitals
+           Hospitals
           </Link>
           <Link
             href="/medicineDetails"
