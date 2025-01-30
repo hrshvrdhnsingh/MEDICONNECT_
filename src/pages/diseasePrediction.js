@@ -55,7 +55,7 @@ export default function SymptomCheckbox() {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className={styles.bodyWrapper}>
         {Object.entries(symptomsData).map(([category, data]) => (
           <div className={styles.wrapper}>
