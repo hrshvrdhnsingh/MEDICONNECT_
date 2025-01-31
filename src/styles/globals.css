@@ -15,18 +15,16 @@
   -webkit-user-select: none;
   user-select: none;
 }
-html,
-body {
+html, body {
   font-family: Poppins, sans-serif;
-  /* min-height: max-content; */
-  /* height: 100vh; */
   min-height: 100vh;
   margin: 0;
-  background-color: #182f5d;
+  background-color: var(--darkshade) !important;
   overflow-x: hidden;
 }
 /*lighter hue : #c4f1fa*/
 
 :root {
   --bgshade: #afdcf6;
+  --darkshade: #182f5d;
 }

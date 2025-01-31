@@ -4,7 +4,9 @@ import { NextUIProvider } from "@nextui-org/react";
 function MyApp({ Component, pageProps }) {
   return (
     <NextUIProvider>
-      <Component {...pageProps} />
+      <div style={{ backgroundColor: "#182f5d", minHeight: "100vh", width: "100vw" }}>
+        <Component {...pageProps} />
+      </div>
     </NextUIProvider>
   );
 }

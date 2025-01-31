@@ -6,6 +6,7 @@
     align-items: center;
     flex-direction: column;
     margin-top: 10vh;
+    background-color: #182f5d;
   }
   .intro_wrapper {
     width: 60vw;
