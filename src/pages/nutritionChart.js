@@ -7,6 +7,7 @@ import { Button } from "@nextui-org/react";
 import { Checkbox } from "@nextui-org/react";
 import NutritionCard from "../../components/NutritionCard/NutritionCard";
 import { Footer } from "../../components/Footer/Footer";
+import { AOSInit } from "/aos.tsx";
 
 const NutritionChart = () => {
   const [height, setHeight] = useState("");
@@ -117,12 +118,12 @@ const NutritionChart = () => {
   };
 
   return (
-    <>
+    <div className={styles.nutrition_bg}>
       <Navbar />
-      <div className={styles.main_body}>
-        <div className={styles.hght}></div>
-        <div className={styles.inputWrapper}>
-          <div className="flex flex-wrap md:flex-nowrap gap-4">
+      <div>
+        <div className="h-[10vh]"></div>
+        <div className="flex justify-evenly">
+          <div className="flex flex-wrap md:flex-nowrap gap-4 mt-12 text-blue-300 text-xl font-medium">
             <label>
               Height (cm):
               <Input
@@ -133,7 +134,7 @@ const NutritionChart = () => {
               />
             </label>
           </div>
-          <div className="flex flex-wrap md:flex-nowrap gap-4">
+          <div className="flex flex-wrap md:flex-nowrap gap-4 mt-12 text-blue-300 text-xl font-medium">
             <label>
               Weight (kg):
               <Input
@@ -145,35 +146,23 @@ const NutritionChart = () => {
             </label>
           </div>
         </div>
-        <div className={styles.option_wrapper}>
-          {/* <div>
-            <label>
-              <input
-                type="checkbox"
-                checked={isVegetarian}
-                onChange={handleVegetarianChange}
-              />
-              Vegetarian
-            </label>
-          </div> */}
-        
-          <Checkbox                     
+        <div className="flex justify-evenly mt-4 text-blue-300">
+          <Checkbox                 
             radius="md"
             checked={isVegetarian}
             onChange={handleVegetarianChange}
-          >Vegetarian</Checkbox>
+          ><p className="text-blue-400 text-xl">Vegetarian</p></Checkbox>
           <Checkbox                     
             radius="md"
             checked={isNonVegetarian}
             onChange={handleNonVegetarianChange}
-          >Non-Vegetarian</Checkbox>
-
+          ><p className="text-blue-400 text-xl">Non-Vegetarian</p></Checkbox>
         </div>
         <div className={styles.btn}>
           <Button
             onClick={prepareDietChart}
             color="primary"
-            className={styles.btn}
+            className="flex justify-center text-xl px-3 py-2"
           >
             Prepare Diet Chart
           </Button>
@@ -183,7 +172,7 @@ const NutritionChart = () => {
         <div className={styles.nutrition_container}>
           {breakfast && (
             <>
-              <h3>Breakfast</h3>
+              <h3 className="mt-4 text-2xl font-medium text-gray-300"  data-aos="fade-up" data-aos-easing="ease" data-aos-delay="150">Breakfast</h3>
               <NutritionCard nutritionData={breakfast} />
               {/* <div>
               {breakfast.options.map((option, index) => (
@@ -198,7 +187,7 @@ const NutritionChart = () => {
           )}
           {lunch && (
             <>
-              <h3>Lunch</h3>
+              <h3 className="mt-4 text-2xl font-medium text-gray-300"  data-aos="fade-up" data-aos-easing="ease" data-aos-delay="150">Lunch</h3>
               <NutritionCard nutritionData={lunch} />
               {/* <div>
               {lunch.options.map((option, index) => (
@@ -213,7 +202,7 @@ const NutritionChart = () => {
           )}
           {snacks && (
             <>
-              <h3>Snacks</h3>
+              <h3 className="mt-4 text-2xl font-medium text-gray-300"  data-aos="fade-up" data-aos-easing="ease" data-aos-delay="150">Snacks</h3>
               <NutritionCard nutritionData={snacks} />
               {/* <div>
                 {snacks.options.map((option, index) => (
@@ -228,7 +217,7 @@ const NutritionChart = () => {
           )}
           {dinner && (
             <>
-              <h3>Dinner</h3>
+              <h3 className="mt-4 text-2xl font-medium text-gray-300" data-aos="fade-up" data-aos-easing="ease" data-aos-delay="150">Dinner</h3>
               <NutritionCard nutritionData={dinner} />
               {/* <div>
               {dinner.options.map((option, index) => (
@@ -244,7 +233,7 @@ const NutritionChart = () => {
         </div>
       </div>
       {/* <Footer /> */}
-    </>
+    </div>
   );
 };
 

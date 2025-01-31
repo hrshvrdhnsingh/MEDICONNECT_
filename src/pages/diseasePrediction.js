@@ -58,7 +58,7 @@ export default function SymptomCheckbox() {
       <Navbar />
       <div className="flex justify-center items-center mt-16 flex-col">
         {Object.entries(symptomsData).map(([category, data]) => (
-          <div className="w-[80vw] mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl">
+          <div className="w-[80vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl">
             <div key={category}>
               <div className="flex justify-center">
                 <div className="flex justify-center text-xl bg-blue-300 px-3 py-2 rounded-xl text-gray-200">
