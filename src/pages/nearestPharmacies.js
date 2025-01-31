@@ -3,6 +3,7 @@ import { getNearbyPharmacies } from "../../lib/getNearbyPharmacies";
 import MapComponent from "../../components/Map/GoogleMap";
 import useTrackUserLocation from "../../hooks/trackUserLocation";
 import Navbar from "../../components/Navbar/Navbar";
+import styles from "../styles/nearestHospitals.module.css";
 
 const FindNearestPharmacies = () => {
   const [pharmacyDetails, setPharmacyDetails] = useState([]);
@@ -36,14 +37,10 @@ const FindNearestPharmacies = () => {
   });
 
   return (
-    <>
-    <Navbar />
-      <MapComponent
-      locations={coordinatesArray}
-      latitude={latitude}
-      longitude={longitude}
-    />
-    </>
+    <div className={styles.extra_bg}>
+      <Navbar />
+      <MapComponent locations={coordinatesArray} latitude={latitude} longitude={longitude}/>
+    </div>
   );
 };
 

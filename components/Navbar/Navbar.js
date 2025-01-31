@@ -32,45 +32,14 @@ const Navbar = () => {
           className={`${styles.menu_icon} ${menuOpen ? styles.hidden : ""}`}
           onClick={toggleMenu}
         />
-        <nav className={`navbar ${menuOpen ? "active" : ""}`}>
-          <Link
-            href="/diseasePrediction"
-            onClick={closeMenu}
-            className={styles.navbar_link}
-          >
-            Predict Disease
-          </Link>
-          <Link
-            href="/nearestPharmacies"
-            onClick={closeMenu}
-            className={styles.navbar_link}
-          >
-            Pharmacies
-          </Link>
-          <Link
-            href="/nearestHospitals"
-            onClick={closeMenu}
-            className={styles.navbar_link}
-          >
-           Hospitals
-          </Link>
-          <Link
-            href="/medicineDetails"
-            onClick={closeMenu}
-            className={styles.navbar_link}
-          >
-            Seach Medicine
-          </Link>
-          <Link
-            href="/nutritionChart"
-            onClick={closeMenu}
-            className={styles.navbar_link}
-          >
-            Nutrition Chart
-          </Link>
+        <nav className={`rounded-xl px-4 bg-transparent navbar w-[65%] text-blue-300 text-xl font-medium ${menuOpen ? "active" : ""}`}>
+          <Link href="/diseasePrediction" onClick={closeMenu} className={styles.navbar_link}> Predict Disease</Link>
+          <Link href="/nearestPharmacies" onClick={closeMenu} className={styles.navbar_link}> Pharmacies</Link>
+          <Link href="/nearestHospitals" onClick={closeMenu} className={styles.navbar_link}> Hospitals</Link>
+          <Link href="/medicineDetails" onClick={closeMenu} className={styles.navbar_link}> Search Medicine</Link>
+          <Link href="/nutritionChart" onClick={closeMenu} className={styles.navbar_link}> Nutrition Chart</Link>
         </nav>
       </header>
-
       <div
         className={`${styles.nav_bg} ${menuOpen ? styles.active : ""}`}
       ></div>

@@ -4,6 +4,7 @@ import Pin from "../../components/Pin";
 import MapComponent from "../../components/Map/GoogleMap";
 import useTrackUserLocation from "../../hooks/trackUserLocation";
 import Navbar from "../../components/Navbar/Navbar"
+import styles from "../styles/nearestHospitals.module.css";
 
 const FindNearestHospitals = () => {
   const [hospitalDetails, setHospitalDetails] = useState([]);
@@ -38,14 +39,14 @@ const FindNearestHospitals = () => {
   });
 
   return (
-    <>  
+    <div className={styles.extra_bg}>  
       <Navbar />
       <MapComponent
         locations={coordinatesArray}
         latitude={latitude}
         longitude={longitude}
       />
-    </>
+    </div>
   );
 };
 

@@ -5,7 +5,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-     
     margin-top: 10vh;
   }
   .intro_wrapper {
@@ -25,19 +24,21 @@
   }
   .card_wrapper {
     width: 90%;
-    height: 55vh;
+    height: 45vh;
     display: flex; border-radius: 14px;
     justify-content: space-around;
     background-color: rgba(255, 255, 255, 0.605); 
-    align-items: center; overflow-y: hidden;
+    align-items: center;
     box-shadow: 0px 0px 8px rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
   }
   .image_container{
     width: 45%; height: 90%; 
     background: url("https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"); 
     background-size: cover;
     border-radius: 34% 64% 77% 26% / 73% 54% 45% 19%; overflow-y: hidden;
-    box-shadow: 0 0px 25px rgba(33,150,243,.6),0 0px 18px  rgba(33,150,243,.4);
+    box-shadow: 0 0px 20px rgba(144, 202, 249, 0.6),0 0px 12px  rgba(77, 172, 249, 0.4);
   }
   .info_container{
     display: flex;
@@ -45,7 +46,7 @@
     align-items: center; width: 45%; flex-wrap: wrap; overflow-y: hidden;
   }
   .info_container > h1{ font-weight: 600; font-size: 25px;
-    padding: 10px 15px; border-radius: 9px; background-color: rgb(33 150 243);
+    padding: 10px 15px; border-radius: 9px; background-color: #4690e3;
     box-shadow: 0 10px 15px  rgba(33,150,243,.4),0 4px 6px -4px rgba(33,150,243,.4);
   }
   .info_container > p{ font-weight: 400; font-size: 18px; color: #484848;}

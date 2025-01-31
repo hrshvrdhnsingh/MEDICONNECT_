@@ -8,7 +8,7 @@ const Introduction = () => {
   return (
     <div className={styles.page_wrapper}>
       <h1
-        className="aos-init"
+        className="aos-init text-blue-400"
         data-aos="fade-up"
         data-aos-easing="ease"
         data-aos-delay="100"
@@ -18,14 +18,6 @@ const Introduction = () => {
       </h1>
       <div className={styles.intro_wrapper}>
         <div className={styles.card_wrapper}>
-          <div
-            className={`${styles.image_container} ${styles["data-aos"]} ${styles["data-aos-easing"]} ${styles["data-aos-delay"]}`}
-            data-aos="zoom-out-right"
-            data-aos-easing="ease"
-            data-aos-delay="400"
-          >
-            <AOSInit />
-          </div>
           <div className={styles.info_container}>
             <h1
               className="aos-init"
@@ -45,8 +37,21 @@ const Introduction = () => {
               platform. Assessment has never been this easy!
             </p>
           </div>
+          <div
+            className={`${styles.image_container} ${styles["data-aos"]} ${styles["data-aos-easing"]} ${styles["data-aos-delay"]}`}
+            data-aos="zoom-out-left"
+            data-aos-easing="ease"
+            data-aos-delay="400"
+          >
+            <img
+              src="https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738337085/wej239olrvm6gkde7fsq.jpg"
+              alt="Health Solution"
+              className="w-full h-full object-cover rounded-xl"
+            />
+            <AOSInit />
+          </div>
         </div>
-        <div className={styles.card_wrapper}>
+        {/* <div className={styles.card_wrapper}>
           <div className={styles.info_container}>
             <h1
               className="aos-init"
@@ -72,14 +77,20 @@ const Introduction = () => {
             data-aos-easing="ease"
             data-aos-delay="300"
           ></div>
-        </div>
+        </div> */}
         <div className={styles.card_wrapper}>
           <div
             className={`${styles.image_container} ${styles["data-aos"]} ${styles["data-aos-easing"]} ${styles["data-aos-delay"]}`}
             data-aos="zoom-out-right"
             data-aos-easing="ease"
             data-aos-delay="300"
-          ></div>
+          >
+            <img
+              src="https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738342138/pexels-pixabay-139398_n6cxb6.jpg"
+              alt="Pharmacy"
+              className="w-full h-full object-cover rounded-xl"
+            />
+          </div>
           <div className={styles.info_container}>
             <h1
               className="aos-init"
@@ -127,6 +138,11 @@ const Introduction = () => {
             data-aos-easing="ease"
             data-aos-delay="300"
           >
+            <img
+              src="https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738342139/pexels-shvetsa-3844581_umccde.jpg"
+              alt="Pharmacy"
+              className="w-full h-full object-cover rounded-xl"
+            />
             <AOSInit />
           </div>
         </div>
@@ -137,6 +153,11 @@ const Introduction = () => {
             data-aos-easing="ease"
             data-aos-delay="300"
           >
+            <img
+              src="https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738337085/wej239olrvm6gkde7fsq.jpg"
+              alt="Pharmacy"
+              className="w-full h-full object-cover rounded-xl"
+            />
             <AOSInit />
           </div>
           <div className={styles.info_container}>
@@ -144,7 +165,7 @@ const Introduction = () => {
               className="aos-init"
               data-aos="zoom-in"
               data-aos-easing="ease"
-              data-aos-delay="100"
+              data-aos-delay="100" 
             >
               Medicine Details
             </h1>
@@ -185,6 +206,11 @@ const Introduction = () => {
             data-aos-easing="ease"
             data-aos-delay="300"
           >
+            <img
+              src="https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738342139/pexels-pavel-danilyuk-7653089_bdzw3j.jpg"
+              alt="Pharmacy"
+              className="w-full h-full object-cover rounded-xl"
+            />
             <AOSInit />
           </div>
         </div>

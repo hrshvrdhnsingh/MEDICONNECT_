@@ -54,23 +54,23 @@ export default function SymptomCheckbox() {
   };
 
   return (
-    <>
-      {/* <Navbar /> */}
-      <div className={styles.bodyWrapper}>
+    <div className={styles.prediction_bg}>
+      <Navbar />
+      <div className="flex justify-center items-center mt-16 flex-col">
         {Object.entries(symptomsData).map(([category, data]) => (
-          <div className={styles.wrapper}>
+          <div className="w-[80vw] mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl">
             <div key={category}>
-              <div className={styles.header_wrapper}>
-                <div className={styles.design_header}>
+              <div className="flex justify-center">
+                <div className="flex justify-center text-xl bg-blue-300 px-3 py-2 rounded-xl text-gray-200">
                   <h2>{category}</h2>
                 </div>
               </div>
-              <div className={styles.full_wrapper}>
-                <div className={styles.option_wrapper}>
+              <div className="flex justify-center mt-2">
+                <div className="flex flex-wrap justify-center w-full">
                   {data.symptoms.map((symptom) => (
                     <div
                       key={Object.keys(symptom)[0]}
-                      className={styles.checkboxWrapper}
+                      className="bg-gray-200 flex min-w-max text-medium rounded-xl px-2 py-1 mx-2 my-2 text-black"
                     >
                       {/* <input
                     type="checkbox"
@@ -103,7 +103,6 @@ export default function SymptomCheckbox() {
                           )
                         }
                       />
-
                       <label htmlFor={Object.values(symptom)[0]}>
                         {Object.keys(symptom)[0]}
                       </label>
@@ -116,28 +115,28 @@ export default function SymptomCheckbox() {
         ))}
         {/* <button onClick={handlePredict}>Predict</button>
         <button onClick={handleReset}>Reset</button> */}
-        <div className={styles.btnWrapper}>
+        <div className="flex justify-center m-8 gap-4">
           <Button
             onClick={handlePredict}
             color="primary"
-            className={styles.btn_predict}
+            className="text-2xl p-4 hover:scale-95"
           >
             Predict disease
           </Button>
-          <Button onClick={handleReset} color="primary" className={styles.btn}>
+          <Button onClick={handleReset} color="primary" className="text-2xl p-4 hover:scale-95">
             Reset
           </Button>
         </div>
 
         {predictedDisease && (
-          <div className={styles.disease_full_wrapper}>
-            <div className={styles.disease_wrapper}>
-              {predictedDisease && <div>You may have : </div>} 
-              <div className={styles.disease}>{predictedDisease}</div>
+          <div className="flex justify-center">
+            <div className="flex justify-center items-center gap-4">
+              {predictedDisease && <div className="text-xl text-blue-300 font-medium">You may have : </div>} 
+              <div className="text-4xl text-gray-300">{predictedDisease}</div>
             </div>
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

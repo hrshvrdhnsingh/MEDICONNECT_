@@ -22,8 +22,8 @@ body {
   /* height: 100vh; */
   min-height: 100vh;
   margin: 0;
-  background-color: var(--bgshade);
-
+  background-color: rgba(24, 47, 93, 1);
+  overflow-x: hidden;
 }
 /*lighter hue : #c4f1fa*/
 
