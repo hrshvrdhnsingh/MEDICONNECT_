@@ -9,6 +9,7 @@ import { Checkbox } from "@nextui-org/react";
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
   const [predictedDisease, setPredictedDisease] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleCheckboxChange = (category, symptom, isChecked) => {
     setCheckedSymptoms((prevState) => ({
@@ -19,8 +20,12 @@ export default function SymptomCheckbox() {
       },
     }));
   };
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
 
   const handlePredict = async () => {
+    setLoading(true);
     try {
       const selectedSymptomsArray = [];
       for (const category in checkedSymptoms) {
@@ -47,6 +52,8 @@ export default function SymptomCheckbox() {
       console.error("Network error:", error);
       // Handle the error here, such as displaying a message to the user
     }
+    scrollToTop();
+    setLoading(false);
   };
 
   const handleReset = () => {
@@ -55,8 +62,19 @@ export default function SymptomCheckbox() {
 
   return (
     <div className={styles.prediction_bg}>
+      {
+        loading && (<div className="fixed top-0 left-0 flex justify-center items-center w-screen h-screen bg-blue-800 bg-opacity-30 z-[120]"><div className={styles.loader}></div></div>)
+      }
       <Navbar />
       <div className="flex justify-center items-center lg:mt-16 mt-12 flex-col">
+        {predictedDisease && (
+          <div className="flex justify-center mt-4">
+            <div className="flex justify-center items-center gap-4">
+              {predictedDisease && <div className="text-xl text-blue-300 font-medium">You may have : </div>} 
+              <div className="text-4xl text-gray-300">{predictedDisease}</div>
+            </div>
+          </div>
+        )}
         {Object.entries(symptomsData).map(([category, data]) => (
           <div className="lg:w-[80vw] w-[90vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl">
             <div key={category}>
@@ -128,14 +146,7 @@ export default function SymptomCheckbox() {
           </Button>
         </div>
 
-        {predictedDisease && (
-          <div className="flex justify-center">
-            <div className="flex justify-center items-center gap-4">
-              {predictedDisease && <div className="text-xl text-blue-300 font-medium">You may have : </div>} 
-              <div className="text-4xl text-gray-300">{predictedDisease}</div>
-            </div>
-          </div>
-        )}
+        
       </div>
     </div>
   );
