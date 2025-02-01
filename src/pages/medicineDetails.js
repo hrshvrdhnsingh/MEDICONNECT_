@@ -63,14 +63,14 @@ const MedicineDetails = () => {
         {errorMsg && <p>{errorMsg}</p>}
           <div className="text-blue-200 text-lg">{foundResults}</div>
              {medicineData && ( 
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center lg:gap-4 gap-4">
           {medicineData.map((medicine) => (
-            <div key={medicine.product_id} className="flex items-center flex-col p-2 w-[25%] h-[25vh] bg-blue-300/20 backdrop-blur-lg rounded-2xl hover:border-teal-200 hover:border-2">
-              <p className="text-2xl font-medium text-gray-300">{medicine.name}</p>
-              <p className="text-xl text-teal-300">Price : {medicine.price.mrp}</p>
+            <div key={medicine.product_id} className="flex items-center flex-col p-2 lg:w-[25%] w-[90%] h-[24vh] lg:h-[25vh] bg-blue-300/20 backdrop-blur-lg rounded-2xl hover:border-teal-200 hover:border-2">
+              <p className="lg:text-2xl text-xl font-medium text-gray-300">{medicine.name}</p>
+              <p className="lg:text-xl text-lg text-teal-300">Price : {medicine.price.mrp}</p>
               {medicine.form && <p className="text-gray-400">Description : {medicine.form}</p>}
               <button className={styles.buybtn} onClick={() => window.open(medicine.product_url, "_blank")}>
-                Proceed to buy
+                <p className="text-gray-300">Proceed to buy</p>
               </button>
             </div>
           ))}

@@ -34,6 +34,7 @@
   all: unset;
   margin-left: 10px;
   cursor: pointer;
+  color: #6eb1fe;
 }
 .navbar_link:hover {
   color: rgba(78, 136, 251, 0.7);
@@ -49,10 +50,17 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  
+  width: 65%;
+  color: #6eb1fe;
+  font-size: 1.25rem;
+  font-weight: 400;
+  background-color: transparent;
+}
+.menu_icon{
+  display: none;
 }
 .navbar a {
-  color: #fff;
+  color: #6eb1fe;
     text-decoration: none;
   margin-left: 25px;
   transition: 0.3s;
@@ -61,25 +69,16 @@
   color: rgba(42, 111, 249, 0.7);
 }
 .menu_icon {
-  font-size: 36px;
+  font-size: 28px;
   color: #fff;
-  display: none;
 }
 /* BREAKPOINTS */
-@media (max-width: 992px) {
-  .header {
-    padding: 1.25rem 4%;
-  }
-  .header_tag {
-    margin-top: 15%;
-  }
-}
 @media (max-width: 768px) {
   .logo {
-    font-size: 32px;
+    font-size: 25px;
   }
   .header {
-    padding: 20px 50px;
+    padding: 5px 10px; 
   }
   .menu_icon {
     display: block;
@@ -91,13 +90,26 @@
     width: 100%;
     padding: 1rem 5%;
     display: none;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
   }
   .navbar.active {
+    transform: translateY(0);
+    margin-top: 5%;
+    border-radius: 15px;
+    left: 8%;
+    width: 84%;
+    font-size: 5px;
     display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    background: rgba( 255, 255, 255, 0.9);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.6 );
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    transition: all 1s ease-in;
   }
   .navbar a {
-    display: block;
-    margin: 1.5rem 0;
+    margin: 0.5rem 0;
   }
   .nav_bg {
     position: absolute;
@@ -110,10 +122,14 @@
     display: none;
   }
   .navbar a {
-    font-size: 27px;
+    font-size: 22px; color: rgb(66, 66, 66); font-weight: 400;
   }
   .nav_bg.active {
-    display: block;
+    display: block; 
+  }
+  .navbar_link{
+    color: black;
+    transition: color 0.3s ease-in-out;
   }
 }
 

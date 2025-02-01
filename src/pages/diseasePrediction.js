@@ -56,9 +56,9 @@ export default function SymptomCheckbox() {
   return (
     <div className={styles.prediction_bg}>
       <Navbar />
-      <div className="flex justify-center items-center mt-16 flex-col">
+      <div className="flex justify-center items-center lg:mt-16 mt-12 flex-col">
         {Object.entries(symptomsData).map(([category, data]) => (
-          <div className="w-[80vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl">
+          <div className="lg:w-[80vw] w-[90vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl">
             <div key={category}>
               <div className="flex justify-center">
                 <div className="flex justify-center text-xl bg-blue-300 px-3 py-2 rounded-xl text-gray-200">
@@ -70,7 +70,7 @@ export default function SymptomCheckbox() {
                   {data.symptoms.map((symptom) => (
                     <div
                       key={Object.keys(symptom)[0]}
-                      className="bg-gray-200 flex min-w-max text-medium rounded-xl px-2 py-1 mx-2 my-2 text-black"
+                      className="bg-gray-200 flex min-w-max lg:text-medium rounded-xl px-1 py-1 mx-1 my-1 lg:px-2 lg:py-1 lg:mx-2 lg:my-2 text-black"
                     >
                       {/* <input
                     type="checkbox"

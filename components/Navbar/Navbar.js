@@ -4,11 +4,8 @@ import { FaBars } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
-  // State for toggling the menu
   const [menuOpen, setMenuOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
 
-  // Function to toggle the menu
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -17,32 +14,35 @@ const Navbar = () => {
     setMenuOpen(false);
   };
 
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
-  };
-
   return (
     <div className={styles.nav_bar}>
       <header className={styles.header}>
         <Link href="/" className={styles.logo}>
           MediConnect
         </Link>
-        {/* Show FaBars icon only on small screens */}
-        <FaBars
-          className={`${styles.menu_icon} ${menuOpen ? styles.hidden : ""}`}
-          onClick={toggleMenu}
-        />
-        <nav className={`rounded-xl px-4 bg-transparent navbar w-[65%] text-blue-300 text-xl font-medium ${menuOpen ? "active" : ""}`}>
-          <Link href="/diseasePrediction" onClick={closeMenu} className={styles.navbar_link}> Predict Disease</Link>
-          <Link href="/nearestPharmacies" onClick={closeMenu} className={styles.navbar_link}> Pharmacies</Link>
-          <Link href="/nearestHospitals" onClick={closeMenu} className={styles.navbar_link}> Hospitals</Link>
-          <Link href="/medicineDetails" onClick={closeMenu} className={styles.navbar_link}> Search Medicine</Link>
-          <Link href="/nutritionChart" onClick={closeMenu} className={styles.navbar_link}> Nutrition Chart</Link>
+
+        {/* Menu Icon */}
+        <FaBars className={styles.menu_icon} onClick={toggleMenu} />
+
+        {/* Navigation Menu */}
+        <nav className={`${styles.navbar} ${menuOpen ? styles.active : ""}`}>
+          <Link href="/diseasePrediction" className={styles.navbar_link} onClick={closeMenu}>
+            Predict Disease
+          </Link>
+          <Link href="/nearestPharmacies" className={styles.navbar_link} onClick={closeMenu}>
+            Pharmacies
+          </Link>
+          <Link href="/nearestHospitals" className={styles.navbar_link} onClick={closeMenu}>
+            Hospitals
+          </Link>
+          <Link href="/medicineDetails" className={styles.navbar_link} onClick={closeMenu}>
+            Search Medicine
+          </Link>
+          <Link href="/nutritionChart" className={styles.navbar_link} onClick={closeMenu}>
+            Nutrition Chart
+          </Link>
         </nav>
       </header>
-      <div
-        className={`${styles.nav_bg} ${menuOpen ? styles.active : ""}`}
-      ></div>
     </div>
   );
 };

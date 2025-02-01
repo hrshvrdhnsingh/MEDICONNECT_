@@ -11,6 +11,12 @@ const config = {
   ],
   theme: {
     extend: {},
+    screens: {
+      sm: '640px', // default sm breakpoint
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
   },
   darkMode: "class",
   plugins: [nextui()],

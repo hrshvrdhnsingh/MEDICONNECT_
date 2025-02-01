@@ -122,8 +122,8 @@ const NutritionChart = () => {
       <Navbar />
       <div>
         <div className="h-[10vh]"></div>
-        <div className="flex justify-evenly">
-          <div className="flex flex-wrap md:flex-nowrap gap-4 mt-12 text-blue-300 text-xl font-medium">
+        <div className="flex justify-evenly lg:p-0 p-2 lg:gap-0 gap-4">
+          <div className="flex flex-wrap md:flex-nowrap gap-4 mt-12 text-blue-300 lg:text-xl text-lg font-medium">
             <label>
               Height (cm):
               <Input
@@ -134,7 +134,7 @@ const NutritionChart = () => {
               />
             </label>
           </div>
-          <div className="flex flex-wrap md:flex-nowrap gap-4 mt-12 text-blue-300 text-xl font-medium">
+          <div className="flex flex-wrap md:flex-nowrap gap-4 mt-12 text-blue-300  lg:text-xl text-lg font-medium">
             <label>
               Weight (kg):
               <Input
@@ -151,12 +151,12 @@ const NutritionChart = () => {
             radius="md"
             checked={isVegetarian}
             onChange={handleVegetarianChange}
-          ><p className="text-blue-400 text-xl">Vegetarian</p></Checkbox>
+          ><p className="text-blue-400 lg:text-xl text-lg">Vegetarian</p></Checkbox>
           <Checkbox                     
             radius="md"
             checked={isNonVegetarian}
             onChange={handleNonVegetarianChange}
-          ><p className="text-blue-400 text-xl">Non-Vegetarian</p></Checkbox>
+          ><p className="text-blue-400 lg:text-xl text-lg">Non-Vegetarian</p></Checkbox>
         </div>
         <div className={styles.btn}>
           <Button

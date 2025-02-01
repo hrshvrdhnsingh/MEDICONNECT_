@@ -13,6 +13,10 @@ const containerStyle = {
   height: "78vh",
   borderRadius: "10px",
   boxShadow: "0px 0px 10px rgba(0, 0, 0, 1)",
+  "@media (max-width: 640px)": {  // md (≥768px)
+    width: "90vw",
+    height: "78vh",
+  },
 };
 
 // const locations = [rgba(0,0,0,1)

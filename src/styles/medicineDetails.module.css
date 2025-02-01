@@ -35,6 +35,6 @@
    font-weight: 400;
 }
 .buybtn{
-  width: 90%; height: 20%; margin-top: auto; background-color: #305ef6; border-radius: 8px;
-
+  font-weight: 500;
+  width: 90%; padding: 5px 0px; margin-top: auto; background-color: #4b74fc9d; border-radius: 8px;
 }
