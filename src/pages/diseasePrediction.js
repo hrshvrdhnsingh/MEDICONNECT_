@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import styles from '../styles/diseasePrediction.module.css';
 import { Button } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
+import { useEffect } from 'react';
 
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
