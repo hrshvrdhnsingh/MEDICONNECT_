@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import symptomsData from "../../data/SymptomsJSON.json";
-import axios from "axios";
-import Navbar from "../../components/Navbar/Navbar";
-import styles from "../styles/diseasePrediction.module.css";
-import { Button } from "@nextui-org/react";
-import { Checkbox } from "@nextui-org/react";
+import React, { useState } from 'react';
+import symptomsData from '../../data/SymptomsJSON.json';
+import axios from 'axios';
+import Navbar from '../../components/Navbar/Navbar';
+import styles from '../styles/diseasePrediction.module.css';
+import { Button } from '@nextui-org/react';
+import { Checkbox } from '@nextui-org/react';
 
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
   const [predictedDisease, setPredictedDisease] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetch('https://diseasepredictionapi.onrender.com');
+  }, []);
 
   const handleCheckboxChange = (category, symptom, isChecked) => {
     setCheckedSymptoms((prevState) => ({
@@ -42,14 +46,14 @@ export default function SymptomCheckbox() {
       };
 
       const response = await axios.post(
-        "https://diseasepredictionapi.onrender.com/Bs",
+        'https://diseasepredictionapi.onrender.com/Bs',
         symptomsArray
       );
       // console.log({ response });
 
       setPredictedDisease(response.data.Disease);
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
       // Handle the error here, such as displaying a message to the user
     }
     scrollToTop();
@@ -62,33 +66,39 @@ export default function SymptomCheckbox() {
 
   return (
     <div className={styles.prediction_bg}>
-      {
-        loading && (<div className="fixed top-0 left-0 flex justify-center items-center w-screen h-screen bg-blue-800 bg-opacity-30 z-[120]"><div className={styles.loader}></div></div>)
-      }
+      {loading && (
+        <div className='fixed top-0 left-0 flex justify-center items-center w-screen h-screen bg-blue-800 bg-opacity-30 z-[120]'>
+          <div className={styles.loader}></div>
+        </div>
+      )}
       <Navbar />
-      <div className="flex justify-center items-center lg:mt-16 mt-12 flex-col">
+      <div className='flex justify-center items-center lg:mt-16 mt-12 flex-col'>
         {predictedDisease && (
-          <div className="flex justify-center mt-4">
-            <div className="flex justify-center items-center gap-4">
-              {predictedDisease && <div className="text-xl text-blue-300 font-medium">You may have : </div>} 
-              <div className="text-4xl text-gray-300">{predictedDisease}</div>
+          <div className='flex justify-center mt-4'>
+            <div className='flex justify-center items-center gap-4'>
+              {predictedDisease && (
+                <div className='text-xl text-blue-300 font-medium'>
+                  You may have :{' '}
+                </div>
+              )}
+              <div className='text-4xl text-gray-300'>{predictedDisease}</div>
             </div>
           </div>
         )}
         {Object.entries(symptomsData).map(([category, data]) => (
-          <div className="lg:w-[80vw] w-[90vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl">
+          <div className='lg:w-[80vw] w-[90vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl'>
             <div key={category}>
-              <div className="flex justify-center">
-                <div className="flex justify-center text-xl bg-blue-300 px-3 py-2 rounded-xl text-gray-200">
+              <div className='flex justify-center'>
+                <div className='flex justify-center text-xl bg-blue-300 px-3 py-2 rounded-xl text-gray-200'>
                   <h2>{category}</h2>
                 </div>
               </div>
-              <div className="flex justify-center mt-2">
-                <div className="flex flex-wrap justify-center w-full">
+              <div className='flex justify-center mt-2'>
+                <div className='flex flex-wrap justify-center w-full'>
                   {data.symptoms.map((symptom) => (
                     <div
                       key={Object.keys(symptom)[0]}
-                      className="bg-gray-200 flex min-w-max lg:text-medium rounded-xl px-1 py-1 mx-1 my-1 lg:px-2 lg:py-1 lg:mx-2 lg:my-2 text-black"
+                      className='bg-gray-200 flex min-w-max lg:text-medium rounded-xl px-1 py-1 mx-1 my-1 lg:px-2 lg:py-1 lg:mx-2 lg:my-2 text-black'
                     >
                       {/* <input
                     type="checkbox"
@@ -107,7 +117,7 @@ export default function SymptomCheckbox() {
                   /> */}
                       <Checkbox
                         id={Object.values(symptom)[0]}
-                        radius="md"
+                        radius='md'
                         checked={
                           checkedSymptoms[category]?.[
                             Object.values(symptom)[0]
@@ -133,20 +143,22 @@ export default function SymptomCheckbox() {
         ))}
         {/* <button onClick={handlePredict}>Predict</button>
         <button onClick={handleReset}>Reset</button> */}
-        <div className="flex justify-center m-8 gap-4">
+        <div className='flex justify-center m-8 gap-4'>
           <Button
             onClick={handlePredict}
-            color="primary"
-            className="text-2xl p-4 hover:scale-95"
+            color='primary'
+            className='text-2xl p-4 hover:scale-95'
           >
             Predict disease
           </Button>
-          <Button onClick={handleReset} color="primary" className="text-2xl p-4 hover:scale-95">
+          <Button
+            onClick={handleReset}
+            color='primary'
+            className='text-2xl p-4 hover:scale-95'
+          >
             Reset
           </Button>
         </div>
-
-        
       </div>
     </div>
   );

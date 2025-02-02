@@ -4,9 +4,7 @@ import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    fetch('https://diseasepredictionapi.onrender.com')
-      .then(() => console.log('ping successful'))
-      .catch(() => console.log('ping error'));
+    fetch('https://diseasepredictionapi.onrender.com');
   }, []);
 
   return (
