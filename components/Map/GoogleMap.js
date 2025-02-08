@@ -19,14 +19,6 @@ const containerStyle = {
   },
 };
 
-// const locations = [rgba(0,0,0,1)
-//   { lat: 23.4188084, lng: 85.4094945 }, // New York City
-//   { lat: 23.4185097, lng: 85.4087648 }, // Los Angeles
-//   { lat: 23.4275163, lng: 85.4120774 }, // Chicago
-//   //   { lat: 29.7604, lng: -95.3698 }, // Houston
-//   //   { lat: 33.4484, lng: -112.074 }, // Phoenix
-// ];
-
 function MapComponent({ locations, latitude, longitude }) {
   const [locationsLoaded, setLocationsLoaded] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -42,9 +34,10 @@ function MapComponent({ locations, latitude, longitude }) {
     lng: longitude,
   };
 
+  const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDR-y0GoIRS0dQVFlIsgVg7fkh5rA0sLAc", // Assuming you set the API key in an environment variable
+    googleMapsApiKey, // Assuming you set the API key in an environment variable
   });
 
   const [map, setMap] = useState(null);
