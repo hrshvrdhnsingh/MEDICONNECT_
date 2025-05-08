@@ -8,6 +8,9 @@ export function middleware(req) {
     '/nearestHospitals',
     '/medicineDetails',
     '/nutritionChart',
+    '/login',
+    '/user-details',
+    '/dashboard'
   ];
 
   const { pathname } = req.nextUrl;

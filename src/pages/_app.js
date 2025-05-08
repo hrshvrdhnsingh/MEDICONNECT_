@@ -1,4 +1,4 @@
-import '@/styles/globals.css';
+import '../styles/globals.css';
 import { NextUIProvider } from '@nextui-org/react';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client'; // Import socket.io-client
