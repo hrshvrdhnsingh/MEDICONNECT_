@@ -15,7 +15,7 @@ export default function GoogleLoginButton() {
       Cookies.set('token', token);
 
       // Check in your own DB if this uid exists
-      const res = await fetch(`/api/check-user?uid=${user.uid}`);
+      const res = await fetch(`/api/check-user-or-doctor?uid=${user.uid}`);
       const { exists } = await res.json();
 
       // redirect:

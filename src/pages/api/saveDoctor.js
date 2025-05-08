@@ -1,7 +1,7 @@
 import { adminAuth } from '../../../lib/firebaseAdmin';
 import connectDB from '../../../lib/dbConnect';
-import User from '../../../models/user';
-import Doctor from '../../../models/doctor'; // import doctor model for checking
+import Doctor from '../../../models/doctor';
+import User from '../../../models/user'; // import user model for checking
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -13,31 +13,30 @@ export default async function handler(req, res) {
     const decoded = await adminAuth.verifyIdToken(token);
     await connectDB();
 
-    const { fullname, age, weight, diet, height } = req.body;
+    const { firstName, lastName, specialization } = req.body;
+    const email = decoded.email;
 
-    // Check if this email already exists in Doctor
-    const existingDoctor = await Doctor.findOne({ email: decoded.email });
-    if (existingDoctor) {
-      return res.status(409).json({ error: 'Email already registered as a doctor' });
+    // Check if this email already exists in User
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ error: 'Email already registered as a user' });
     }
 
-    const user = await User.findOneAndUpdate(
+    const doctor = await Doctor.findOneAndUpdate(
       { uid: decoded.uid },
       {
-        fullname,
-        email: decoded.email,
-        age,
-        weight,
-        diet,
-        height,
+        firstName,
+        lastName,
+        email,
+        specialization,
         uid: decoded.uid,
       },
       { upsert: true, new: true }
     );
 
-    return res.status(200).json({ message: 'User data saved', user });
+    return res.status(200).json({ message: 'Doctor data saved', doctor });
   } catch (err) {
-    console.error('Error saving user:', err);
+    console.error('Error saving doctor:', err);
     return res.status(401).json({ error: 'Invalid token or DB error' });
   }
 }

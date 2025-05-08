@@ -1,8 +1,9 @@
 // pages/index.js
 import Head from 'next/head';
-import {Banner} from '../../components/Banner/Banner';
+import { Banner } from '../../components/Banner/Banner';
 import dbConnect from '../../lib/dbConnect';
 import User from '../../models/user';
+import Doctor from '../../models/doctor';
 import { adminAuth } from '../../lib/firebaseAdmin';
 import Introduction from '@/components/infoContainer/Introduction';
 
@@ -15,12 +16,14 @@ export async function getServerSideProps({ req }) {
   try {
     const { uid } = await adminAuth.verifyIdToken(token);
     await dbConnect();
-    const user = await User.findOne({ uid }).lean();
+
+    // Check both User and Doctor collections
+    let user = await User.findOne({ uid }).lean();
+    if (!user) {
+      user = await Doctor.findOne({ uid }).lean();
+    }
 
     if (!user) {
-      return { redirect: { destination: '/login', permanent: false } };
-    }
-    if (!user.age || !user.weight || !user.height) {
       return { redirect: { destination: '/login', permanent: false } };
     }
 
