@@ -14,5 +14,8 @@ export default async function handler(req, res) {
   const userExists = await User.exists({ uid });
   const doctorExists = await Doctor.exists({ uid });
 
-  return res.status(200).json({ exists: Boolean(userExists || doctorExists) });
+  return res.status(200).json({
+    exists: Boolean(userExists || doctorExists),
+    type: userExists ? 'user' : doctorExists ? 'doctor' : null,
+  });
 }

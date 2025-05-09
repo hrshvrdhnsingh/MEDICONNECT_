@@ -25,7 +25,7 @@ export default function UserDetails() {
       if (!token) return; 
 
       try {
-        const response = await fetch('/api/check-email', {
+        const response = await fetch('/api/check-email-exists', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,

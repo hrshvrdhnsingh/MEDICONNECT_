@@ -3,7 +3,7 @@ import { NextUIProvider } from '@nextui-org/react';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client'; // Import socket.io-client
 
-const socket = io('http://localhost:3001'); // Initialize socket connection
+// const socket = io('http://localhost:3001'); // Initialize socket connection
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {

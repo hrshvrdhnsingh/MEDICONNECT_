@@ -2,18 +2,22 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-  uid: { type: String, required: true },
+  uid: { type: String, required: true, unique: true }, // Ensure uid is unique
   email: { type: String, required: true },
-  fullname: {type: String, required: true },
+  fullname: { type: String, required: true },
   age: Number,
   weight: Number,
   height: Number,
   diet: { type: String, enum: ['veg', 'non-veg'] },
-}, { timestamps: true });
+}, { 
+  timestamps: true,
+  _id: false // Disable the default _id field
+});
 
 userSchema.set('toJSON', {
   transform: (doc, ret) => {
-    ret._id = ret._id.toString(); // Convert _id to string
+    ret.id = ret.uid; // Use uid as the identifier
+    delete ret._id; // Remove the default _id field
     return ret;
   },
 });

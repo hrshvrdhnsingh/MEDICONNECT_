@@ -1,10 +1,13 @@
 const express = require('express');
 const http = require('http');
-const { Server } = require('socket.io'); // Importing socket.io for real-time communication
-const cors = require('cors'); // Importing CORS middleware for handling cross-origin requests
+const { Server } = require('socket.io');
+const cors = require('cors');
+const mongoose = require('mongoose'); // Import mongoose
+const Conversation = require('./models/Conversation'); // Import Conversation model
+const dbConnect = require('./utils/dbConnect'); // Use require for dbConnect
 
 const app = express();
-const server = http.createServer(app); // Creating an HTTP server using Express
+const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: '*', // Allow all origins for CORS
@@ -13,25 +16,90 @@ const io = new Server(server, {
   },
 });
 
+// Wrap the database connection in an async function
+(async () => {
+  try {
+    await dbConnect(); // Connect to MongoDB
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('Error connecting to MongoDB:', err);
+    process.exit(1); // Exit the process if the connection fails
+  }
+})();
+
 io.on('connection', (socket) => {
-  console.log('A user connected:', socket.id); // Log when a user connects
+  console.log('A user connected:', socket.id);
 
-  // Handle incoming messages from clients
-  // socket.on('message', (data) => {
-  //   console.log('Message received:', data); // Log the received message
-  //   io.emit('message', data); // Broadcast the message to all connected clients
-  // });
+  // Hardcoded user_uid and doctor_uid
+  const user_uid = 'XCz9pL4d3JgQ3Xo0mAfqTSQ6T5D3';
+  const doctor_uid = '3IrnZ7YFK2WJQugQEt4STEPtbCw1';
 
-  // // Handle disconnection of users
-  // socket.on('disconnect', () => {
-  //   console.log('A user disconnected:', socket.id); // Log when a user disconnects
-  // });
+  // Join a custom room based on hardcoded user_uid and doctor_uid
+  const room = `${user_uid}_${doctor_uid}`;
+  socket.join(room);
+  console.log(`User joined room: ${room}`);
+
+  // Retrieve previous conversations
+  socket.on('joinRoom', async () => {
+    try {
+      const conversation = await Conversation.findOne({ user_uid, doctor_uid });
+      if (conversation) {
+        socket.emit('previousMessages', conversation.chats); // Send previous messages to the client
+      }
+    } catch (err) {
+      console.error('Error retrieving conversation:', err);
+    }
+  });
+
+  // Handle new messages
+  socket.on('sendMessage', async ({ sender, message }) => {
+    const chatMessage = { sender, message, timestamp: new Date() };
+
+    // Save the message to the database
+    try {
+      await Conversation.findOneAndUpdate(
+        { user_uid, doctor_uid },
+        { $push: { chats: chatMessage } },
+        { upsert: true, new: true }
+      );
+    } catch (err) {
+      console.error('Error saving message:', err);
+    }
+
+    // Broadcast the message to the room
+    io.to(room).emit('receiveMessage', chatMessage);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected:', socket.id); // Log when a user disconnects
+  });
 });
 
-app.use(cors()); // Use CORS middleware to handle cross-origin requests
+app.use(cors()); // Use CORS middleware to handle cross-origin requests (API requests)
 
 app.get('/', (req, res) => {
   res.send('Hello from Express!');
+});
+
+app.get('/api/conversations', async (req, res) => {
+  const { userId, doctorId } = req.query;
+
+  if (!userId || !doctorId) {
+    return res.status(400).json({ error: 'userId and doctorId are required' });
+  }
+
+  try {
+    const conversation = await Conversation.findOne({ userId, doctorId });
+
+    if (!conversation) {
+      return res.status(404).json({ message: 'No conversation found' });
+    }
+
+    res.json(conversation);
+  } catch (err) {
+    console.error('Error retrieving conversation:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 const PORT = 3001;

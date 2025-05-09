@@ -5,12 +5,14 @@ export function middleware(req) {
     '/',
     '/diseasePrediction',
     '/nearestPharmacies',
+    '/chat',
     '/nearestHospitals',
     '/medicineDetails',
     '/nutritionChart',
     '/login',
     '/user-details',
-    '/dashboard'
+    '/dashboard',
+    '/test'
   ];
 
   const { pathname } = req.nextUrl;
