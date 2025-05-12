@@ -30,45 +30,50 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
 
-  // Hardcoded user_uid and doctor_uid
-  const user_uid = 'XCz9pL4d3JgQ3Xo0mAfqTSQ6T5D3';
-  const doctor_uid = '3IrnZ7YFK2WJQugQEt4STEPtbCw1';
+  // Join a custom room based on user_uid and doctor_uid sent from frontend
+  socket.on('joinRoom', async ({ user_uid, doctor_uid }) => {
+    if (!user_uid || !doctor_uid) return;
+    const room = `${user_uid}_${doctor_uid}`;
+    socket.join(room);
+    console.log(`User joined room: ${room}`);
 
-  // Join a custom room based on hardcoded user_uid and doctor_uid
-  const room = `${user_uid}_${doctor_uid}`;
-  socket.join(room);
-  console.log(`User joined room: ${room}`);
-
-  // Retrieve previous conversations
-  socket.on('joinRoom', async () => {
+    // Retrieve previous conversations
     try {
       const conversation = await Conversation.findOne({ user_uid, doctor_uid });
       if (conversation) {
         socket.emit('previousMessages', conversation.chats); // Send previous messages to the client
+      } else {
+        socket.emit('previousMessages', []);
       }
     } catch (err) {
       console.error('Error retrieving conversation:', err);
+      socket.emit('previousMessages', []);
     }
   });
 
   // Handle new messages
-  socket.on('sendMessage', async ({ sender, message }) => {
-    const chatMessage = { sender, message, timestamp: new Date() };
+  socket.on(
+    'sendMessage',
+    async ({ sender, message, user_uid, doctor_uid }) => {
+      if (!user_uid || !doctor_uid) return;
+      const room = `${user_uid}_${doctor_uid}`;
+      const chatMessage = { sender, message, timestamp: new Date() };
 
-    // Save the message to the database
-    try {
-      await Conversation.findOneAndUpdate(
-        { user_uid, doctor_uid },
-        { $push: { chats: chatMessage } },
-        { upsert: true, new: true }
-      );
-    } catch (err) {
-      console.error('Error saving message:', err);
+      // Save the message to the database
+      try {
+        await Conversation.findOneAndUpdate(
+          { user_uid, doctor_uid },
+          { $push: { chats: chatMessage } },
+          { upsert: true, new: true }
+        );
+      } catch (err) {
+        console.error('Error saving message:', err);
+      }
+
+      // Broadcast the message to the room
+      io.to(room).emit('receiveMessage', chatMessage);
     }
-
-    // Broadcast the message to the room
-    io.to(room).emit('receiveMessage', chatMessage);
-  });
+  );
 
   socket.on('disconnect', () => {
     console.log('A user disconnected:', socket.id); // Log when a user disconnects
