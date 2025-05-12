@@ -49,16 +49,16 @@ const Chat = () => {
   }, [userType]);
 
   // Listen for new messages globally to update patient list for doctors
-  useEffect(() => {
-    if (userType !== 'doctor') return;
-    const handleNewMessage = () => {
-      fetchList();
-    };
-    socket.on('receiveMessage', handleNewMessage);
-    return () => {
-      socket.off('receiveMessage', handleNewMessage);
-    };
-  }, [userType]);
+  // useEffect(() => {
+  //   if (userType !== 'doctor') return;
+  //   const handleNewMessage = () => {
+  //     fetchList();
+  //   };
+  //   socket.on('receiveMessage', handleNewMessage);
+  //   return () => {
+  //     socket.off('receiveMessage', handleNewMessage);
+  //   };
+  // }, [userType]);
 
   // Join room and fetch previous messages when selection changes
   useEffect(() => {
