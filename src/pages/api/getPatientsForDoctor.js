@@ -1,5 +1,5 @@
 import dbConnect from '../../../lib/dbConnect';
-import Conversation from '../../../models/Conversation';
+import Conversation from '../../../models/conversation';
 import User from '../../../models/user';
 import { adminAuth } from '../../../lib/firebaseAdmin';
 
