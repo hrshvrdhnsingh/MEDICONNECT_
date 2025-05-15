@@ -72,7 +72,10 @@ export default function UserDetails() {
       },
       body: JSON.stringify(userForm),
     });
-    if (res.ok) router.push('/');
+    if (res.ok) {
+       Cookies.set('userType', 'user');
+       router.push('/');
+    }
   };
 
   const handleDoctorSubmit = async (e) => {
@@ -85,7 +88,10 @@ export default function UserDetails() {
       },
       body: JSON.stringify(doctorForm),
     });
-    if (res.ok) router.push('/');
+    if (res.ok) {
+      Cookies.set('userType', 'doctor')
+      router.push('/');
+    }
   };
 
   const specializations = [

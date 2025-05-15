@@ -1,12 +1,17 @@
+// utils/auth.js
 import jwt from 'jsonwebtoken';
 
-// Have to change this file this is just a placeholder
-
 export function verifyToken(token) {
+  const secret = process.env.JWT_SECRET;
+
+  if (!secret) {
+    throw new Error('JWT secret is not defined in environment variables.');
+  }
+
   try {
-    const secret = process.env.JWT_SECRET; // Ensure this environment variable is set
     return jwt.verify(token, secret);
   } catch (error) {
-    throw new Error('Invalid token');
+    console.error('JWT verification failed:', error.message);
+    throw new Error('Invalid or expired token');
   }
 }

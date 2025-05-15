@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import styles from "./Banner.module.css";
-
 export function Banner() {
   const [isClient, setIsClient] = useState(false);
 

@@ -10,13 +10,13 @@ export default async function handler(req, res) {
   console.log('heeelllooo Request method:', req.method); // Debugging line
   try {
     const token = req.headers.authorization?.split(' ')[1];
-    console.log('Token:', token); // Debugging line
+    console.log('Token:', token); 
     if (!token) return res.status(401).json({ error: 'Unauthorized' });
 
     const decoded = verifyToken(token);
     const email = decoded.email;
 
-    console.log('Decoded email:', email); // Debugging line
+    console.log('Decoded email:', email);
 
     await dbConnect();
 

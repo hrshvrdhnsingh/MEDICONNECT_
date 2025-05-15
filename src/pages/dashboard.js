@@ -47,6 +47,8 @@ export default function Dashboard({ data, type }) {
 
   const handleLogout = () => {
     Cookies.remove('token');
+    Cookies.remove('userType')
+    Cookies.remove('user_uid')
     console.log('Log-out succesful')
     router.push('/login');
   };
