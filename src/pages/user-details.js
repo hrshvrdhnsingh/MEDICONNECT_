@@ -100,30 +100,33 @@ export default function UserDetails() {
   ];
 
   return (
-    <div className='w-screen min-h-screen flex justify-center items-center flex-col gap-12'>
-      <h1 className='text-4xl text-blue-700 font-semibold'>Allow us to personalize your experience!</h1>
+    <div className='w-screen min-h-screen flex justify-center items-center gap-20'
+      style={{
+          backgroundImage: "url('https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747339514/zgi5lyx9jyp3zwgrc31d.jpg')",
+          backgroundSize: '100% 100%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+    >
+      <div className='flex flex-col gap-8 w-4/12 h-full items-start justify-center'>
+        <h1 className='text-5xl font-bold bg-gradient-to-r from-[#f093fb] to-[#f5576c] bg-clip-text text-transparent'>Allow us to personalize your experience!</h1>
+        <div className="flex gap-4 text-2xl justify-around">
+          <Checkbox
+            isSelected={userType === 'user'}
+            onValueChange={() => setUserType('user')}
+            className="text- text-2xl"
+          >
+            I'm a User
+          </Checkbox>
 
-      <div className="flex gap-4 text-lg">
-        <label className="flex items-center gap-2">
-          <input
-            type="radio"
-            name="type"
-            value="user"
-            checked={userType === 'user'}
-            onChange={() => setUserType('user')}
-          />
-          I'm a User
-        </label>
-        <label className="flex items-center gap-2">
-          <input
-            type="radio"
-            name="type"
-            value="doctor"
-            checked={userType === 'doctor'}
-            onChange={() => setUserType('doctor')}
-          />
-          I'm a Doctor
-        </label>
+          <Checkbox
+            isSelected={userType === 'doctor'}
+            onValueChange={() => setUserType('doctor')}
+            className="text-[#00f2fe] text-2xl"
+          >
+            I'm a Doctor
+          </Checkbox>
+        </div>
       </div>
 
       <form
@@ -132,7 +135,7 @@ export default function UserDetails() {
       >
         {userType === 'user' ? (
           <>
-            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-blue-300 lg:text-xl text-lg font-medium">
+            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-cyan-300 lg:text-xl text-lg font-medium">
               <div className="w-11/12">
                 Name:
                 <Input
@@ -146,7 +149,7 @@ export default function UserDetails() {
               </div>
             </div>
 
-            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-blue-300 lg:text-xl text-lg font-medium">
+            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-cyan-300 lg:text-xl text-lg font-medium">
               <div className="w-11/12">
                 Age:
                 <Input
@@ -160,7 +163,7 @@ export default function UserDetails() {
               </div>
             </div>
 
-            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-blue-300 lg:text-xl text-lg font-medium">
+            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-cyan-300 lg:text-xl text-lg font-medium">
               <div className="w-11/12">
                 Weight (kg):
                 <Input
@@ -174,7 +177,7 @@ export default function UserDetails() {
               </div>
             </div>
 
-            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-blue-300 lg:text-xl text-lg font-medium">
+            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-cyan-300 lg:text-xl text-lg font-medium">
               <div className="w-11/12">
                 Height (cm):
                 <Input
@@ -188,7 +191,7 @@ export default function UserDetails() {
               </div>
             </div>
 
-            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-blue-300 lg:text-xl text-lg font-medium">
+            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-cyan-300 lg:text-xl text-lg font-medium">
               <div className="w-11/12">
                 Diet:
                 <Select
@@ -209,7 +212,7 @@ export default function UserDetails() {
           </>
         ) : (
           <>
-            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-blue-300 lg:text-xl text-lg font-medium">
+            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-cyan-300 lg:text-xl text-lg font-medium">
               <div className="w-11/12">
                 First Name:
                 <Input
@@ -223,7 +226,7 @@ export default function UserDetails() {
               </div>
             </div>
 
-            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-blue-300 lg:text-xl text-lg font-medium">
+            <div className="w-full justify-center items-center flex flex-wrap md:flex-nowrap gap-4 text-cyan-300 lg:text-xl text-lg font-medium">
               <div className="w-11/12">
                 Last Name:
                 <Input
@@ -237,16 +240,24 @@ export default function UserDetails() {
               </div>
             </div>
 
-            <div className="w-full justify-center items-center flex flex-col text-blue-300 lg:text-xl text-lg font-medium">
+            <div className="w-full justify-center items-center flex flex-col text-cyan-300 lg:text-xl text-lg font-medium">
               <div className="w-11/12">
                 Specializations:
                 <CheckboxGroup
                   value={doctorForm.specialization}
                   onValueChange={(val) => handleDoctorChange('specialization', val)}
-                  className="mt-2 gap-2 flex border items-center flex-wrap"
+                  className="mt-2 w-full"
+                  classNames={{
+                    base: "flex flex-wrap gap-3", // container
+                    label: "text-white text-xl font-semibold mb-2", // top label (optional)
+                  }}
                 >
                   {specializations.map((item) => (
-                    <Checkbox key={item} value={item} className='text-blue-300'>
+                    <Checkbox key={item} value={item} className='' classNames={{
+                      base: "rounded-xl p-2",
+                      label: "text-lg text-blue-100", // label text
+                      icon: "text-pink-400",
+                    }}>
                       {item}
                     </Checkbox>
                   ))}
@@ -258,7 +269,7 @@ export default function UserDetails() {
 
         <button
           type="submit"
-          className='w-11/12 px-3 py-2 bg-blue-gray-400 rounded-xl mt-4 text-black text-xl font-medium hover:scale-95 transition-all duration-1000'
+          className='w-11/12 px-3 py-2 bg-gradient-to-r from-[#0a6efabd] to-[#68c1f5c7] rounded-xl mt-4 text-white text-xl hover:scale-[0.98] transition-all duration-1000'
         >
           Submit
         </button>
