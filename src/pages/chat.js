@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import Cookies from 'js-cookie';
 
-const socket = io('http://localhost:3001'); // Connect to the backend server
+const socket = io('https://mediconnectfork-3.onrender.com'); // Connect to the backend server
 
 const Chat = () => {
   const user_uid = Cookies.get('user_uid');
