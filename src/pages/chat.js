@@ -7,7 +7,7 @@ const socket = io('http://localhost:3001'); // Connect to the backend server
 const Chat = () => {
   const user_uid = Cookies.get('user_uid');
   const userType = Cookies.get('userType');
-  // const token = Cookies.get('token');
+  const token = Cookies.get('token');
 
   console.log('User UID:', user_uid);
   console.log('User Type:', userType);
@@ -28,6 +28,17 @@ const Chat = () => {
       console.log('The response is:', res);
     };
     f();
+
+    const emailCheck = async () => {
+      const response = await fetch('/api/check-email-exists', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    };
+    emailCheck();
+
   }, []);
   // Fetch doctors (for user) or patients (for doctor)
   const fetchList = async () => {
