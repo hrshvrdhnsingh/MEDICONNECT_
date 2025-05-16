@@ -3,7 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const mongoose = require('mongoose'); // Import mongoose
-const Conversation = require('./models/Conversation'); // Import Conversation model
+const Conversation = require('./models/conversation'); // Import Conversation model
 const dbConnect = require('./utils/dbConnect'); // Use require for dbConnect
 
 const app = express();
