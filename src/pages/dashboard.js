@@ -45,7 +45,6 @@ export async function getServerSideProps({ req }) {
 
 export default function Dashboard({ data, type }) {
   const router = useRouter();
-  console.log(data, type);
 
   const handleLogout = () => {
     Cookies.remove('token');

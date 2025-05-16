@@ -2,7 +2,7 @@
 import dbConnect from '../../../lib/dbConnect'; // your DB connection
 import User from '../../../models/user';
 import Doctor from '../../../models/doctor';
-import { verifyToken } from '../../utils/auth'; // Corrected import path
+import { adminAuth } from '../../../lib/firebaseAdmin'; // Corrected import path
 
 // Have to change this file. This is not the correct file to check if the user is a doctor or a user. This is only dummy.
 export default async function handler(req, res) {
@@ -10,13 +10,12 @@ export default async function handler(req, res) {
   console.log('heeelllooo Request method:', req.method); // Debugging line
   try {
     const token = req.headers.authorization?.split(' ')[1];
-    console.log('Token:', token); 
     if (!token) return res.status(401).json({ error: 'Unauthorized' });
 
-    const decoded = verifyToken(token);
+    const decoded = await adminAuth.verifyIdToken(token);
     const email = decoded.email;
 
-    console.log('Decoded email:', email);
+    if (!email) return res.status(400).json({ error: 'Invalid token, email not found' });
 
     await dbConnect();
 
@@ -24,7 +23,9 @@ export default async function handler(req, res) {
     const doctor = await Doctor.findOne({ email });
 
     const exists = !!(user || doctor);
-    return res.status(200).json({ exists });
+    const type = doctor ? 'doctor' : user ? 'user' : null;
+
+    return res.status(200).json({ exists, type });
   } catch (error) {
     console.log('There is an error ')
     console.error(error);

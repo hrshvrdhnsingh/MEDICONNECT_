@@ -22,8 +22,6 @@ doctorSchema.set('toJSON', {
   },
 });
 
-console.log('The models are:', mongoose.models);
-
 const Doctor = mongoose.models.Doctor || mongoose.model('Doctor', doctorSchema);
 
 export default Doctor;
