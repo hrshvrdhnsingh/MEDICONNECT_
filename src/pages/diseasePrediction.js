@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import symptomsData from '../../data/SymptomsJSON.json';
 import axios from 'axios';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from '../styles/diseasePrediction.module.css';
 import { Button } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
-import { useEffect } from 'react';
+import StartupLoader from '../../components/StartupLoader/StartupLoader';
 
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
   const [predictedDisease, setPredictedDisease] = useState(null);
+  const [startupLoading, setStartupLoading] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [countdown, setCountdown] = useState(60);
 
   useEffect(() => {
-    fetch('https://diseasepredictionapi.onrender.com');
+    setStartupLoading(true);
+    fetch('https://diseasepredictionapi.onrender.com')
+      .catch((err) => console.error('API warmup error:', err))
+      .finally(() => setStartupLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (!startupLoading) return;
+    if (countdown === 0) return;
+    const timer = setTimeout(() => setCountdown((c) => c - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [startupLoading, countdown]);
 
   const handleCheckboxChange = (category, symptom, isChecked) => {
     setCheckedSymptoms((prevState) => ({
@@ -67,7 +79,26 @@ export default function SymptomCheckbox() {
 
   return (
     <div className={styles.prediction_bg}>
-      {loading && (
+      {startupLoading && (
+        <div
+          style={{
+            backgroundColor: '#182f5d',
+            minHeight: '100vh',
+            width: '100vw',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            zIndex: 120,
+            opacity: 0.98,
+          }}
+        >
+          <StartupLoader countdown={countdown} />
+        </div>
+      )}
+      {loading && !startupLoading && (
         <div className='fixed top-0 left-0 flex justify-center items-center w-screen h-screen bg-blue-800 bg-opacity-30 z-[120]'>
           <div className={styles.loader}></div>
         </div>
