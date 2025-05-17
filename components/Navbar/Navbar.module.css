@@ -55,6 +55,8 @@
   font-size: 1.25rem;
   font-weight: 400;
   background-color: transparent;
+  white-space: nowrap;
+  overflow-x: hidden;
 }
 .menu_icon{
   display: none;
