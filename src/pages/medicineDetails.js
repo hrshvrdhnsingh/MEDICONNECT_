@@ -50,13 +50,13 @@ const MedicineDetails = () => {
 
       {/* <button onClick={retrieveMedicineDetails}>Retrieve Details</button> */}
       <div className="flex justify-center mt-4">
-        <Button
+        <button
           onClick={retrieveMedicineDetails}
           color="primary"
-          className={styles.btn}
+          className="flex justify-center text-xl px-3 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-blue-700 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none ease-in-out duration-200 focus:ring-cyan-300 dark:focus:ring-cyan-800"
         >
           Retrieve Details
-        </Button>
+        </button>
       </div>
 
       <div className="flex justify-center min-h-max flex-wrap w-11/12 mt-8">
@@ -69,7 +69,7 @@ const MedicineDetails = () => {
               <p className="lg:text-2xl text-xl font-medium text-gray-300">{medicine.name}</p>
               <p className="lg:text-xl text-lg text-teal-300">Price : {medicine.price.mrp}</p>
               {medicine.form && <p className="text-gray-400">Description : {medicine.form}</p>}
-              <button className={styles.buybtn} onClick={() => window.open(medicine.product_url, "_blank")}>
+              <button className='w-10/12 mt-auto flex justify-center text-xl px-3 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-blue-700 hover:bg-gradient-to-bl focus:ring-1 ease-in-out duration-200 focus:ring-cyan-300 focus:outline-none  dark:focus:ring-cyan-800' onClick={() => window.open(medicine.product_url, "_blank")}>
                 <p className="text-gray-300">Proceed to buy</p>
               </button>
             </div>
