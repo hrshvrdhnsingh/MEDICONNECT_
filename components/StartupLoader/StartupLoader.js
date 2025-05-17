@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Loader({ countdown }) {
+export default function StartupLoader({ countdown }) {
   return (
     <div style={{
       minHeight: "40vh",

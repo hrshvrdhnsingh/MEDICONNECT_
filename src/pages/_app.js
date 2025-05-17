@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import { NextUIProvider } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
-import Loader from '../../components/Loader/Loader'; // Adjust path if needed
+import StartupLoader from '../../components/StartupLoader/StartupLoader'; // Adjust path if needed
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }) {
           justifyContent: 'center',
         }}
       >
-        <Loader countdown={countdown} />
+        <StartupLoader countdown={countdown} />
       </div>
     );
   }
