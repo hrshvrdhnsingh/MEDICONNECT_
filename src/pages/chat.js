@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import Cookies from 'js-cookie';
+import Link from 'next/link';
 
 const socket = io('https://mediconnectfork-3.onrender.com'); // Connect to the backend server
 
@@ -17,6 +18,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [isClient, setIsClient] = useState(false);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -46,11 +48,13 @@ const Chat = () => {
       // Fetch patients who have chatted with this doctor
       const res = await fetch('/api/getPatientsForDoctor');
       const data = await res.json();
+      console.log('Patients', data);
       setList(data.patients || []);
     } else {
       // Fetch all doctors
       const res = await fetch('/api/getDoctors');
       const data = await res.json();
+      console.log('Doctors', data)
       setList(data.doctors || []);
     }
   };
@@ -58,6 +62,10 @@ const Chat = () => {
   useEffect(() => {
     fetchList();
   }, [userType]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages.length]);
 
   // Listen for new messages globally to update patient list for doctors
   // useEffect(() => {
@@ -130,48 +138,19 @@ const Chat = () => {
       : `${item.firstName} ${item.lastName}`;
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        height: '80vh',
-        background: '#f5f7fa',
-        borderRadius: 12,
-        overflow: 'hidden',
-        margin: 24,
-      }}
-    >
+    <div className='flex h-screen w-screen overflow-hidden'>
       {/* List (Doctors or Patients) */}
-      <div
-        style={{
-          width: 260,
-          background: '#1e293b',
-          color: '#fff',
-          padding: 0,
-          overflowY: 'auto',
-        }}
-      >
-        <div
-          style={{
-            padding: 16,
-            fontWeight: 600,
-            fontSize: 20,
-            borderBottom: '1px solid #334155',
-            minHeight: 28,
-          }}
-        >
+      <div className='w-2/12 flex flex-col gap-2 bg-[#071c3f] text-white p-1 overflow'>
+        <div className='flex justify-between items-center px-2 py-3 font-medium text-2xl border-b-1 border-[#334155] min-h-8'>
+          <Link href='/' type="button" className="text-white bg-gradient-to-r from-blue-500 to-blue-800 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center">{'<'}</Link>
           {listTitle}
         </div>
         {list.map((item) => (
-          <div
+          <div 
             key={item.uid}
-            style={{
-              padding: '14px 18px',
-              cursor: 'pointer',
-              background:
-                selected?.uid === item.uid ? '#334155' : 'transparent',
-              borderBottom: '1px solid #334155',
-              fontWeight: selected?.uid === item.uid ? 700 : 400,
-            }}
+            className={`px-4 flex flex-col gap-2 rounded-xl py-3 cursor-pointer border-b border-[#334155] ${
+              selected?.uid === item.uid ? 'bg-[#2563eb] font-bold' : 'bg-transparent font-normal'
+            }`}
             onClick={() => setSelected(item)}
           >
             {getDisplayName(item)}
@@ -179,23 +158,8 @@ const Chat = () => {
         ))}
       </div>
       {/* Chat Window */}
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          background: '#fff',
-        }}
-      >
-        <div
-          style={{
-            padding: 16,
-            borderBottom: '1px solid #e5e7eb',
-            fontWeight: 600,
-            fontSize: 18,
-            background: '#f1f5f9',
-          }}
-        >
+      <div className='flex flex-col bg-white w-10/12'>
+        <div className='border-b-1 p-4 border-[#e5e7eb] font-medium text-xl bg-[#f1f5f9]'>
           {
             selected
               ? getDisplayName(selected)
@@ -206,51 +170,58 @@ const Chat = () => {
               : '' /* Avoid SSR/CSR mismatch */
           }
         </div>
-        <div
-          style={{
-            flex: 1,
-            overflowY: 'auto',
-            padding: 16,
-            background: '#f8fafc',
-          }}
-        >
-          {selected ? (
-            messages.length > 0 ? (
-              messages.map((msg, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    marginBottom: 12,
-                    textAlign: msg.sender === userType ? 'right' : 'left',
-                  }}
-                >
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      background:
-                        msg.sender === userType ? '#2563eb' : '#e0e7ef',
-                      color: msg.sender === userType ? '#fff' : '#22223b',
-                      borderRadius: 8,
-                      padding: '8px 14px',
-                      maxWidth: '70%',
-                      wordBreak: 'break-word',
-                    }}
+        <div className='flex-1  overflow-y-auto p-3 bg-[#f8fafc]'>
+          {messages.length > 0 ? (
+              messages.map((msg, idx) => {
+                const isLast = idx === messages.length - 1;
+                const isUser = msg.sender === userType;
+                const isDoctor = msg.sender === 'doctor';
+                const isPatient = msg.sender === 'patient';
+                const displayName = isUser ? 'You' : msg.sender;
+
+                // Decide the image based on the sender role
+                const imageSrc = isDoctor
+                  ? 'https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747493127/nczsnx2iewsmbo8vuv0m.png' // Replace with your doctor logo path
+                  : 'https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747493384/f1siona09tbsca88ftlv.png'; // Replace with your patient logo path
+
+                return (
+                  <div
+                    key={idx} ref={isLast ? messagesEndRef : null}
+                    className={`mb-3 flex items-end ${isUser ? 'justify-end' : 'justify-start'}`}
                   >
-                    {msg.message}
-                  </span>
-                  <div style={{ fontSize: 10, color: '#64748b', marginTop: 2 }}>
-                    {msg.sender === userType ? 'You' : msg.sender}
+                    {/* Logo on left if NOT user */}
+                    {!isUser && (
+                      <img
+                        src={imageSrc}
+                        alt={msg.sender}
+                        className="lg:w-8 lg:h-8 h-6 w-6 mr-2 mb-2"
+                      />
+                    )}
+
+                    {/* Message bubble */}
+                    <div
+                      className={`px-2 py-2 max-w-[50%] break-words ${
+                        isUser ? 'bg-[#2563eb] text-white rounded-l-md rounded-t-md' : 'bg-[#34d76a] text-white rounded-r-md rounded-t-md'
+                      }`}
+                    >
+                      <div className="text-xs text-gray-200 font-bold mb-1">{displayName}</div>
+                      <div >{msg.message}</div>
+                    </div>
+
+                    {/* Logo on right if user */}
+                    {isUser && (
+                      <img
+                        src={imageSrc}
+                        alt={msg.sender}
+                        className="lg:w-6 lg:h-6 h-4 w-4 ml-2 mb-2"
+                      />
+                    )}
                   </div>
-                </div>
-              ))
+                );
+              })
             ) : (
-              <div style={{ color: '#64748b', marginTop: 24 }}>
-                No messages yet.
-              </div>
-            )
-          ) : (
             isClient && (
-              <div style={{ color: '#64748b', marginTop: 24 }}>
+              <div className='text-[#64748b] mt-12'>
                 Select a {userType === 'doctor' ? 'patient' : 'doctor'} to start
                 chatting.
               </div>
@@ -258,15 +229,7 @@ const Chat = () => {
           )}
         </div>
         {/* Input */}
-        <div
-          style={{
-            padding: 16,
-            borderTop: '1px solid #e5e7eb',
-            background: '#f1f5f9',
-            display: 'flex',
-            gap: 8,
-          }}
-        >
+        <div className='p-2 border-t border-[#e5e7eb] bg-[#f1f5f9] flex gap-2'>
           <input
             type='text'
             value={message}
@@ -280,15 +243,9 @@ const Chat = () => {
                   } to chat`
                 : ''
             }
-            style={{
-              flex: 1,
-              border: '1px solid #cbd5e1',
-              borderRadius: 6,
-              padding: '8px 12px',
-              fontSize: 16,
-              outline: 'none',
-              background: selected ? '#fff' : '#f1f5f9',
-            }}
+            className={`flex-1 border border-[#cbd5e1] rounded-[6px] py-2 px-3 text-base outline-none ${
+              selected ? 'bg-white' : 'bg-[#f1f5f9]'
+            }`}
             disabled={!selected}
             onKeyDown={(e) => {
               if (e.key === 'Enter') sendMessage();
@@ -297,16 +254,9 @@ const Chat = () => {
           <button
             onClick={sendMessage}
             disabled={!selected || !message.trim()}
-            style={{
-              background: '#2563eb',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 6,
-              padding: '8px 18px',
-              fontWeight: 600,
-              cursor: selected && message.trim() ? 'pointer' : 'not-allowed',
-              opacity: selected && message.trim() ? 1 : 0.6,
-            }}
+            className={`bg-[#2563eb] text-white border-none rounded-[6px] py-2 px-[18px] font-semibold ${
+              selected && message.trim() ? 'cursor-pointer opacity-100' : 'cursor-not-allowed opacity-60'
+            }`}
           >
             Send
           </button>

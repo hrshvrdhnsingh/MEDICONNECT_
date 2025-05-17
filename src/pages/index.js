@@ -6,6 +6,7 @@ import User from '../../models/user';
 import Doctor from '../../models/doctor';
 import { adminAuth } from '../../lib/firebaseAdmin';
 import Introduction from '@/components/infoContainer/Introduction';
+import Footer from '../../components/Footer/Footer';
 
 export async function getServerSideProps({ req }) {
   const token = req.cookies.token;
@@ -49,6 +50,7 @@ export default function HomePage({ user }) {
       <main className="min-h-screen">
         <Banner user={user} />
         <Introduction />
+        <Footer />
       </main>
     </>
   );

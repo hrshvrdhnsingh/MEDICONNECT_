@@ -6,6 +6,7 @@ import styles from '../styles/diseasePrediction.module.css';
 import { Button } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
 import { useEffect } from 'react';
+import Footer from '@/components/Footer/Footer';
 
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
@@ -161,6 +162,7 @@ export default function SymptomCheckbox() {
           </Button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
