@@ -159,15 +159,14 @@ const NutritionChart = () => {
           ><p className="text-blue-400 lg:text-xl text-lg">Non-Vegetarian</p></Checkbox>
         </div>
         <div className={styles.btn}>
-          <Button
+          <button
             onClick={prepareDietChart}
             color="primary"
-            className="flex justify-center text-xl px-3 py-2"
+            className="flex justify-center text-xl px-3 py-2 ease-in-out duration-200 text-white bg-gradient-to-r from-blue-400 to-blue-700 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg"
           >
             Prepare Diet Chart
-          </Button>
+          </button>
         </div>
-        {console.log({ breakfast })}
 
         <div className={styles.nutrition_container}>
           {breakfast && (

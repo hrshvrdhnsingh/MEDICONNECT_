@@ -20,7 +20,7 @@ const Introduction = () => {
         <div className={styles.card_wrapper}>
           <div className={styles.info_container}>
             <h1
-              className="aos-init"
+              className="aos-init bg-gradient-to-r text-gray-300 from-blue-600 to-cyan-700"
               data-aos="zoom-in"
               data-aos-easing="ease"
               data-aos-delay="100"
@@ -28,7 +28,7 @@ const Introduction = () => {
               Disease Prediction
             </h1>
             <p
-              className="aos-init"
+              className="aos-init "
               data-aos="zoom-in"
               data-aos-easing="ease"
               data-aos-delay="100"
@@ -80,7 +80,7 @@ const Introduction = () => {
         </div> */}
         <div className={styles.card_wrapper}>
           <div
-            className={`${styles.image_container} ${styles["data-aos"]} ${styles["data-aos-easing"]} ${styles["data-aos-delay"]}`}
+            className={`${styles.image_container} ${styles["data-aos"]} ${styles["data-aos-easing"]} ${styles["data-aos-delay"]} `}
             data-aos="zoom-out-right"
             data-aos-easing="ease"
             data-aos-delay="300"
@@ -93,7 +93,7 @@ const Introduction = () => {
           </div>
           <div className={styles.info_container}>
             <h1
-              className="aos-init"
+              className="aos-init bg-gradient-to-r text-gray-300 from-blue-600 to-cyan-700"
               data-aos="zoom-in"
               data-aos-easing="ease"
               data-aos-delay="100"
@@ -114,7 +114,7 @@ const Introduction = () => {
         <div className={styles.card_wrapper}>
           <div className={styles.info_container}>
             <h1
-              className="aos-init"
+              className="aos-init bg-gradient-to-r text-gray-300 from-blue-600 to-cyan-700"
               data-aos="zoom-in"
               data-aos-easing="ease"
               data-aos-delay="100"
@@ -162,7 +162,7 @@ const Introduction = () => {
           </div>
           <div className={styles.info_container}>
             <h1
-              className="aos-init"
+              className="aos-init bg-gradient-to-r text-gray-300 from-blue-600 to-cyan-700"
               data-aos="zoom-in"
               data-aos-easing="ease"
               data-aos-delay="100" 
@@ -183,7 +183,7 @@ const Introduction = () => {
         <div className={styles.card_wrapper}>
           <div className={styles.info_container}>
             <h1
-              className="aos-init"
+              className="aos-init bg-gradient-to-r text-gray-300 from-blue-600 to-cyan-700"
               data-aos="zoom-in"
               data-aos-easing="ease"
               data-aos-delay="100"

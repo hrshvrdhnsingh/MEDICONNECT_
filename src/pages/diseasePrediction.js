@@ -13,7 +13,7 @@ export default function SymptomCheckbox() {
   const [predictedDisease, setPredictedDisease] = useState(null);
   const [startupLoading, setStartupLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [countdown, setCountdown] = useState(60);
+  const [countdown, setCountdown] = useState(3600);
 
   useEffect(() => {
     setStartupLoading(true);
@@ -119,10 +119,10 @@ export default function SymptomCheckbox() {
           </div>
         )}
         {Object.entries(symptomsData).map(([category, data]) => (
-          <div className='lg:w-[80vw] w-[90vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl'>
+          <div className='lg:w-[80vw] w-[90vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl' key={category.id}>
             <div key={category}>
               <div className='flex justify-center'>
-                <div className='flex justify-center text-xl bg-blue-300 px-3 py-2 rounded-xl text-gray-200'>
+                <div className='flex justify-center text-xl bg-gradient-to-r from-blue-400 to-blue-600 px-3 py-2 rounded-xl text-gray-200'>
                   <h2>{category}</h2>
                 </div>
               </div>
@@ -177,20 +177,20 @@ export default function SymptomCheckbox() {
         {/* <button onClick={handlePredict}>Predict</button>
         <button onClick={handleReset}>Reset</button> */}
         <div className='flex justify-center m-8 gap-4'>
-          <Button
+          <button
             onClick={handlePredict}
             color='primary'
-            className='text-2xl p-4 hover:scale-95'
+            className='text-white bg-gradient-to-r from-blue-500 to-blue-800 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg ease-in-out duration-200 text-xl px-3 py-2.5 text-cente'
           >
             Predict disease
-          </Button>
-          <Button
+          </button>
+          <button
             onClick={handleReset}
             color='primary'
-            className='text-2xl p-4 hover:scale-95'
+            className='text-white text-xl bg-gradient-to-r from-blue-500 to-blue-800 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg ease-in-out duration-200 px-3 py-2.5 text-cente'
           >
             Reset
-          </Button>
+          </button>
         </div>
       </div>
       <Footer />
