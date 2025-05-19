@@ -3,43 +3,62 @@ import { getNearbyPharmacies } from "../../lib/getNearbyPharmacies";
 import MapComponent from "../../components/Map/GoogleMap";
 import useTrackUserLocation from "../../hooks/trackUserLocation";
 import Navbar from "../../components/Navbar/Navbar";
-import styles from "../styles/nearestHospitals.module.css";
+import PageLoader from "../../components/PageLoader/PageLoader"; // <-- Loader Component
+import styles from "../styles/nearestHospitals.module.css"; // reuse CSS
 
 const FindNearestPharmacies = () => {
   const [pharmacyDetails, setPharmacyDetails] = useState([]);
+  const [dataLoading, setDataLoading] = useState(false); // track fetch status
   const coords = useTrackUserLocation();
   const { latitude, longitude } = coords;
 
   useEffect(() => {
     const fetchNearbyPharmacies = async () => {
+      setDataLoading(true);
       try {
         const pharmacies = await getNearbyPharmacies({ latitude, longitude });
         setPharmacyDetails(pharmacies);
       } catch (error) {
         console.error("Error fetching pharmacies:", error);
         setPharmacyDetails([]);
+      } finally {
+        setDataLoading(false);
       }
     };
 
-    if (coords) {
+    if (latitude && longitude) {
       fetchNearbyPharmacies();
     }
-  }, [latitude, longitude]); // Add latitude and longitude to the dependency array
+  }, [latitude, longitude]);
 
-  const coordinatesArray = pharmacyDetails.map((pharmacy) => {
-    return {
-      lng: pharmacy.longitude,
-      lat: pharmacy.latitude,
-      name: pharmacy.name,
-      address: pharmacy.address,
-      distance: pharmacy.distance,
-    };
-  });
+  const coordinatesArray = pharmacyDetails.map((pharmacy) => ({
+    lng: pharmacy.longitude,
+    lat: pharmacy.latitude,
+    name: pharmacy.name,
+    address: pharmacy.address,
+    distance: pharmacy.distance,
+  }));
+
+  const shouldShowLoader = !latitude || !longitude || dataLoading;
 
   return (
     <div className={styles.extra_bg}>
       <Navbar />
-      <MapComponent locations={coordinatesArray} latitude={latitude} longitude={longitude}/>
+
+      {/* Loader Overlay */}
+      {shouldShowLoader && (
+        <div className='fixed top-0 left-0 flex justify-center items-center w-screen h-screen  bg-[#0116726b] z-[120]'>
+          <PageLoader />
+        </div>
+      )}
+
+      {!shouldShowLoader && (
+        <MapComponent
+          locations={coordinatesArray}
+          latitude={latitude}
+          longitude={longitude}
+        />
+      )}
     </div>
   );
 };

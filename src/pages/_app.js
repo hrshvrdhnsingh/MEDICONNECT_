@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
         {loading && (
           <div
             style={{
-              backgroundColor: '#182f5d',
+              backgroundColor: '#0116726b',
               minHeight: '100vh',
               width: '100vw',
               display: 'flex',

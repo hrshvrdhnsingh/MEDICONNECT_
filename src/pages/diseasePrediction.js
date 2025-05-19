@@ -7,13 +7,14 @@ import { Button } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
 import StartupLoader from '../../components/StartupLoader/StartupLoader';
 import Footer from '@/components/Footer/Footer';
+import PageLoader from '@/components/PageLoader/PageLoader';
 
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
   const [predictedDisease, setPredictedDisease] = useState(null);
   const [startupLoading, setStartupLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [countdown, setCountdown] = useState(3600);
+  const [countdown, setCountdown] = useState(60);
 
   useEffect(() => {
     setStartupLoading(true);
@@ -100,8 +101,8 @@ export default function SymptomCheckbox() {
         </div>
       )}
       {loading && !startupLoading && (
-        <div className='fixed top-0 left-0 flex justify-center items-center w-screen h-screen bg-blue-800 bg-opacity-30 z-[120]'>
-          <div className={styles.loader}></div>
+        <div className='fixed top-0 left-0 flex justify-center items-center w-screen h-screen bg-[#0116726b] z-[120]'>
+          <PageLoader />
         </div>
       )}
       <Navbar />

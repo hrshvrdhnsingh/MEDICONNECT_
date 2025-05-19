@@ -221,7 +221,7 @@ const Chat = () => {
               })
             ) : (
             isClient && (
-              <div className='text-[#64748b] mt-12'>
+              <div className='text-[#64748b] mt-8'>
                 Select a {userType === 'doctor' ? 'patient' : 'doctor'} to start
                 chatting.
               </div>

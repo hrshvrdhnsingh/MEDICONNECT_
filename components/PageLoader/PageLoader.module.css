@@ -1,8 +1,7 @@
 /* From Uiverse.io by codingzemigle */ 
 .content {
-  width: 50vmin;
-  height: 50vmin;
-  background: #fff0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,8 +9,8 @@
 
 .pill {
   background: #fff0;
-  width: 15vmin;
-  height: 40vmin;
+  width: 4vmin;
+  height: 23vmin;
   display: flex;
   align-items: center;
   justify-content: center;

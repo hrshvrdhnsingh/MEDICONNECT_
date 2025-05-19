@@ -86,10 +86,10 @@ export default function Dashboard({ data, type }) {
                 </div>
               </div>
               <div className="pl-2 mt-2 flex flex-col gap-1 ">
-                <p className='text-xl text-cyan-400'><strong className='text-cyan-700'>Email:</strong> {data.email}</p>
-                <p className='text-xl text-cyan-400'><strong className='text-cyan-700'>Age:</strong> {data.age}</p>
-                <p className='text-xl text-cyan-400'><strong className='text-cyan-700'>Weight:</strong> {data.weight} kg</p>
-                <p className='text-xl text-cyan-400'><strong className='text-cyan-700'>Diet Type:</strong> {data.diet}</p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Email:</strong> {data.email}</p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Age:</strong> {data.age}</p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Weight:</strong> {data.weight} kg</p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Diet Type:</strong> {data.diet}</p>
               </div>
             </div>
           )}
@@ -108,9 +108,9 @@ export default function Dashboard({ data, type }) {
                 </div>
               </div>
               <div className='pl-2 mt-2 flex flex-col gap-1 '>
-                <p className='text-xl text-cyan-400'><strong className='text-cyan-600'>Email:</strong> {data.email}</p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-600'>Email:</strong> {data.email}</p>
                 <strong className='text-xl text-cyan-600'>Specializations:</strong>
-                <ul className="list-disc list-inside ml-4 text-xl text-cyan-500">
+                <ul className="list-disc list-inside ml-4 text-xl text-cyan-400">
                     {data.specialization.map((spec, index) => (
                     <li key={index}>{spec}</li>
                     ))}
