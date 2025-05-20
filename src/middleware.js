@@ -12,7 +12,8 @@ export function middleware(req) {
     '/login',
     '/user-details',
     '/dashboard',
-    '/test'
+    '/test',
+    '/chat-bot'
   ];
 
   const { pathname } = req.nextUrl;

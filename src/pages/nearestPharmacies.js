@@ -59,6 +59,14 @@ const FindNearestPharmacies = () => {
           longitude={longitude}
         />
       )}
+      {
+        !shouldShowLoader && (
+          <div className="flex flex-col gap-8">
+            <p className="text-4xl text-blue-400 font-semibold">Quick access to nearby care</p>
+            <p className="text-gray-300 text-md">* Tap on pointer to expand the address</p>
+          </div>
+        )
+      }
     </div>
   );
 };

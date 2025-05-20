@@ -7,6 +7,9 @@ import Doctor from '../../models/doctor';
 import { adminAuth } from '../../lib/firebaseAdmin';
 import Introduction from '@/components/infoContainer/Introduction';
 import Footer from '../../components/Footer/Footer';
+import { useState } from 'react';
+import GPTButton from '@/components/ChatWidget/GPTButton';
+import ChatModal from '@/components/ChatWidget/ChatWidget';
 
 export async function getServerSideProps({ req }) {
   const token = req.cookies.token;
@@ -39,6 +42,7 @@ export async function getServerSideProps({ req }) {
 }
 
 export default function HomePage({ user }) {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   return (
     <>
       <Head>

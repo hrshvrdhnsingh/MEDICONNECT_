@@ -7,6 +7,7 @@ import User from '../../models/user';
 import Doctor from '../../models/doctor';
 import { adminAuth } from '../../lib/firebaseAdmin';
 import styles from '../styles/Home.module.css';
+import Navbar from '@/components/Navbar/Navbar';
 
 export async function getServerSideProps({ req }) {
   const token = req.cookies.token;
@@ -67,6 +68,7 @@ export default function Dashboard({ data, type }) {
           backgroundRepeat: 'no-repeat'
         }}
       >
+        <Navbar />
         <h1 className="text-4xl font-bold mb-4 text-cyan-200">
           Welcome {type === 'user' ? data.fullname : data.firstName}
         </h1>

@@ -1,23 +1,28 @@
 import Link from "next/link";
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <div className="w-screen p-1"> 
-      <div className="rounded-2xl px-32 py-2 bg-gradient-to-r from-blue-800 to-blue-900 min-h-max flex justify-between items-center">
-        <div className="flex gap-4 justify-center items-center">
-          <div>
-            <img
-              src='https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747504102/oca9dmpfgeungnpooa3k.png' alt='logo'
-              className="h-24 w-24"
-            />
-          </div>
-          <div className="text-4xl text-white font-bold ">MediConnect</div>
+    <div className="w-screen"> 
+      <div className="rounded-t-3xl px-32 py-1 bg-gradient-to-r from-blue-800 to-blue-900 min-h-max flex justify-evenly items-center">
+        <div className="flex text-2xl text-white font-semibold gap-4 justify-center items-center">
+          © MediConnect
         </div>
-        <div className="flex gap-4">
-          <Link className='text-xl text-gray-400 hover:text-white' href="/dashboard">Dashboard</Link>
-          <Link className='text-xl text-gray-400 hover:text-white' href="/chat">Chat with Doctor</Link>
-          <Link className='text-xl text-gray-400 hover:text-white' href="/diseasePrediction">Disease Prediction</Link>
-          <Link className='text-xl text-gray-400 hover:text-white' href="/nutritionChart">Personalized Diet</Link>
+        <div className="flex gap-12">
+          <div className="flex gap-3">
+            <p className="text-white text-xl">Soumojjal Sen</p>
+            <div className="flex gap-2">
+              <Link className='p-1 rounded-xl text-2xl bg-purple-600 text-white hover:bg-gray-100 hover:!text-purple-700' href="https://github.com/SoumojjalSen"><FaGithub /></Link>
+              <Link className='hover:!text-blue-700 p-1 rounded-xl text-2xl bg-blue-700 text-white hover:bg-gray-100' href="https://www.linkedin.com/in/soumojjal-sen-7b8490256/"><FaLinkedin /></Link>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <p className="text-white text-xl">Harshvardhan Singh</p>
+            <div className="flex gap-2">
+              <Link className='hover:!text-purple-600 p-1 rounded-xl text-2xl bg-purple-600 text-white hover:bg-gray-100 ' href="https://github.com/hrshvrdhnsingh"><FaGithub /></Link>
+              <Link className='hover:!text-blue-700 p-1 rounded-xl text-2xl bg-blue-700 text-white hover:bg-gray-100' href="https://linkedin.com/in/harshvardhan-singh-4p3sh17/"><FaLinkedin /></Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

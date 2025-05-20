@@ -60,6 +60,14 @@ const FindNearestHospitals = () => {
           longitude={longitude}
         />
       )}
+      {
+        !shouldShowLoader && (
+          <div className="flex flex-col gap-3">
+            <p className="text-4xl text-blue-400 font-semibold">Nearby hospitals at a glance</p>
+            <p className="text-gray-300 text-md">* Tap on pointer to expand the address</p>
+          </div>
+        )
+      }
     </div>
   );
 };

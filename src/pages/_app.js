@@ -3,12 +3,15 @@ import { NextUIProvider } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PageLoader from '../../components/PageLoader/PageLoader';
+import GPTButton from '@/components/ChatWidget/GPTButton';
+import ChatModal from '@/components/ChatWidget/ChatWidget';
 
 let apisFetched = false;
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     if (!apisFetched) {
@@ -31,6 +34,8 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
+  const isChatPage = router.pathname === '/chat';
+  
   return (
     <NextUIProvider>
       <div
@@ -38,6 +43,7 @@ function MyApp({ Component, pageProps }) {
           backgroundColor: '#182f5d',
           minHeight: '100vh',
           width: '100vw',
+          position: 'relative'
         }}
       >
         {loading && (
@@ -59,6 +65,12 @@ function MyApp({ Component, pageProps }) {
           </div>
         )}
         <Component {...pageProps} />
+        {!isChatPage && (
+          <>
+            <GPTButton onClick={() => setIsChatOpen(true)} />
+            <ChatModal isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+          </>
+        )}
       </div>
     </NextUIProvider>
   );

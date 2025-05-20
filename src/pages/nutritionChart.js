@@ -120,22 +120,23 @@ const NutritionChart = () => {
   return (
     <div className={styles.nutrition_bg}>
       <Navbar />
-      <div>
+      <form className="flex flex-col gap-2" onSubmit={(e) => {e.preventDefault(); prepareDietChart();}}>
         <div className="h-[10vh]"></div>
-        <div className="flex justify-evenly lg:p-0 p-2 lg:gap-0 gap-4">
-          <div className="flex flex-wrap md:flex-nowrap gap-4 mt-12 text-blue-300 lg:text-xl text-lg font-medium">
-            <label>
+        <div className="flex justify-evenly lg:p-0 p-2 lg:gap-0 gap-2">
+          <div className="flex flex-wrap md:flex-nowrap w-3/12 gap-4 mt-12 text-blue-300 lg:text-xl text-lg font-medium">
+            <label className=" w-full">
               Height (cm):
               <Input
                 type="number"
                 value={height}
                 label="Enter your height"
+                className="w-full"
                 onChange={(e) => setHeight(e.target.value)}
               />
             </label>
           </div>
-          <div className="flex flex-wrap md:flex-nowrap gap-4 mt-12 text-blue-300  lg:text-xl text-lg font-medium">
-            <label>
+          <div className="flex flex-wrap md:flex-nowrap w-3/12 gap-4 mt-12 text-blue-300  lg:text-xl text-lg font-medium">
+            <label className="w-full">
               Weight (kg):
               <Input
                 type="number"
@@ -160,6 +161,7 @@ const NutritionChart = () => {
         </div>
         <div className={styles.btn}>
           <button
+            type="submit"
             onClick={prepareDietChart}
             color="primary"
             className="flex justify-center text-xl px-3 py-2 ease-in-out duration-200 text-white bg-gradient-to-r from-blue-400 to-blue-700 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg"
@@ -230,7 +232,7 @@ const NutritionChart = () => {
             </>
           )}
         </div>
-      </div>
+      </form>
       {/* <Footer /> */}
     </div>
   );
