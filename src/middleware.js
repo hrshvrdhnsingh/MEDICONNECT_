@@ -12,19 +12,31 @@ export function middleware(req) {
     '/login',
     '/user-details',
     '/dashboard',
-    '/test',
-    '/chat-bot'
   ];
 
   const { pathname } = req.nextUrl;
+  const token = req.cookies.get('token');
 
   // Allow static files and API routes to bypass middleware
-  if (pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname.startsWith('/static')) {
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/static')
+  ) {
     return NextResponse.next();
   }
 
+  // Do not protect the root path
+  if (pathname === '/') {
+    return NextResponse.next();
+  }
+
+  // If route is protected and no token, redirect to login
+  if (allowedRoutes.includes(pathname) && pathname !== '/login' && !token) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
+
   if (!allowedRoutes.includes(pathname)) {
-    // console.log('Redirecting to /'); // Log redirection
     return NextResponse.redirect(new URL('/', req.url));
   }
 
