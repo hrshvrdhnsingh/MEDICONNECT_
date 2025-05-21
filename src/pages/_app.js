@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
-  const isChatPage = router.pathname === '/chat';
+  const isChatPage = router.pathname === '/chat' || router.pathname === '/login' || router.pathname == '/user-details';
   
   return (
     <NextUIProvider>

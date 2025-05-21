@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState } from 'react';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -57,7 +58,7 @@ export default function ChatModal({ isOpen, onClose }) {
 
   return (
     <div className="relative border-2 inset-0 z-50 flex items-center justify-center">
-      <div className="fixed bottom-[2vh] right-[1vw] w-[25vw] h-[65vh] bg-gray-100 dark:bg-zinc-800 shadow-lg rounded-lg overflow-hidden">
+      <div className="fixed lg:bottom-[2vh] lg:right-[1vw] lg:w-[25vw] lg:h-[65vh] bg-gray-100 dark:bg-zinc-800 shadow-lg w-[86vw] bottom-[5vh] h-[60vh] rounded-lg overflow-hidden">
         <div className="flex flex-col h-full">
           <div className="px-3 py-3 border-b dark:border-zinc-700 flex justify-between items-center">
             <h2 className="text-lg font-semibold text-zinc-800 dark:text-white">MediAid Bot</h2>
@@ -77,12 +78,21 @@ export default function ChatModal({ isOpen, onClose }) {
                   remarkPlugins={[remarkGfm]}
                   components={{
                     a: ({ href, children }) => (
-                      <a
+                      <Link
                         href={href}
-                        className="text-gray-300 hover:underline"
+                        scroll={true}
+                        passHref
+                        legacyBehavior
                       >
-                        {children}
-                      </a>
+                        <button
+                          className="text-blue-200 hover:underline"
+                          onClick={(e) => {
+                            e.stopPropagation(); // prevent modal issues
+                          }}
+                        >
+                          {children}
+                        </button>
+                      </Link>
                     ),
                   }}
                 >

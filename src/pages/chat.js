@@ -154,21 +154,32 @@ const Chat = () => {
             onClick={() => setSelected(item)}
           >
             {getDisplayName(item)}
+            {userType !== 'doctor' && Array.isArray(item.specialization) && item.specialization.length > 0 && (
+              <div className={`${selected?.uid === item.id ? "font-semibold" : "font-normal"} text-xs font-medium text-gray-300`}>
+                {item.specialization.join(', ')}
+              </div>
+            )}
           </div>
         ))}
       </div>
       {/* Chat Window */}
       <div className='flex flex-col bg-white w-10/12'>
-        <div className='border-b-1 p-4 border-[#e5e7eb] font-medium text-xl bg-[#f1f5f9]'>
-          {
-            selected
-              ? getDisplayName(selected)
-              : isClient
-              ? `Select a ${
-                  userType === 'doctor' ? 'patient' : 'doctor'
-                } to chat`
-              : '' /* Avoid SSR/CSR mismatch */
-          }
+        <div className='border-b-1 flex items-center gap-2 p-4 border-[#e5e7eb] font-medium text-xl bg-[#f1f5f9]'>
+          {selected ? (
+            <>
+              <div className='font-semibold text-xl'>{getDisplayName(selected)}</div>
+              {/* Only show specialization for doctors */}
+              {userType !== 'doctor' && Array.isArray(selected.specialization) && selected.specialization.length > 0 && (
+                <div className='text-sm text-gray-500'>{'('}{selected.specialization.join(', ')}{')'}</div>
+              )}
+            </>
+          ) : isClient ? (
+            <div className='font-medium text-xl'>
+              Select a {userType === 'doctor' ? 'patient' : 'doctor'} to chat
+            </div>
+          ) : (
+            ''
+          )}
         </div>
         <div className='flex-1  overflow-y-auto p-3 bg-[#f8fafc]'>
           {messages.length > 0 ? (

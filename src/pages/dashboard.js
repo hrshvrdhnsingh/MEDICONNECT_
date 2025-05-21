@@ -60,13 +60,8 @@ export default function Dashboard({ data, type }) {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <main className="min-h-screen flex justify-center items-center flex-col"
-        style={{
-          backgroundImage: "url('https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747386117/sz72h0uh2xgodvzd5mvh.png')",
-          backgroundSize: '100% 100%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
+      <main className="min-h-screen flex justify-center items-center flex-col bg-[url('https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747386117/sz72h0uh2xgodvzd5mvh.png')] bg-no-repeat bg-center lg:bg-[length:100%_100%] bg-cover"
+        
       >
         <Navbar />
         <h1 className="text-4xl font-bold mb-4 text-cyan-200">

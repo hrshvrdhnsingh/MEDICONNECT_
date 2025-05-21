@@ -131,6 +131,9 @@
     color: black;
     transition: color 0.3s ease-in-out;
   }
+  .custom_buttons{
+    flex-direction: column;
+  }
 }
 
 .theme_checkbox {
