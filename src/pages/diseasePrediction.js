@@ -18,7 +18,7 @@ export default function SymptomCheckbox() {
 
   useEffect(() => {
     setStartupLoading(true);
-    fetch('https://diseasepredictionapi.onrender.com')
+    fetch('https://disease-prediction-prob-api.onrender.com')
       .catch((err) => console.error('API warmup error:', err))
       .finally(() => setStartupLoading(false));
   }, []);
@@ -54,19 +54,26 @@ export default function SymptomCheckbox() {
           }
         }
       }
-      console.log(selectedSymptomsArray);
+      // console.log(selectedSymptomsArray);
 
       const symptomsArray = {
-        list: selectedSymptomsArray,
+        symptoms: selectedSymptomsArray,
       };
 
       const response = await axios.post(
-        'https://diseasepredictionapi.onrender.com/Bs',
+        'https://disease-prediction-prob-api.onrender.com/predict',
         symptomsArray
       );
       // console.log({ response });
 
-      setPredictedDisease(response.data.Disease);
+      // Handle new API response format: response.data['Top 3 Predictions']
+      if (response.data && response.data['Top 3 Predictions']) {
+        setPredictedDisease(response.data['Top 3 Predictions']);
+      } else if (response.data && response.data.Disease) {
+        setPredictedDisease([{ Disease: response.data.Disease }]);
+      } else {
+        setPredictedDisease(null);
+      }
     } catch (error) {
       console.error('Network error:', error);
       // Handle the error here, such as displaying a message to the user
@@ -109,18 +116,31 @@ export default function SymptomCheckbox() {
       <div className='flex justify-center items-center lg:mt-16 mt-12 flex-col'>
         {predictedDisease && (
           <div className='flex justify-center mt-4'>
-            <div className='flex justify-center items-center gap-4'>
-              {predictedDisease && (
-                <div className='text-xl text-blue-300 font-medium'>
-                  You may have :{' '}
+            <div className='flex flex-col items-center gap-2'>
+              <div className='text-xl text-blue-300 font-medium'>
+                Top 3 Predictions:
+              </div>
+              {predictedDisease.map((item, idx) => (
+                <div
+                  key={item.Disease + '-' + idx}
+                  className='flex gap-4 items-center'
+                >
+                  <span className='text-2xl text-gray-300'>{item.Disease}</span>
+                  {item.Probability !== undefined && (
+                    <span className='text-lg text-blue-200'>
+                      (Probability: {(item.Probability * 100).toFixed(2)}%)
+                    </span>
+                  )}
                 </div>
-              )}
-              <div className='text-4xl text-gray-300'>{predictedDisease}</div>
+              ))}
             </div>
           </div>
         )}
         {Object.entries(symptomsData).map(([category, data]) => (
-          <div className='lg:w-[80vw] w-[90vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl' key={category.id}>
+          <div
+            className='lg:w-[80vw] w-[90vw] hover:border-blue-500 hover:border-2 mt-8 px-4 py-3 bg-blue-300/20 backdrop-blur-xl rounded-2xl'
+            key={category}
+          >
             <div key={category}>
               <div className='flex justify-center'>
                 <div className='flex justify-center text-xl bg-gradient-to-r from-blue-400 to-blue-600 px-3 py-2 rounded-xl text-gray-200'>
@@ -134,21 +154,6 @@ export default function SymptomCheckbox() {
                       key={Object.keys(symptom)[0]}
                       className='bg-gray-200 flex min-w-max lg:text-medium rounded-xl px-1 py-1 mx-1 my-1 lg:px-2 lg:py-1 lg:mx-2 lg:my-2 text-black'
                     >
-                      {/* <input
-                    type="checkbox"
-                    id={Object.values(symptom)[0]}
-                    checked={
-                      checkedSymptoms[category]?.[Object.values(symptom)[0]] ||
-                      false
-                    }
-                    onChange={(e) =>
-                      handleCheckboxChange(
-                        category,
-                        Object.values(symptom)[0],
-                        e.target.checked
-                      )
-                    }
-                  /> */}
                       <Checkbox
                         id={Object.values(symptom)[0]}
                         radius='md'
