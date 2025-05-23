@@ -54,11 +54,18 @@ export default function SymptomCheckbox() {
           }
         }
       }
-      // console.log(selectedSymptomsArray);
+      if (selectedSymptomsArray.length === 0) {
+        setPredictedDisease('NO_SYMPTOMS');
+        setLoading(false);
+        scrollToTop();
+        return;
+      }
 
       const symptomsArray = {
         symptoms: selectedSymptomsArray,
       };
+
+      console.log('Symptoms Array:', symptomsArray);
 
       const response = await axios.post(
         process.env.NEXT_PUBLIC_DISEASE_PREDICTION_API_URL + '/predict',
@@ -81,9 +88,11 @@ export default function SymptomCheckbox() {
     scrollToTop();
     setLoading(false);
   };
-
+  
   const handleReset = () => {
     setCheckedSymptoms({});
+    setPredictedDisease(null); // Also clear the prediction result
+    scrollToTop();
   };
 
   return (
@@ -114,27 +123,40 @@ export default function SymptomCheckbox() {
       )}
       <Navbar />
       <div className='flex justify-center items-center lg:mt-16 mt-12 flex-col'>
-        {predictedDisease && (
+        {predictedDisease === 'NO_SYMPTOMS' ? (
           <div className='flex justify-center mt-4'>
             <div className='flex flex-col items-center gap-2'>
-              <div className='text-xl text-blue-300 font-medium'>
-                Top 3 Predictions:
+              <div className='text-xl text-red-400 font-medium'>
+                Please select your symptoms
               </div>
-              {predictedDisease.map((item, idx) => (
-                <div
-                  key={item.Disease + '-' + idx}
-                  className='flex gap-4 items-center'
-                >
-                  <span className='text-2xl text-gray-300'>{item.Disease}</span>
-                  {item.Probability !== undefined && (
-                    <span className='text-lg text-blue-200'>
-                      (Probability: {(item.Probability * 100).toFixed(2)}%)
-                    </span>
-                  )}
-                </div>
-              ))}
             </div>
           </div>
+        ) : (
+          predictedDisease && (
+            <div className='flex justify-center mt-4'>
+              <div className='flex flex-col items-center gap-2'>
+                <div className='text-xl text-blue-300 font-medium'>
+                  Top 3 Predictions:
+                </div>
+                {predictedDisease.map &&
+                  predictedDisease.map((item, idx) => (
+                    <div
+                      key={item.Disease + '-' + idx}
+                      className='flex gap-4 items-center'
+                    >
+                      <span className='text-2xl text-gray-300'>
+                        {item.Disease}
+                      </span>
+                      {item.Probability !== undefined && (
+                        <span className='text-lg text-blue-200'>
+                          (Probability: {(item.Probability * 100).toFixed(2)}%)
+                        </span>
+                      )}
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )
         )}
         {Object.entries(symptomsData).map(([category, data]) => (
           <div
@@ -157,10 +179,8 @@ export default function SymptomCheckbox() {
                       <Checkbox
                         id={Object.values(symptom)[0]}
                         radius='md'
-                        checked={
-                          checkedSymptoms[category]?.[
-                            Object.values(symptom)[0]
-                          ] || false
+                        isSelected={
+                          checkedSymptoms[category]?.[Object.values(symptom)[0]] || false
                         }
                         onChange={(e) =>
                           handleCheckboxChange(
