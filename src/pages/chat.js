@@ -3,16 +3,16 @@ import io from 'socket.io-client';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 
-const socket = io('https://mediconnectfork-3.onrender.com'); // Connect to the backend server
+const socket = io(process.env.NEXT_PUBLIC_CHAT_SERVER_URL); // Connect to the backend server
 
 const Chat = () => {
   const user_uid = Cookies.get('user_uid');
   const userType = Cookies.get('userType');
   const token = Cookies.get('token');
 
-  console.log('User UID:', user_uid);
-  console.log('User Type:', userType);
-  // console.log('The token is:', token);
+  // console.log('User UID:', user_uid);
+  // console.log('User Type:', userType);
+
   const [list, setList] = useState([]); // doctors or patients
   const [selected, setSelected] = useState(null); // selected doctor or patient
   const [messages, setMessages] = useState([]);

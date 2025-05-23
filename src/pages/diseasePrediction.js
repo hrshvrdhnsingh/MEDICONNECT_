@@ -18,7 +18,7 @@ export default function SymptomCheckbox() {
 
   useEffect(() => {
     setStartupLoading(true);
-    fetch('https://disease-prediction-prob-api.onrender.com')
+    fetch(process.env.NEXT_PUBLIC_DISEASE_PREDICTION_API_URL)
       .catch((err) => console.error('API warmup error:', err))
       .finally(() => setStartupLoading(false));
   }, []);
@@ -61,7 +61,7 @@ export default function SymptomCheckbox() {
       };
 
       const response = await axios.post(
-        'https://disease-prediction-prob-api.onrender.com/predict',
+        process.env.NEXT_PUBLIC_DISEASE_PREDICTION_API_URL + '/predict',
         symptomsArray
       );
       // console.log({ response });

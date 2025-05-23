@@ -6,8 +6,7 @@ let isConnected = false;
 async function dbConnect() {
   if (isConnected) return;
 
-//   const MONGODB_URI = process.env.NEXT_PUBLIC_MONGO_URI;
-    const MONGODB_URI = "mongodb+srv://soumojjalsen:mongodbproject@cluster0.t3idlvi.mongodb.net/mediconnect-db";
+  const MONGODB_URI = process.env.NEXT_PUBLIC_MONGO_URI;
 
   if (!MONGODB_URI) {
     throw new Error('Please define MONGODB_URI in .env.local');
