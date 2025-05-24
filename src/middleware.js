@@ -17,6 +17,8 @@ export function middleware(req) {
   const { pathname } = req.nextUrl;
   const token = req.cookies.get('token');
 
+  // console.log("The token is :", token);
+
   // Allow static files and API routes to bypass middleware
   if (
     pathname.startsWith('/_next') ||
