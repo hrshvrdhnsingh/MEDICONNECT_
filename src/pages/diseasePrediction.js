@@ -74,13 +74,12 @@ export default function SymptomCheckbox() {
       // console.log({ response });
 
       // Handle new API response format: response.data['Top 3 Predictions']
-      if (response.data && response.data['Top 3 Predictions']) {
-        setPredictedDisease(response.data['Top 3 Predictions']);
-      } else if (response.data && response.data.Disease) {
-        setPredictedDisease([{ Disease: response.data.Disease }]);
-      } else {
-        setPredictedDisease(null);
-      }
+      const topPredictions = response?.data?.['Top 3 Predictions'];
+      const singlePrediction = response?.data?.Disease;
+
+      setPredictedDisease(
+        topPredictions ?? (singlePrediction ? [{ Disease: singlePrediction }] : null)
+      );
     } catch (error) {
       console.error('Network error:', error);
       // Handle the error here, such as displaying a message to the user
@@ -135,25 +134,22 @@ export default function SymptomCheckbox() {
           predictedDisease && (
             <div className='flex justify-center mt-4'>
               <div className='flex flex-col items-center gap-2'>
-                <div className='text-xl text-blue-300 font-medium'>
+                <div className='text-xl text-blue-400 font-medium'>
                   Top 3 Predictions:
                 </div>
-                {predictedDisease.map &&
-                  predictedDisease.map((item, idx) => (
-                    <div
-                      key={item.Disease + '-' + idx}
-                      className='flex gap-4 items-center'
-                    >
-                      <span className='text-2xl text-gray-300'>
-                        {item.Disease}
+                {predictedDisease?.map?.((item, idx) => (
+                  <div
+                    key={`${item.Disease}-${idx}`}
+                    className='flex gap-2 items-center bg-gradient-to-tr from-blue-300 to-blue-400 px-2 py-1 rounded-md '
+                  >
+                    <span className='text-2xl text-white'>{item.Disease}</span>
+                    {item.Probability != null && (
+                      <span className='text-lg text-gray-300'>
+                        (Probability: {(item.Probability * 100).toFixed(2)}%)
                       </span>
-                      {item.Probability !== undefined && (
-                        <span className='text-lg text-blue-200'>
-                          (Probability: {(item.Probability * 100).toFixed(2)}%)
-                        </span>
-                      )}
-                    </div>
-                  ))}
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           )
