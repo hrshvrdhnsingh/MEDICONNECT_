@@ -19,8 +19,7 @@ export default function LoginPage() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
-      >
-        
+      >        
       </div>
     </div>
   );
