@@ -8,6 +8,7 @@ import { Checkbox } from '@nextui-org/react';
 import StartupLoader from '../../components/StartupLoader/StartupLoader';
 import Footer from '@/components/Footer/Footer';
 import PageLoader from '@/components/PageLoader/PageLoader';
+import DiseasePieChart from '@/components/DiseasePieChart';
 
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
@@ -121,7 +122,7 @@ export default function SymptomCheckbox() {
         </div>
       )}
       <Navbar />
-      <div className='flex justify-center items-center lg:mt-16 mt-12 flex-col'>
+      <div className='flex justify-center items-center lg:mt-16 mt-16 flex-col'>
         {predictedDisease === 'NO_SYMPTOMS' ? (
           <div className='flex justify-center mt-16'>
             <div className='flex flex-col items-center gap-2'>
@@ -131,28 +132,7 @@ export default function SymptomCheckbox() {
             </div>
           </div>
         ) : (
-          predictedDisease && (
-            <div className='flex justify-center mt-4'>
-              <div className='flex flex-col items-center gap-2'>
-                <div className='text-xl text-blue-300 font-medium'>
-                  Top 3 Predictions:
-                </div>
-                {predictedDisease?.map?.((item, idx) => (
-                  <div
-                    key={`${item.Disease}-${idx}`}
-                    className='flex gap-2 items-center bg-gradient-to-tr from-blue-300 to-blue-400 px-2 py-1 rounded-md '
-                  >
-                    <span className='text-2xl text-white'>{item.Disease}</span>
-                    {item.Probability != null && (
-                      <span className='text-lg text-gray-300'>
-                        (Probability: {(item.Probability * 100).toFixed(2)}%)
-                      </span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )
+          predictedDisease && <DiseasePieChart data={predictedDisease} /> 
         )}
         {Object.entries(symptomsData).map(([category, data]) => (
           <div

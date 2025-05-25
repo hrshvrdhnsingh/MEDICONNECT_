@@ -155,6 +155,7 @@ const NutritionChart = () => {
             radius='md'
             isSelected={isVegetarian}
             onChange={() => handleDietTypeChange('veg')}
+            className='flex justify-center items-center'
           >
             <p className='text-blue-400 lg:text-xl text-lg'>Vegetarian</p>
           </Checkbox>
@@ -162,6 +163,7 @@ const NutritionChart = () => {
             radius='md'
             isSelected={isNonVegetarian}
             onChange={() => handleDietTypeChange('non-veg')}
+            className='flex justify-center items-center'
           >
             <p className='text-blue-400 lg:text-xl text-lg'>Non-Vegetarian</p>
           </Checkbox>

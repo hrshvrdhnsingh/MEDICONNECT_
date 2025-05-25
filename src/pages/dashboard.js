@@ -119,7 +119,7 @@ export default function Dashboard({ data, type }) {
 
         <button
           onClick={handleLogout}
-          className="mt-6 bg-gradient-to-r from-red-400 to-red-900 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-cyan-300 text-white px-4 py-2 rounded hover:bg-red-600"
+          className="mt-6 bg-gradient-to-r from-red-400 to-red-900 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-red-300 text-white px-4 py-2 rounded hover:bg-red-600"
         >
           Logout
         </button>

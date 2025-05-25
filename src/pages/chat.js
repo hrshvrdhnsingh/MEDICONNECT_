@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import Link from 'next/link';
-
+import ChatNavbar from '@/components/Navbar/chatNavbar'
 let socket;
 
 const Chat = ({
@@ -145,9 +145,9 @@ const Chat = ({
       </div>
       {/* Chat Window */}
       <div className='flex flex-col bg-white w-10/12'>
-        <div className='border-b-1 flex items-center gap-2 p-4 border-[#e5e7eb] font-medium text-xl bg-[#f1f5f9]'>
+        <div className='border-b-1 flex justify-between items-center gap-2 p-4 border-[#e5e7eb] font-medium text-xl bg-[#f1f5f9]'>
           {selected ? (
-            <>
+            <div className='flex justify-center items-center gap-2'>
               <div className='font-semibold text-xl'>
                 {getDisplayName(selected)}
               </div>
@@ -161,7 +161,7 @@ const Chat = ({
                     {')'}
                   </div>
                 )}
-            </>
+            </div>
           ) : isClient ? (
             <div className='font-medium text-xl'>
               Select a {initialUserType === 'doctor' ? 'patient' : 'doctor'} to
@@ -170,6 +170,7 @@ const Chat = ({
           ) : (
             ''
           )}
+          <ChatNavbar className='border border-black'/>
         </div>
         <div className='flex-1  overflow-y-auto p-3 bg-[#f8fafc]'>
           {messages.length > 0

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaBars } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 
-const Navbar = ({chatActive}) => {
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
