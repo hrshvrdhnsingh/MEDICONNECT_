@@ -1,9 +1,10 @@
 // components/GoogleLoginButton.js
 import { auth, provider } from '../lib/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, signInWithRedirect, getRedirectResult } from 'firebase/auth';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import styles from './Component.module.css'
+import { useEffect } from 'react';
 
 export default function GoogleLoginButton() {
   const router = useRouter();
@@ -11,23 +12,36 @@ export default function GoogleLoginButton() {
   const handleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      const token = await user.getIdToken();
-      Cookies.set('token', token);
-
-      // Check in your own DB if this uid exists
-      const res = await fetch(`/api/check-user-or-doctor?uid=${user.uid}`);
-      console.log("hellloooo", res);
-      const { exists, type } = await res.json();
-
-      Cookies.set('user_uid', user.uid); // Set user UID in cookies
-      Cookies.set('userType', type); // Set user type in cookies
-
-      // redirect:
-      router.push(exists ? '/' : '/user-details');
+      await handleAuthResult(result);
     } catch (err) {
-      console.error('Login failed', err);
+      console.warn('Popup failed, falling back to redirect...', err);
+      await signInWithRedirect(auth, provider);  // fallback
     }
+  };
+
+  // handleRedirectCallback after redirect back
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result) handleAuthResult(result);
+      })
+      .catch((error) => {
+        console.error("Redirect login error:", error);
+      });
+  }, []);
+
+  const handleAuthResult = async (result) => {
+    if (!result) return;
+    const user = result.user;
+    const token = await user.getIdToken();
+    Cookies.set('token', token);
+    Cookies.set('user_uid', user.uid);
+
+    const res = await fetch(`/api/check-user-or-doctor?uid=${user.uid}`);
+    const { exists, type } = await res.json();
+
+    Cookies.set('userType', type);
+    router.push(exists ? '/' : '/user-details');
   };
 
   return <button className={styles.oauthButton} onClick={handleLogin}>

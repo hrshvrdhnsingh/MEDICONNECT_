@@ -60,7 +60,7 @@ export default function Dashboard({ data, type }) {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <main className="min-h-screen flex justify-center items-center flex-col bg-[url('https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747386117/sz72h0uh2xgodvzd5mvh.png')] bg-no-repeat bg-center lg:bg-[length:100%_100%] bg-cover"
+      <main className="min-h-screen flex justify-center items-center flex-col bg-[url('https://res.cloudinary.com/dv6bqnxqf/image/upload/v1748159943/h2gpft2glpvd0tyas9uu.png')] bg-no-repeat bg-center lg:bg-[length:100%_100%] bg-cover"
         
       >
         <Navbar />
@@ -119,7 +119,7 @@ export default function Dashboard({ data, type }) {
 
         <button
           onClick={handleLogout}
-          className="mt-6 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          className="mt-6 bg-gradient-to-r from-red-400 to-red-900 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-cyan-300 text-white px-4 py-2 rounded hover:bg-red-600"
         >
           Logout
         </button>

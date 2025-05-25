@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaBars } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 
-const Navbar = () => {
+const Navbar = ({chatActive}) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -25,7 +25,7 @@ const Navbar = () => {
         <FaBars className={styles.menu_icon} onClick={toggleMenu} />
 
         {/* Navigation Menu */}
-        <nav className={`${styles.navbar} ${menuOpen ? styles.active : ""}`}>
+        <nav className={`${styles.navbar} ${menuOpen  ? styles.active : ""}`}>
           <Link href="/diseasePrediction" className={styles.navbar_link} onClick={closeMenu}>
             Predict Disease
           </Link>
