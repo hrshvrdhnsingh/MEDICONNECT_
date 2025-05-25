@@ -123,7 +123,7 @@ export default function SymptomCheckbox() {
       <Navbar />
       <div className='flex justify-center items-center lg:mt-16 mt-12 flex-col'>
         {predictedDisease === 'NO_SYMPTOMS' ? (
-          <div className='flex justify-center mt-4'>
+          <div className='flex justify-center mt-16'>
             <div className='flex flex-col items-center gap-2'>
               <div className='text-xl text-red-400 font-medium'>
                 Please select your symptoms
@@ -134,7 +134,7 @@ export default function SymptomCheckbox() {
           predictedDisease && (
             <div className='flex justify-center mt-4'>
               <div className='flex flex-col items-center gap-2'>
-                <div className='text-xl text-blue-400 font-medium'>
+                <div className='text-xl text-blue-300 font-medium'>
                   Top 3 Predictions:
                 </div>
                 {predictedDisease?.map?.((item, idx) => (

@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <div className="w-screen"> 
+    <div className="w-screen min-h-max"> 
       <div className="rounded-t-3xl px-32 py-1 bg-gradient-to-r from-blue-800 to-blue-900 min-h-max flex justify-evenly items-center">
         <div className="flex text-2xl text-white font-semibold gap-4 justify-center items-center">
           © MediConnect
