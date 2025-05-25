@@ -15,8 +15,8 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (!apisFetched) {
-      fetch('https://diseasepredictionapi.onrender.com');
-      fetch('https://mediconnectfork-3.onrender.com');
+      fetch(process.env.NEXT_PUBLIC_DISEASE_PREDICTION_API_URL);
+      fetch(process.env.NEXT_PUBLIC_CHAT_SERVER_URL);
       apisFetched = true;
     }
   }, []);
