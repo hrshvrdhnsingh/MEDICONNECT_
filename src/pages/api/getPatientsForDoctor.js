@@ -27,6 +27,6 @@ export default async function handler(req, res) {
 
     res.status(200).json({ patients });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    return res.status(500).json({ error: 'Server error' });
   }
 }

@@ -4,7 +4,6 @@
       { "Continuous Sneezing": "continuous_sneezing" },
       { "Cough": "cough" },
       { "Breathlessness": "breathlessness" },
-      { "Sinus Pressure": "sinus_pressure" },
       { "Runny Nose": "runny_nose" },
       { "Congestion": "congestion" },
       { "Rusty Sputum": "rusty_sputum" },
@@ -12,7 +11,10 @@
       { "Mucoid Sputum": "mucoid_sputum" },
       { "Phlegm": "phlegm" },
       { "Patches in Throat": "patches_in_throat" },
-      { "Throat Irritation": "throat_irritation" }
+      { "Throat Irritation": "throat_irritation" },
+      { "Sinus Pressure": "sinus_pressure" },
+      { "Fast Heart Rate": "fast_heart_rate" },
+      { "Blood in Sputum": "blood_in_sputum" }
     ]
   },
   "Digestive and Stomach Symptoms": {
@@ -28,13 +30,16 @@
       { "Loss of Appetite": "loss_of_appetite" },
       { "Increased Appetite": "increased_appetite" },
       { "Abdominal Pain": "abdominal_pain" },
-      { "Diarrhea": "diarrhea" },
+      { "Diarrhea": "diarrhoea" },
       { "Constipation": "constipation" },
-      { "Patches in Throat": "patches_in_throat" },
       { "Acute Liver Failure": "acute_liver_failure" },
       { "Fluid Overload": "fluid_overload" },
       { "Swelling of Stomach": "swelling_of_stomach" },
-      { "Swollen Lymph Nodes": "swollen_lymph_nodes" }
+      { "Swollen Lymph Nodes": "swelled_lymph_nodes" },
+      { "Distention of Abdomen": "distention_of_abdomen" },
+      { "Stomach Bleeding": "stomach_bleeding" },
+      { "History of Alcohol Consumption": "history_of_alcohol_consumption" },
+      { "Fluid Overload 1": "fluid_overload.1" }
     ]
   },
   "Musculoskeletal Symptoms": {
@@ -44,14 +49,18 @@
       { "Back Pain": "back_pain" },
       { "Weakness in Limbs": "weakness_in_limbs" },
       { "Knee Pain": "knee_pain" },
-      { "Swollen Joints": "swollen_joints" },
+      { "Swollen Joints": "swelling_joints" },
       { "Hip Joint Pain": "hip_joint_pain" },
       { "Muscle Weakness": "muscle_weakness" },
       { "Muscle Pain": "muscle_pain" },
       { "Neck Pain": "neck_pain" },
       { "Stiff Neck": "stiff_neck" },
       { "Movement Stiffness": "movement_stiffness" },
-      { "Cramps": "cramps" }
+      { "Cramps": "cramps" },
+      { "Painful Walking": "painful_walking" },
+      { "Swollen Legs": "swollen_legs" },
+      { "Swollen Extremities": "swollen_extremeties" },
+      { "Prominent Veins on Calf": "prominent_veins_on_calf" }
     ]
   },
   "Neurological and Sensory Symptoms": {
@@ -76,7 +85,8 @@
       { "Watering from Eyes": "watering_from_eyes" },
       { "Sunken Eyes": "sunken_eyes" },
       { "Yellowing of Eyes": "yellowing_of_eyes" },
-      { "Redness of Eyes": "redness_of_eyes" }
+      { "Redness of Eyes": "redness_of_eyes" },
+      { "Coma": "coma" }
     ]
   },
   "Skin and Dermatological Symptoms": {
@@ -86,9 +96,9 @@
       { "Skin Rash": "skin_rash" },
       { "Nodal Skin Eruptions": "nodal_skin_eruptions" },
       { "Red Spots Over Body": "red_spots_over_body" },
-      { "Dischromic Patches": "dischromic_patches" },
+      { "Dischromic Patches": "dischromic _patches" },
       { "Blackheads": "blackheads" },
-      { "Scarring": "scarring" },
+      { "Scarring": "scurring" },
       { "Skin Peeling": "skin_peeling" },
       { "Silver-like Dusting": "silver_like_dusting" },
       { "Small Dents in Nails": "small_dents_in_nails" },
@@ -97,7 +107,9 @@
       { "Blister": "blister" },
       { "Red Sore Around Nose": "red_sore_around_nose" },
       { "Yellow Crust Ooze": "yellow_crust_ooze" },
-      { "Pus-filled Pimples": "pus_filled_pimples" }
+      { "Pus-filled Pimples": "pus_filled_pimples" },
+      { "Bruising": "bruising" },
+      { "Swollen Blood Vessels": "swollen_blood_vessels" }
     ]
   },
   "Excretion and Reproductive Symptoms": {
@@ -107,14 +119,18 @@
       { "Pain During Bowel Movements": "pain_during_bowel_movements" },
       { "Pain in Anal Region": "pain_in_anal_region" },
       { "Burning Micturition": "burning_micturition" },
-      { "Spotting Urination": "spotting_urination" },
+      { "Spotting  Urination": "spotting_ urination" },
       { "Polyuria": "polyuria" },
       { "Abnormal Menstruation": "abnormal_menstruation" },
-      { "Foul Smell of Urine": "foul_smell_of_urine" },
+      { "Foul Smell of  Urine": "foul_smell_of urine" },
       { "Continuous Feel of Urine": "continuous_feel_of_urine" },
       { "Dark Urine": "dark_urine" },
       { "Yellow Urine": "yellow_urine" },
-      { "Bladder Discomfort": "bladder_discomfort" }
+      { "Bladder Discomfort": "bladder_discomfort" },
+      { "Family History": "family_history" },
+      { "Extra Marital Contacts": "extra_marital_contacts" },
+      { "Receiving Blood Transfusion": "receiving_blood_transfusion" },
+      { "Receiving Unsterile Injections": "receiving_unsterile_injections" }
     ]
   },
   "Psychological and Emotional Symptoms": {
@@ -140,12 +156,12 @@
       { "Swelling of Extremities": "swelling_of_extremities" },
       { "Excessive Hunger": "excessive_hunger" },
       { "Drying and Tingling Lips": "drying_and_tingling_lips" },
-      { "Painful Walking": "painful_walking" },
       { "Malaise": "malaise" },
-      { "Toxic Look (Typhus)": "toxic_look_typhus" },
-      { "Bruising": "bruising" },
-      { "Cold Hands and Feet": "cold_hands_and_feet" },
-      { "Sweating": "sweating" }
+      { "Toxic Look (Typhos)": "toxic_look_(typhos)" },
+      { "Cold Hands and Feet": "cold_hands_and_feets" },
+      { "Sweating": "sweating" },
+      { "Enlarged Thyroid": "enlarged_thyroid" },
+      { "Palpitations": "palpitations" }
     ]
   }
 }

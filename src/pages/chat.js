@@ -1,54 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
-import Cookies from 'js-cookie';
+import Link from 'next/link';
+import ChatNavbar from '@/components/Navbar/chatNavbar'
+let socket;
 
-const socket = io('https://mediconnectfork-3.onrender.com'); // Connect to the backend server
-
-const Chat = () => {
-  const user_uid = Cookies.get('user_uid');
-  const userType = Cookies.get('userType');
-  const token = Cookies.get('token');
-
-  console.log('User UID:', user_uid);
-  console.log('User Type:', userType);
-  // console.log('The token is:', token);
-  const [list, setList] = useState([]); // doctors or patients
+const Chat = ({
+  initialList,
+  initialUserType,
+  initialUserUid,
+  initialToken,
+}) => {
+  const [list, setList] = useState(initialList || []); // doctors or patients
   const [selected, setSelected] = useState(null); // selected doctor or patient
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [isClient, setIsClient] = useState(false);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     setIsClient(true);
+    if (!socket && typeof window !== 'undefined') {
+      socket = io(process.env.NEXT_PUBLIC_CHAT_SERVER_URL);
+    }
   }, []);
 
-  useEffect(() => {
-    const f = async () => {
-      const res = await fetch(`/api/check-user-or-doctor?uid=${user_uid}`);
-      console.log('The response is:', res);
-    };
-    f();
-
-    const emailCheck = async () => {
-      const response = await fetch('/api/check-email-exists', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    };
-    emailCheck();
-
-  }, []);
-  // Fetch doctors (for user) or patients (for doctor)
+  // Fetch doctors (for user) or patients (for doctor) on client if needed
   const fetchList = async () => {
-    if (userType === 'doctor') {
-      // Fetch patients who have chatted with this doctor
+    if (!initialUserType) return;
+    if (initialUserType === 'doctor') {
       const res = await fetch('/api/getPatientsForDoctor');
       const data = await res.json();
       setList(data.patients || []);
     } else {
-      // Fetch all doctors
       const res = await fetch('/api/getDoctors');
       const data = await res.json();
       setList(data.doctors || []);
@@ -56,31 +39,23 @@ const Chat = () => {
   };
 
   useEffect(() => {
-    fetchList();
-  }, [userType]);
+    // Optionally re-fetch list on client if userType changes
+    // fetchList();
+  }, [initialUserType]);
 
-  // Listen for new messages globally to update patient list for doctors
-  // useEffect(() => {
-  //   if (userType !== 'doctor') return;
-  //   const handleNewMessage = () => {
-  //     fetchList();
-  //   };
-  //   socket.on('receiveMessage', handleNewMessage);
-  //   return () => {
-  //     socket.off('receiveMessage', handleNewMessage);
-  //   };
-  // }, [userType]);
-
-  // Join room and fetch previous messages when selection changes
   useEffect(() => {
-    if (!selected) return;
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages.length]);
+
+  useEffect(() => {
+    if (!selected || !socket) return;
     let doctor_uid, patient_uid;
-    if (userType === 'doctor') {
-      doctor_uid = user_uid;
+    if (initialUserType === 'doctor') {
+      doctor_uid = initialUserUid;
       patient_uid = selected.uid;
     } else {
       doctor_uid = selected.uid;
-      patient_uid = user_uid;
+      patient_uid = initialUserUid;
     }
     socket.emit('joinRoom', { user_uid: patient_uid, doctor_uid });
 
@@ -96,20 +71,20 @@ const Chat = () => {
       socket.off('previousMessages');
       socket.off('receiveMessage');
     };
-  }, [selected, user_uid, userType]);
+  }, [selected, initialUserUid, initialUserType]);
 
   const sendMessage = () => {
-    if (!message.trim() || !selected) return;
+    if (!message.trim() || !selected || !socket) return;
     let doctor_uid, patient_uid;
-    if (userType === 'doctor') {
-      doctor_uid = user_uid;
+    if (initialUserType === 'doctor') {
+      doctor_uid = initialUserUid;
       patient_uid = selected.uid;
     } else {
       doctor_uid = selected.uid;
-      patient_uid = user_uid;
+      patient_uid = initialUserUid;
     }
     socket.emit('sendMessage', {
-      sender: userType || 'user',
+      sender: initialUserType || 'user',
       message,
       user_uid: patient_uid,
       doctor_uid,
@@ -119,154 +94,149 @@ const Chat = () => {
 
   // UI labels
   const listTitle = isClient
-    ? userType === 'doctor'
+    ? initialUserType === 'doctor'
       ? 'Patients'
       : 'Doctors'
-    : ''; // Avoid SSR/CSR mismatch
+    : '';
 
   const getDisplayName = (item) =>
-    userType === 'doctor'
+    initialUserType === 'doctor'
       ? item.fullname || item.name || item.email
       : `${item.firstName} ${item.lastName}`;
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        height: '80vh',
-        background: '#f5f7fa',
-        borderRadius: 12,
-        overflow: 'hidden',
-        margin: 24,
-      }}
-    >
+    <div className='flex h-screen w-screen overflow-hidden'>
       {/* List (Doctors or Patients) */}
-      <div
-        style={{
-          width: 260,
-          background: '#1e293b',
-          color: '#fff',
-          padding: 0,
-          overflowY: 'auto',
-        }}
-      >
-        <div
-          style={{
-            padding: 16,
-            fontWeight: 600,
-            fontSize: 20,
-            borderBottom: '1px solid #334155',
-            minHeight: 28,
-          }}
-        >
+      <div className='w-2/12 flex flex-col gap-2 bg-[#071c3f] text-white p-1 overflow'>
+        <div className='flex justify-between items-center px-2 py-3 font-medium text-2xl border-b-1 border-[#334155] min-h-8'>
+          <Link
+            href='/'
+            type='button'
+            className='text-white bg-gradient-to-r from-blue-500 to-blue-800 hover:bg-gradient-to-bl focus:ring-1 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center'
+          >
+            {'<'}
+          </Link>
           {listTitle}
         </div>
         {list.map((item) => (
           <div
             key={item.uid}
-            style={{
-              padding: '14px 18px',
-              cursor: 'pointer',
-              background:
-                selected?.uid === item.uid ? '#334155' : 'transparent',
-              borderBottom: '1px solid #334155',
-              fontWeight: selected?.uid === item.uid ? 700 : 400,
-            }}
+            className={`px-4 flex flex-col gap-2 rounded-xl py-3 cursor-pointer border-b border-[#334155] ${
+              selected?.uid === item.uid
+                ? 'bg-[#2563eb] font-bold'
+                : 'bg-transparent font-normal'
+            }`}
             onClick={() => setSelected(item)}
           >
             {getDisplayName(item)}
+            {initialUserType !== 'doctor' &&
+              Array.isArray(item.specialization) &&
+              item.specialization.length > 0 && (
+                <div
+                  className={`${
+                    selected?.uid === item.id ? 'font-semibold' : 'font-normal'
+                  } text-xs font-medium text-gray-300`}
+                >
+                  {item.specialization.join(', ')}
+                </div>
+              )}
           </div>
         ))}
       </div>
       {/* Chat Window */}
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          background: '#fff',
-        }}
-      >
-        <div
-          style={{
-            padding: 16,
-            borderBottom: '1px solid #e5e7eb',
-            fontWeight: 600,
-            fontSize: 18,
-            background: '#f1f5f9',
-          }}
-        >
-          {
-            selected
-              ? getDisplayName(selected)
-              : isClient
-              ? `Select a ${
-                  userType === 'doctor' ? 'patient' : 'doctor'
-                } to chat`
-              : '' /* Avoid SSR/CSR mismatch */
-          }
-        </div>
-        <div
-          style={{
-            flex: 1,
-            overflowY: 'auto',
-            padding: 16,
-            background: '#f8fafc',
-          }}
-        >
+      <div className='flex flex-col bg-white w-10/12'>
+        <div className='border-b-1 flex justify-between items-center gap-2 p-4 border-[#e5e7eb] font-medium text-xl bg-[#f1f5f9]'>
           {selected ? (
-            messages.length > 0 ? (
-              messages.map((msg, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    marginBottom: 12,
-                    textAlign: msg.sender === userType ? 'right' : 'left',
-                  }}
-                >
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      background:
-                        msg.sender === userType ? '#2563eb' : '#e0e7ef',
-                      color: msg.sender === userType ? '#fff' : '#22223b',
-                      borderRadius: 8,
-                      padding: '8px 14px',
-                      maxWidth: '70%',
-                      wordBreak: 'break-word',
-                    }}
-                  >
-                    {msg.message}
-                  </span>
-                  <div style={{ fontSize: 10, color: '#64748b', marginTop: 2 }}>
-                    {msg.sender === userType ? 'You' : msg.sender}
+            <div className='flex justify-center items-center gap-2'>
+              <div className='font-semibold text-xl'>
+                {getDisplayName(selected)}
+              </div>
+              {/* Only show specialization for doctors */}
+              {initialUserType !== 'doctor' &&
+                Array.isArray(selected.specialization) &&
+                selected.specialization.length > 0 && (
+                  <div className='text-sm text-gray-500'>
+                    {'('}
+                    {selected.specialization.join(', ')}
+                    {')'}
                   </div>
-                </div>
-              ))
-            ) : (
-              <div style={{ color: '#64748b', marginTop: 24 }}>
-                No messages yet.
-              </div>
-            )
+                )}
+            </div>
+          ) : isClient ? (
+            <div className='font-medium text-xl'>
+              Select a {initialUserType === 'doctor' ? 'patient' : 'doctor'} to
+              chat
+            </div>
           ) : (
-            isClient && (
-              <div style={{ color: '#64748b', marginTop: 24 }}>
-                Select a {userType === 'doctor' ? 'patient' : 'doctor'} to start
-                chatting.
-              </div>
-            )
+            ''
           )}
+          <ChatNavbar className='border border-black'/>
+        </div>
+        <div className='flex-1  overflow-y-auto p-3 bg-[#f8fafc]'>
+          {messages.length > 0
+            ? messages.map((msg, idx) => {
+                const isLast = idx === messages.length - 1;
+                const isUser = msg.sender === initialUserType;
+                const isDoctor = msg.sender === 'doctor';
+                const isPatient = msg.sender === 'patient';
+                const displayName = isUser ? 'You' : msg.sender;
+
+                // Decide the image based on the sender role
+                const imageSrc = isDoctor
+                  ? 'https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747493127/nczsnx2iewsmbo8vuv0m.png' // Replace with your doctor logo path
+                  : 'https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747493384/f1siona09tbsca88ftlv.png'; // Replace with your patient logo path
+
+                return (
+                  <div
+                    key={idx}
+                    ref={isLast ? messagesEndRef : null}
+                    className={`mb-3 flex items-end ${
+                      isUser ? 'justify-end' : 'justify-start'
+                    }`}
+                  >
+                    {/* Logo on left if NOT user */}
+                    {!isUser && (
+                      <img
+                        src={imageSrc}
+                        alt={msg.sender}
+                        className='lg:w-8 lg:h-8 h-6 w-6 mr-2 mb-2'
+                      />
+                    )}
+
+                    {/* Message bubble */}
+                    <div
+                      className={`px-2 py-2 max-w-[50%] break-words ${
+                        isUser
+                          ? 'bg-[#2563eb] text-white rounded-l-md rounded-t-md'
+                          : 'bg-[#34d76a] text-white rounded-r-md rounded-t-md'
+                      }`}
+                    >
+                      <div className='text-xs text-gray-200 font-bold mb-1'>
+                        {displayName}
+                      </div>
+                      <div>{msg.message}</div>
+                    </div>
+
+                    {/* Logo on right if user */}
+                    {isUser && (
+                      <img
+                        src={imageSrc}
+                        alt={msg.sender}
+                        className='lg:w-6 lg:h-6 h-4 w-4 ml-2 mb-2'
+                      />
+                    )}
+                  </div>
+                );
+              })
+            : isClient && (
+                <div className='text-[#64748b] mt-8'>
+                  Select a {initialUserType === 'doctor' ? 'patient' : 'doctor'}{' '}
+                  to start chatting.
+                </div>
+              )}
         </div>
         {/* Input */}
-        <div
-          style={{
-            padding: 16,
-            borderTop: '1px solid #e5e7eb',
-            background: '#f1f5f9',
-            display: 'flex',
-            gap: 8,
-          }}
-        >
+        <div className='p-2 border-t border-[#e5e7eb] bg-[#f1f5f9] flex gap-2'>
           <input
             type='text'
             value={message}
@@ -276,19 +246,13 @@ const Chat = () => {
                 ? 'Type your message...'
                 : isClient
                 ? `Select a ${
-                    userType === 'doctor' ? 'patient' : 'doctor'
+                    initialUserType === 'doctor' ? 'patient' : 'doctor'
                   } to chat`
                 : ''
             }
-            style={{
-              flex: 1,
-              border: '1px solid #cbd5e1',
-              borderRadius: 6,
-              padding: '8px 12px',
-              fontSize: 16,
-              outline: 'none',
-              background: selected ? '#fff' : '#f1f5f9',
-            }}
+            className={`flex-1 border border-[#cbd5e1] rounded-[6px] py-2 px-3 text-base outline-none ${
+              selected ? 'bg-white' : 'bg-[#f1f5f9]'
+            }`}
             disabled={!selected}
             onKeyDown={(e) => {
               if (e.key === 'Enter') sendMessage();
@@ -297,16 +261,11 @@ const Chat = () => {
           <button
             onClick={sendMessage}
             disabled={!selected || !message.trim()}
-            style={{
-              background: '#2563eb',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 6,
-              padding: '8px 18px',
-              fontWeight: 600,
-              cursor: selected && message.trim() ? 'pointer' : 'not-allowed',
-              opacity: selected && message.trim() ? 1 : 0.6,
-            }}
+            className={`bg-[#2563eb] text-white border-none rounded-[6px] py-2 px-[18px] font-semibold ${
+              selected && message.trim()
+                ? 'cursor-pointer opacity-100'
+                : 'cursor-not-allowed opacity-60'
+            }`}
           >
             Send
           </button>
@@ -315,5 +274,58 @@ const Chat = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  // Read cookies from the request
+  const { req } = context;
+  const cookie = req.headers.cookie || '';
+  const getCookie = (name) => {
+    const match = cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  };
+  const userType = getCookie('userType');
+  const user_uid = getCookie('user_uid');
+  const token = getCookie('token');
+
+  // console.log("Server", { userType }, {user_uid}, {token});
+
+  let initialList = [];
+  try {
+    if (userType === 'doctor') {
+      const res = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+        }/api/getPatientsForDoctor`,
+        {
+          headers: { Cookie: cookie },
+        }
+      );
+      const data = await res.json();
+      initialList = data.patients || [];
+    } else if (userType) {
+      const res = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+        }/api/getDoctors`,
+        {
+          headers: { Cookie: cookie },
+        }
+      );
+      const data = await res.json();
+      initialList = data.doctors || [];
+    }
+  } catch (e) {
+    initialList = [];
+  }
+
+  return {
+    props: {
+      initialList,
+      initialUserType: userType || null,
+      initialUserUid: user_uid || null,
+      initialToken: token || null,
+    },
+  };
+}
 
 export default Chat;
