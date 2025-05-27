@@ -72,7 +72,7 @@ export default function Dashboard({ data, type }) {
           Welcome {type === 'user' ? data.fullname : data.firstName}
         </h1>
 
-        <div className='shadow-md rounded max-w-md'>
+        <div className='shadow-md rounded max-w-md min-h-max'>
           {type === 'user' && (
             <div className={styles.card}>
               <div className={styles.tools}>

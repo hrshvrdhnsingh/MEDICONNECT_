@@ -3,12 +3,38 @@ import symptomsData from '../../data/SymptomsJSON.json';
 import axios from 'axios';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from '../styles/diseasePrediction.module.css';
-import { Button } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
 import StartupLoader from '../../components/StartupLoader/StartupLoader';
 import Footer from '@/components/Footer/Footer';
 import PageLoader from '@/components/PageLoader/PageLoader';
 import DiseasePieChart from '@/components/DiseasePieChart';
+import { adminAuth } from '../../lib/firebaseAdmin'; 
+
+export async function getServerSideProps({ req }) {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    await adminAuth.verifyIdToken(token);
+    return { props: {} }; // or additional props if needed
+  } catch (error) {
+    console.error('Token verification failed:', error);
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+}
 
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
