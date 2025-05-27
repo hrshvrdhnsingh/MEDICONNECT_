@@ -5,33 +5,6 @@ import useTrackUserLocation from "../../hooks/trackUserLocation";
 import Navbar from "../../components/Navbar/Navbar";
 import PageLoader from "../../components/PageLoader/PageLoader"; // <-- Loader Component
 import styles from "../styles/nearestHospitals.module.css"; // reuse CSS
-import { adminAuth } from '../../lib/firebaseAdmin'; 
-
-export async function getServerSideProps({ req }) {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-
-  try {
-    await adminAuth.verifyIdToken(token);
-    return { props: {} }; // or additional props if needed
-  } catch (error) {
-    console.error('Token verification failed:', error);
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-}
 
 const FindNearestPharmacies = () => {
   const [pharmacyDetails, setPharmacyDetails] = useState([]);

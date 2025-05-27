@@ -4,33 +4,6 @@ import { Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import Navbar from "../../components/Navbar/Navbar";
 import PageLoader from "@/components/PageLoader/PageLoader";
-import { adminAuth } from '../../lib/firebaseAdmin'; 
-
-export async function getServerSideProps({ req }) {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-
-  try {
-    await adminAuth.verifyIdToken(token);
-    return { props: {} }; // or additional props if needed
-  } catch (error) {
-    console.error('Token verification failed:', error);
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-}
 
 const MedicineDetails = () => {
   const [errorMsg, setErrorMsg] = useState(null);
