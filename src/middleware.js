@@ -15,7 +15,7 @@ export function middleware(req) {
   ];
 
   const { pathname } = req.nextUrl;
-  const token = req.cookies.get('token').value;
+  const token = req.cookies.get('token');
 
   // console.log("The token is :", token);
 
