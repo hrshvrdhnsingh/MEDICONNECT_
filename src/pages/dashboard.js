@@ -11,6 +11,7 @@ import styles from '../styles/Home.module.css';
 import Navbar from '@/components/Navbar/Navbar';
 
 export async function getServerSideProps({ req }) {
+  console.log(req.cookies)
   const token = req.cookies.token;
   if (!token) return { redirect: { destination: '/login', permanent: false } };
 
@@ -40,7 +41,8 @@ export async function getServerSideProps({ req }) {
         type,
       },
     };
-  } catch {
+  } catch(err) {
+    console.log(err)
     return { redirect: { destination: '/login', permanent: false } };
   }
 }
