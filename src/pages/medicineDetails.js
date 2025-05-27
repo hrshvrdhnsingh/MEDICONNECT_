@@ -4,6 +4,33 @@ import { Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import Navbar from "../../components/Navbar/Navbar";
 import PageLoader from "@/components/PageLoader/PageLoader";
+import { adminAuth } from '../../lib/firebaseAdmin'; 
+
+export async function getServerSideProps({ req }) {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    await adminAuth.verifyIdToken(token);
+    return { props: {} }; // or additional props if needed
+  } catch (error) {
+    console.error('Token verification failed:', error);
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+}
 
 const MedicineDetails = () => {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -69,7 +96,7 @@ const MedicineDetails = () => {
                 {medicineData.map((medicine) => (
                   <div
                     key={medicine.product_id}
-                    className="flex overflow-y-hidden items-center flex-col p-2 lg:w-[25%] w-[90%] gap-2 min-h-max bg-blue-300/20 backdrop-blur-lg rounded-2xl hover:border-blue-200 hover:border-2"
+                    className="flex overflow-y-hidden items-center flex-col p-2 lg:w-[25%] w-[90%] gap-1 min-h-max bg-blue-300/20 backdrop-blur-lg rounded-2xl hover:border-blue-200 hover:border-2"
                   >
                     <p className="lg:text-2xl text-xl font-medium text-gray-300">
                       {medicine.name.length > 20 ? medicine.name.slice(0, 20) + "..." : medicine.name}

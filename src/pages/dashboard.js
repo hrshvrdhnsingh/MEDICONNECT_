@@ -11,7 +11,6 @@ import styles from '../styles/Home.module.css';
 import Navbar from '@/components/Navbar/Navbar';
 
 export async function getServerSideProps({ req }) {
-  console.log(req.cookies)
   const token = req.cookies.token;
   if (!token) return { redirect: { destination: '/login', permanent: false } };
 
@@ -74,7 +73,7 @@ export default function Dashboard({ data, type }) {
           Welcome {type === 'user' ? data.fullname : data.firstName}
         </h1>
 
-        <div className='shadow-md rounded max-w-md'>
+        <div className='shadow-md rounded max-w-md min-h-max'>
           {type === 'user' && (
             <div className={styles.card}>
               <div className={styles.tools}>

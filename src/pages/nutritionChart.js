@@ -3,11 +3,35 @@ import nutritionDetails from '../../data/nutritionDetails.json';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from '../styles/nutritionChart.module.css';
 import { Input } from '@nextui-org/react';
-import { Button } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
 import NutritionCard from '../../components/NutritionCard/NutritionCard';
-import { Footer } from '../../components/Footer/Footer';
-import { AOSInit } from '/aos.tsx';
+import { adminAuth } from '../../lib/firebaseAdmin'; 
+
+export async function getServerSideProps({ req }) {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    await adminAuth.verifyIdToken(token);
+    return { props: {} }; // or additional props if needed
+  } catch (error) {
+    console.error('Token verification failed:', error);
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+}
 
 const NutritionChart = () => {
   const [height, setHeight] = useState('');
@@ -157,7 +181,7 @@ const NutritionChart = () => {
             onChange={() => handleDietTypeChange('veg')}
             className='flex justify-center items-center'
           >
-            <p className='text-blue-400 lg:text-xl text-lg'>Vegetarian</p>
+            <p className='text-blue-400 lg:text-xl text-lg flex justify-center items-center'>Vegetarian</p>
           </Checkbox>
           <Checkbox
             radius='md'
@@ -165,7 +189,7 @@ const NutritionChart = () => {
             onChange={() => handleDietTypeChange('non-veg')}
             className='flex justify-center items-center'
           >
-            <p className='text-blue-400 lg:text-xl text-lg'>Non-Vegetarian</p>
+            <p className='text-blue-400 lg:text-xl text-lg flex justify-center items-center'>Non-Vegetarian</p>
           </Checkbox>
         </div>
         <div className={styles.btn}>
