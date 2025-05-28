@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-import { adminAuth } from '../lib/firebaseAdmin';
 
-export async function middleware(req) {
+export function middleware(req) {
   const allowedRoutes = [
     '/',
     '/diseasePrediction',
@@ -44,16 +43,6 @@ export async function middleware(req) {
     !tokenValue
   ) {
     return NextResponse.redirect(new URL('/login', req.url));
-  }
-
-  // If token exists, verify it using adminAuth
-  if (allowedRoutes.includes(pathname) && pathname !== '/login' && tokenValue) {
-    try {
-      await adminAuth.verifyIdToken(tokenValue);
-    } catch (err) {
-      // Invalid token, redirect to login
-      return NextResponse.redirect(new URL('/login', req.url));
-    }
   }
 
   if (!allowedRoutes.includes(pathname)) {
