@@ -69,7 +69,7 @@ const MedicineDetails = () => {
                 {medicineData.map((medicine) => (
                   <div
                     key={medicine.product_id}
-                    className="flex overflow-y-hidden items-center flex-col p-2 lg:w-[25%] w-[90%] gap-2 min-h-max bg-blue-300/20 backdrop-blur-lg rounded-2xl hover:border-blue-200 hover:border-2"
+                    className="flex overflow-y-hidden items-center flex-col p-2 lg:w-[25%] w-[90%] gap-1 min-h-max bg-blue-300/20 backdrop-blur-lg rounded-2xl hover:border-blue-200 hover:border-2"
                   >
                     <p className="lg:text-2xl text-xl font-medium text-gray-300">
                       {medicine.name.length > 20 ? medicine.name.slice(0, 20) + "..." : medicine.name}

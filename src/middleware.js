@@ -15,9 +15,12 @@ export function middleware(req) {
   ];
 
   const { pathname } = req.nextUrl;
-  const token = req.cookies.get('token').value;
+  // Get the token value safely for all Next.js versions
+  const token = req.cookies.get('token');
+  const tokenValue = token?.value || token;
 
-  // console.log("The token is :", token);
+  console.log('The token is:', token);
+  console.log('The token value is:', tokenValue);
 
   // Allow static files and API routes to bypass middleware
   if (
@@ -34,7 +37,11 @@ export function middleware(req) {
   }
 
   // If route is protected and no token, redirect to login
-  if (allowedRoutes.includes(pathname) && pathname !== '/login' && !token) {
+  if (
+    allowedRoutes.includes(pathname) &&
+    pathname !== '/login' &&
+    !tokenValue
+  ) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 

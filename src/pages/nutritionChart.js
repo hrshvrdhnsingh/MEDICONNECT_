@@ -3,11 +3,8 @@ import nutritionDetails from '../../data/nutritionDetails.json';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from '../styles/nutritionChart.module.css';
 import { Input } from '@nextui-org/react';
-import { Button } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
 import NutritionCard from '../../components/NutritionCard/NutritionCard';
-import { Footer } from '../../components/Footer/Footer';
-import { AOSInit } from '/aos.tsx';
 
 const NutritionChart = () => {
   const [height, setHeight] = useState('');
@@ -150,22 +147,24 @@ const NutritionChart = () => {
             </label>
           </div>
         </div>
-        <div className='flex justify-evenly mt-4 text-blue-300'>
+        <div className='flex justify-evenly items-center mt-4 text-blue-300'>
           <Checkbox
             radius='md'
             isSelected={isVegetarian}
             onChange={() => handleDietTypeChange('veg')}
             className='flex justify-center items-center'
+            classNames={{ base: "flex items-center" }}
           >
-            <p className='text-blue-400 lg:text-xl text-lg'>Vegetarian</p>
+            <p className='text-blue-400 h-full lg:text-xl text-lg flex justify-center items-center'>Vegetarian</p>
           </Checkbox>
           <Checkbox
             radius='md'
             isSelected={isNonVegetarian}
             onChange={() => handleDietTypeChange('non-veg')}
             className='flex justify-center items-center'
+            classNames={{ base: "flex items-center" }}
           >
-            <p className='text-blue-400 lg:text-xl text-lg'>Non-Vegetarian</p>
+            <p className='text-blue-400 h-full lg:text-xl text-lg flex justify-center items-center'>Non-Vegetarian</p>
           </Checkbox>
         </div>
         <div className={styles.btn}>

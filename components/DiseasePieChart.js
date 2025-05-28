@@ -23,7 +23,7 @@ function formatPredictionData(predictions) {
 
   if (other > 0) {
     pieData.push({
-      name: "Other",
+      name: "Other minor",
       value: parseFloat((other * 100).toFixed(2)),
     });
   }

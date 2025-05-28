@@ -3,7 +3,6 @@ import symptomsData from '../../data/SymptomsJSON.json';
 import axios from 'axios';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from '../styles/diseasePrediction.module.css';
-import { Button } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
 import StartupLoader from '../../components/StartupLoader/StartupLoader';
 import Footer from '@/components/Footer/Footer';
@@ -15,7 +14,7 @@ export default function SymptomCheckbox() {
   const [predictedDisease, setPredictedDisease] = useState(null);
   const [startupLoading, setStartupLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [countdown, setCountdown] = useState(15);
+  const [countdown, setCountdown] = useState(25);
 
   useEffect(() => {
     setStartupLoading(true);

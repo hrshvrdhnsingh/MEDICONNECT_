@@ -16,8 +16,6 @@ export async function getServerSideProps({ req }) {
 
   try {
     const { uid } = await adminAuth.verifyIdToken(token);
-    const res = await adminAuth.verifyIdToken(token);
-    // console.log('The resssss is :', res);
     await dbConnect();
 
     const user = await User.findOne({ uid }).lean();
@@ -72,7 +70,7 @@ export default function Dashboard({ data, type }) {
           Welcome {type === 'user' ? data.fullname : data.firstName}
         </h1>
 
-        <div className='shadow-md rounded max-w-md'>
+        <div className='shadow-md rounded max-w-md min-h-max'>
           {type === 'user' && (
             <div className={styles.card}>
               <div className={styles.tools}>
