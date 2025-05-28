@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
-        console.log('Token verification response:', data);
+        // console.log('Token verification response:', data);
         if (!data.valid) {
           Cookies.remove('token');
           router.push('/login');
