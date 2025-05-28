@@ -19,8 +19,8 @@ export function middleware(req) {
   const token = req.cookies.get('token');
   const tokenValue = token?.value || token;
 
-  console.log('The token is:', token);
-  console.log('The token value is:', tokenValue);
+  // console.log('The token is:', token);
+  // console.log('The token value is:', tokenValue);
 
   // Allow static files and API routes to bypass middleware
   if (

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import GPTButton from '@/components/ChatWidget/GPTButton';
 import ChatModal from '@/components/ChatWidget/ChatWidget';
+import Cookies from 'js-cookie';
 
 let apisFetched = false;
 
@@ -34,8 +35,36 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
-  const isChatPage = router.pathname === '/chat' || router.pathname === '/login' || router.pathname == '/user-details';
-  
+  useEffect(() => {
+    // Exclude '/' and '/login' from token verification
+    if (router.pathname === '/' || router.pathname === '/login') return;
+    const verifyToken = async () => {
+      const token = Cookies.get('token');
+      if (!token) return;
+      try {
+        const res = await fetch('/api/verify-token', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+        console.log('Token verification response:', data);
+        if (!data.valid) {
+          Cookies.remove('token');
+          router.push('/login');
+        }
+      } catch {
+        Cookies.remove('token');
+        router.push('/login');
+      }
+    };
+    verifyToken();
+  }, [router.pathname]);
+
+  const isChatPage =
+    router.pathname === '/chat' ||
+    router.pathname === '/login' ||
+    router.pathname == '/user-details';
+
   return (
     <NextUIProvider>
       <div
@@ -43,7 +72,7 @@ function MyApp({ Component, pageProps }) {
           backgroundColor: '#182f5d',
           minHeight: '100vh',
           width: '100vw',
-          position: 'relative'
+          position: 'relative',
         }}
       >
         {loading && (
@@ -68,7 +97,10 @@ function MyApp({ Component, pageProps }) {
         {!isChatPage && (
           <>
             <GPTButton onClick={() => setIsChatOpen(true)} />
-            <ChatModal isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+            <ChatModal
+              isOpen={isChatOpen}
+              onClose={() => setIsChatOpen(false)}
+            />
           </>
         )}
       </div>
