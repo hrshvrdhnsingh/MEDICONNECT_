@@ -14,7 +14,7 @@ export default function SymptomCheckbox() {
   const [predictedDisease, setPredictedDisease] = useState(null);
   const [startupLoading, setStartupLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [countdown, setCountdown] = useState(15);
+  const [countdown, setCountdown] = useState(25);
 
   useEffect(() => {
     setStartupLoading(true);

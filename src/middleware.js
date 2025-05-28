@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
+import { adminAuth } from '../lib/firebaseAdmin';
 
-export function middleware(req) {
+export async function middleware(req) {
   const allowedRoutes = [
     '/',
     '/diseasePrediction',
@@ -15,9 +16,12 @@ export function middleware(req) {
   ];
 
   const { pathname } = req.nextUrl;
-  const token = req.cookies.get('token').value;
+  // Get the token value safely for all Next.js versions
+  const token = req.cookies.get('token');
+  const tokenValue = token?.value || token;
 
-  // console.log("The token is :", token);
+  console.log('The token is:', token);
+  console.log('The token value is:', tokenValue);
 
   // Allow static files and API routes to bypass middleware
   if (
@@ -34,8 +38,22 @@ export function middleware(req) {
   }
 
   // If route is protected and no token, redirect to login
-  if (allowedRoutes.includes(pathname) && pathname !== '/login' && !token) {
+  if (
+    allowedRoutes.includes(pathname) &&
+    pathname !== '/login' &&
+    !tokenValue
+  ) {
     return NextResponse.redirect(new URL('/login', req.url));
+  }
+
+  // If token exists, verify it using adminAuth
+  if (allowedRoutes.includes(pathname) && pathname !== '/login' && tokenValue) {
+    try {
+      await adminAuth.verifyIdToken(tokenValue);
+    } catch (err) {
+      // Invalid token, redirect to login
+      return NextResponse.redirect(new URL('/login', req.url));
+    }
   }
 
   if (!allowedRoutes.includes(pathname)) {

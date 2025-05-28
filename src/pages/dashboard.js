@@ -16,8 +16,6 @@ export async function getServerSideProps({ req }) {
 
   try {
     const { uid } = await adminAuth.verifyIdToken(token);
-    const res = await adminAuth.verifyIdToken(token);
-    // console.log('The resssss is :', res);
     await dbConnect();
 
     const user = await User.findOne({ uid }).lean();
