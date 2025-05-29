@@ -1,7 +1,6 @@
 // components/GoogleLoginButton.js
 import { auth, provider } from '../lib/firebase';
 import { signInWithPopup } from 'firebase/auth';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import styles from './Component.module.css';
 import { useEffect, useState } from 'react';
@@ -23,10 +22,12 @@ export default function GoogleLoginButton() {
       const res = await fetch(`/api/check-user-or-doctor?uid=${user.uid}`);
       const { exists, type } = await res.json();
 
-      // Set all cookies before redirecting
-      Cookies.set('token', token);
-      Cookies.set('user_uid', user.uid);
-      Cookies.set('userType', type);
+      // Set all cookies on the server
+      await fetch('/api/check-user-or-doctor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, uid: user.uid, type }),
+      });
 
       // Ensure cookies are set before redirecting
       await router.push(exists ? '/' : '/user-details');

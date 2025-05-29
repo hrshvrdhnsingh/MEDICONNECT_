@@ -21,6 +21,8 @@ export function middleware(req) {
   const token = req.cookies.get('token');
   const tokenValue = token?.value || token;
 
+  // console.log('The token is:', token);
+  // console.log('The token value is:', tokenValue);
   console.log("Debug 1");
 
   // Allow static files and API routes to bypass middleware
@@ -31,16 +33,11 @@ export function middleware(req) {
   ) {
     return NextResponse.next();
   }
-  
-  console.log("Debug 2");
-  console.log("The token value is  22222:", tokenValue);
 
   // Do not protect the root path
   if (pathname === '/') {
     return NextResponse.next();
   }
-
-  console.log("Debug 3");
 
   console.log("The pathname is:", pathname);  
   console.log("The token value is:", tokenValue);
@@ -55,7 +52,6 @@ export function middleware(req) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
-  console.log("Debug 4");
   console.log("The pathname is allowed:", pathname, allowedRoutes.includes(pathname));
 
   if (!allowedRoutes.includes(pathname)) {
