@@ -31,8 +31,9 @@ export function middleware(req) {
   ) {
     return NextResponse.next();
   }
-
+  
   console.log("Debug 2");
+  console.log("The token value is:", tokenValue);
 
   // Do not protect the root path
   if (pathname === '/') {
