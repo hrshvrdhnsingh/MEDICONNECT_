@@ -40,7 +40,10 @@ function MyApp({ Component, pageProps }) {
     if (router.pathname === '/' || router.pathname === '/login') return;
     const verifyToken = async () => {
       const token = Cookies.get('token');
-      if (!token) return;
+      if (!token) {
+        router.push('/login');
+        return;
+      }
       try {
         const res = await fetch('/api/verify-token', {
           method: 'POST',
