@@ -29,11 +29,6 @@ export default function GoogleLoginButton() {
       Cookies.set('userType', type);
 
       // Ensure cookies are set before redirecting
-      while(!Cookies.get('token') || !Cookies.get('user_uid') || !Cookies.get('userType')) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-      console.log('User logged in:', user);
-      console.log('User type:', type);
       await router.push(exists ? '/' : '/user-details');
     } catch (err) {
       if (err.code === 'auth/popup-blocked') {
