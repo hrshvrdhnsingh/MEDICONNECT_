@@ -33,7 +33,7 @@ export function middleware(req) {
   }
   
   console.log("Debug 2");
-  console.log("The token value is:", tokenValue);
+  console.log("The token value is  22222:", tokenValue);
 
   // Do not protect the root path
   if (pathname === '/') {
