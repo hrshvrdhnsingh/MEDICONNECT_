@@ -18,17 +18,18 @@ export default function GoogleLoginButton() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const token = await user.getIdToken();
-      Cookies.set('token', token);
 
       // Check in your own DB if this uid exists
       const res = await fetch(`/api/check-user-or-doctor?uid=${user.uid}`);
       const { exists, type } = await res.json();
 
-      Cookies.set('user_uid', user.uid); // Set user UID in cookies
-      Cookies.set('userType', type); // Set user type in cookies
+      // Set all cookies before redirecting
+      Cookies.set('token', token);
+      Cookies.set('user_uid', user.uid);
+      Cookies.set('userType', type);
 
-      // redirect:
-      router.push(exists ? '/' : '/user-details');
+      // Ensure cookies are set before redirecting
+      await router.push(exists ? '/' : '/user-details');
     } catch (err) {
       if (err.code === 'auth/popup-blocked') {
         setErrorMsg(
