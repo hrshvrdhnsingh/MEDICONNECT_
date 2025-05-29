@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 export default function HomePage() {
   // const [isChatOpen, setIsChatOpen] = useState(false);
+  console.log("This is index page");
   return (
     <>
       <Head>

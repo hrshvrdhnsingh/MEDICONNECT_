@@ -18,7 +18,7 @@ export default function GoogleLoginButton() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const token = await user.getIdToken();
-      Cookies.set('token', token, { path: '/', sameSite: 'strict', secure: true });
+      Cookies.set('token', token);
 
       // Check in your own DB if this uid exists
       const res = await fetch(`/api/check-user-or-doctor?uid=${user.uid}`);

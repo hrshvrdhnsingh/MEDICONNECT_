@@ -14,6 +14,8 @@ export function middleware(req) {
     '/dashboard',
   ];
 
+  console.log("Middleware is running...");
+
   const { pathname } = req.nextUrl;
   // Get the token value safely for all Next.js versions
   const token = req.cookies.get('token');
@@ -36,6 +38,10 @@ export function middleware(req) {
     return NextResponse.next();
   }
 
+  console.log("The pathname is:", pathname);  
+  console.log("The token value is:", tokenValue);
+
+
   // If route is protected and no token, redirect to login
   if (
     allowedRoutes.includes(pathname) &&
@@ -44,6 +50,8 @@ export function middleware(req) {
   ) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
+
+  console.log("The pathname is allowed:", pathname, allowedRoutes.includes(pathname));
 
   if (!allowedRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL('/', req.url));
