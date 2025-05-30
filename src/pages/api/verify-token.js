@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const decoded = await adminAuth.verifyIdToken(token);
     // console.log('Token verified:', decoded);
     return res.status(200).json({ valid: true, uid: decoded.uid, email: decoded.email });
-  } catch (error) {
-    return res.status(401).json({ valid: false, error: 'Invalid token' });
+  } catch {
+      return res.status(401).json({ valid: false, error: 'Invalid token' });
   }
 }

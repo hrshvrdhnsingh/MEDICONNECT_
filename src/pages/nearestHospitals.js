@@ -5,6 +5,7 @@ import useTrackUserLocation from "../../hooks/trackUserLocation";
 import Navbar from "../../components/Navbar/Navbar";
 import PageLoader from "../../components/PageLoader/PageLoader";
 import styles from "../styles/nearestHospitals.module.css";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const FindNearestHospitals = () => {
   const [hospitalDetails, setHospitalDetails] = useState([]);
@@ -43,6 +44,7 @@ const FindNearestHospitals = () => {
   const shouldShowLoader = !latitude || !longitude || dataLoading;
 
   return (
+    <ProtectedRoute>
     <div className={styles.extra_bg}>
       <Navbar />
 
@@ -69,6 +71,7 @@ const FindNearestHospitals = () => {
         )
       }
     </div>
+    </ProtectedRoute>
   );
 };
 

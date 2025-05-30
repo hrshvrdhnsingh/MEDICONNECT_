@@ -5,6 +5,7 @@ import styles from '../styles/nutritionChart.module.css';
 import { Input } from '@nextui-org/react';
 import { Checkbox } from '@nextui-org/react';
 import NutritionCard from '../../components/NutritionCard/NutritionCard';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const NutritionChart = () => {
   const [height, setHeight] = useState('');
@@ -112,6 +113,7 @@ const NutritionChart = () => {
   };
 
   return (
+    <ProtectedRoute>
     <div className={styles.nutrition_bg}>
       <Navbar />
       <form
@@ -260,8 +262,8 @@ const NutritionChart = () => {
           )}
         </div>
       </form>
-      {/* <Footer /> */}
     </div>
+    </ProtectedRoute>
   );
 };
 

@@ -14,8 +14,6 @@ export function middleware(req) {
     '/dashboard',
   ];
 
-  console.log("Middleware is running...");
-
   const { pathname } = req.nextUrl;
   // Get the token value safely for all Next.js versions
   // const token = req.cookies.get('token');

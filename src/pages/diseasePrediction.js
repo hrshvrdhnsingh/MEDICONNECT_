@@ -8,6 +8,7 @@ import StartupLoader from '../../components/StartupLoader/StartupLoader';
 import Footer from '@/components/Footer/Footer';
 import PageLoader from '@/components/PageLoader/PageLoader';
 import DiseasePieChart from '@/components/DiseasePieChart';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function SymptomCheckbox() {
   const [checkedSymptoms, setCheckedSymptoms] = useState({});
@@ -95,6 +96,7 @@ export default function SymptomCheckbox() {
   };
 
   return (
+    <ProtectedRoute>
     <div className={styles.prediction_bg}>
       {startupLoading && (
         <div
@@ -196,5 +198,6 @@ export default function SymptomCheckbox() {
       </div>
       <Footer />
     </div>
+    </ProtectedRoute>
   );
 }
