@@ -35,30 +35,6 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router]);
 
-  useEffect(() => {
-    // Exclude '/' and '/login' from token verification
-    if (router.pathname === '/' || router.pathname === '/login') return;
-    const verifyToken = async () => {
-      const token = Cookies.get('token');
-      if (!token) return;
-      try {
-        const res = await fetch('/api/verify-token', {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await res.json();
-        // console.log('Token verification response:', data);
-        if (!data.valid) {
-          Cookies.remove('token');
-          router.push('/login');
-        }
-      } catch {
-        Cookies.remove('token');
-        router.push('/login');
-      }
-    };
-    verifyToken();
-  }, [router.pathname]);
 
   const isChatPage =
     router.pathname === '/chat' ||

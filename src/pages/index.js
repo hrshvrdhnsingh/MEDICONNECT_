@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { Banner } from '../../components/Banner/Banner';
 import Introduction from '@/components/infoContainer/Introduction';
 import Footer from '../../components/Footer/Footer';
-import { useState } from 'react';
 
 export default function HomePage() {
   // const [isChatOpen, setIsChatOpen] = useState(false);

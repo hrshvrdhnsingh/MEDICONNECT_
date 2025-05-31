@@ -4,6 +4,7 @@ import { Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import Navbar from "../../components/Navbar/Navbar";
 import PageLoader from "@/components/PageLoader/PageLoader";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const MedicineDetails = () => {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -30,6 +31,7 @@ const MedicineDetails = () => {
   };
 
   return (
+    <ProtectedRoute>
     <div className={styles.medicine_bg}>
       <Navbar />
       <div className="flex justify-center w-full">
@@ -96,6 +98,7 @@ const MedicineDetails = () => {
         )}
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 

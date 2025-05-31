@@ -2,13 +2,14 @@
 import Head from 'next/head';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import dbConnect from '../../lib/dbConnect';
-import User from '../../models/user';
-import Doctor from '../../models/doctor';
-import { adminAuth } from '../../lib/firebaseAdmin';
-import { auth } from '../../lib/firebase';
 import styles from '../styles/Home.module.css';
 import Navbar from '@/components/Navbar/Navbar';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import { auth } from '../../lib/firebase';
+import User from '@/models/user';
+import Doctor from '@/models/doctor';
+import dbConnect from '@/server/utils/dbConnect';
+import { adminAuth } from '@/lib/firebaseAdmin';
 
 export async function getServerSideProps({ req }) {
   const token = req.cookies.token;
@@ -38,12 +39,14 @@ export async function getServerSideProps({ req }) {
         type,
       },
     };
-  } catch {
+  } catch(err) {
+    console.error(err)
+    console.log("here")
     return { redirect: { destination: '/login', permanent: false } };
   }
 }
 
-export default function Dashboard({ data, type }) {
+export default function Dashboard({data, type}) {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -60,45 +63,29 @@ export default function Dashboard({ data, type }) {
   };
 
   return (
-    <>
+    <ProtectedRoute>
       <Head>
         <title>Dashboard</title>
       </Head>
       <main className="min-h-screen flex justify-center items-center flex-col bg-[url('https://res.cloudinary.com/dv6bqnxqf/image/upload/v1748159943/h2gpft2glpvd0tyas9uu.png')] bg-no-repeat bg-center lg:bg-[length:100%_100%] bg-cover">
         <Navbar />
         <h1 className='text-4xl font-bold mb-4 text-cyan-200'>
-          Welcome {type === 'user' ? data.fullname : data.firstName}
+          Welcome {type === 'user' ? data?.fullname : data?.firstName}
         </h1>
 
         <div className='shadow-md rounded max-w-md min-h-max'>
           {type === 'user' && (
             <div className={styles.card}>
               <div className={styles.tools}>
-                <div className={styles.circle}>
-                  <span className={styles.red_box}></span>
-                </div>
-                <div className={styles.circle}>
-                  <span className={styles.yellow_box}></span>
-                </div>
-                <div className={styles.circle}>
-                  <span className={styles.green_box}></span>
-                </div>
+                <div className={styles.circle}><span className={styles.red_box}></span></div>
+                <div className={styles.circle}><span className={styles.yellow_box}></span></div>
+                <div className={styles.circle}><span className={styles.green_box}></span></div>
               </div>
               <div className='pl-2 mt-2 flex flex-col gap-1 '>
-                <p className='text-xl text-cyan-300'>
-                  <strong className='text-cyan-400'>Email:</strong> {data.email}
-                </p>
-                <p className='text-xl text-cyan-300'>
-                  <strong className='text-cyan-400'>Age:</strong> {data.age}
-                </p>
-                <p className='text-xl text-cyan-300'>
-                  <strong className='text-cyan-400'>Weight:</strong>{' '}
-                  {data.weight} kg
-                </p>
-                <p className='text-xl text-cyan-300'>
-                  <strong className='text-cyan-400'>Diet Type:</strong>{' '}
-                  {data.diet}
-                </p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Email:</strong> {data?.email}</p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Age:</strong> {data?.age}</p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Weight:</strong> {data?.weight} kg</p>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Diet Type:</strong> {data?.diet}</p>
               </div>
             </div>
           )}
@@ -106,25 +93,15 @@ export default function Dashboard({ data, type }) {
           {type === 'doctor' && (
             <div className={styles.card}>
               <div className={styles.tools}>
-                <div className={styles.circle}>
-                  <span className={styles.red_box}></span>
-                </div>
-                <div className={styles.circle}>
-                  <span className={styles.yellow_box}></span>
-                </div>
-                <div className={styles.circle}>
-                  <span className={styles.green_box}></span>
-                </div>
+                <div className={styles.circle}><span className={styles.red_box}></span></div>
+                <div className={styles.circle}><span className={styles.yellow_box}></span></div>
+                <div className={styles.circle}><span className={styles.green_box}></span></div>
               </div>
               <div className='pl-2 mt-2 flex flex-col gap-1 '>
-                <p className='text-xl text-cyan-300'>
-                  <strong className='text-cyan-600'>Email:</strong> {data.email}
-                </p>
-                <strong className='text-xl text-cyan-600'>
-                  Specializations:
-                </strong>
+                <p className='text-xl text-cyan-300'><strong className='text-cyan-600'>Email:</strong> {data?.email}</p>
+                <strong className='text-xl text-cyan-600'>Specializations:</strong>
                 <ul className='list-disc list-inside ml-4 text-xl text-cyan-400'>
-                  {data.specialization.map((spec, index) => (
+                  {data?.specialization?.map((spec, index) => (
                     <li key={index}>{spec}</li>
                   ))}
                 </ul>
@@ -140,6 +117,6 @@ export default function Dashboard({ data, type }) {
           Logout
         </button>
       </main>
-    </>
+    </ProtectedRoute>
   );
 }

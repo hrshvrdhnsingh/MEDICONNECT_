@@ -4,7 +4,7 @@ import { signInWithPopup } from 'firebase/auth';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import styles from './Component.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function GoogleLoginButton() {
   const router = useRouter();
@@ -18,17 +18,20 @@ export default function GoogleLoginButton() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const token = await user.getIdToken();
-      Cookies.set('token', token);
 
       // Check in your own DB if this uid exists
       const res = await fetch(`/api/check-user-or-doctor?uid=${user.uid}`);
       const { exists, type } = await res.json();
 
-      Cookies.set('user_uid', user.uid); // Set user UID in cookies
-      Cookies.set('userType', type); // Set user type in cookies
+      // Set all cookies before redirecting
+      Cookies.set('token', token, {expires: 7});
 
-      // redirect:
-      router.push(exists ? '/' : '/user-details');
+      Cookies.set('user_uid', user.uid, {expires: 7});
+
+      Cookies.set('userType', type, {expires: 7});
+
+      // Ensure cookies are set before redirecting
+      await router.push(exists ? '/' : '/user-details');
     } catch (err) {
       if (err.code === 'auth/popup-blocked') {
         setErrorMsg(
