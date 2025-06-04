@@ -31,7 +31,7 @@ const MedicineDetails = () => {
   };
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
     <div className={styles.medicine_bg}>
       <Navbar />
       <div className="flex justify-center w-full">
@@ -98,7 +98,7 @@ const MedicineDetails = () => {
         )}
       </div>
     </div>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   );
 };
 

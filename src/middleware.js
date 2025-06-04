@@ -19,11 +19,12 @@ export function middleware(req) {
   // const token = req.cookies.get('token');
   // const tokenValue = token?.value || token;
 
-  // Allow static files and API routes to bypass middleware
+  // Allow static files, favicon, and API routes to bypass middleware
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.startsWith('/static')
+    pathname.startsWith('/static') ||
+    pathname === '/favicon.ico'
   ) {
     return NextResponse.next();
   }
@@ -32,7 +33,6 @@ export function middleware(req) {
   // if (pathname === '/') {
   //   return NextResponse.next();
   // }
-
 
   // // If route is protected and no token, redirect to login
   // if (

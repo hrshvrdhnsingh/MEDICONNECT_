@@ -113,7 +113,7 @@ const NutritionChart = () => {
   };
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
     <div className={styles.nutrition_bg}>
       <Navbar />
       <form
@@ -263,7 +263,7 @@ const NutritionChart = () => {
         </div>
       </form>
     </div>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   );
 };
 
