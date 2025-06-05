@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import Link from 'next/link';
 import ChatNavbar from '@/components/Navbar/chatNavbar';
 import Cookies from 'js-cookie';
+import Image from 'next/image';
 let socket;
 
 const Chat = () => {
@@ -203,9 +204,11 @@ const Chat = () => {
                   >
                     {/* Logo on left if NOT user */}
                     {!isUser && (
-                      <img
+                      <Image
                         src={imageSrc}
                         alt={msg.sender}
+                        width={32}
+                        height={32}
                         className='lg:w-8 lg:h-8 h-6 w-6 mr-2 mb-2'
                       />
                     )}
@@ -226,9 +229,11 @@ const Chat = () => {
 
                     {/* Logo on right if user */}
                     {isUser && (
-                      <img
+                      <Image
                         src={imageSrc}
                         alt={msg.sender}
+                        width={24}
+                        height={24}
                         className='lg:w-6 lg:h-6 h-4 w-4 ml-2 mb-2'
                       />
                     )}
