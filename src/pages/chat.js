@@ -1,33 +1,40 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import Link from 'next/link';
-import ChatNavbar from '@/components/Navbar/chatNavbar'
+import ChatNavbar from '@/components/Navbar/chatNavbar';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
 let socket;
 
-const Chat = ({
-  initialList,
-  initialUserType,
-  initialUserUid,
-  initialToken,
-}) => {
-  const [list, setList] = useState(initialList || []); // doctors or patients
+const Chat = () => {
+  const [list, setList] = useState([]); // doctors or patients
   const [selected, setSelected] = useState(null); // selected doctor or patient
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [isClient, setIsClient] = useState(false);
+  const [initialUserType, setInitialUserType] = useState(null);
+  const [initialUserUid, setInitialUserUid] = useState(null);
+  const [initialToken, setInitialToken] = useState(null);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     setIsClient(true);
+    // Get userType, user_uid, token from cookies
+    const userType = Cookies.get('userType');
+    const user_uid = Cookies.get('user_uid');
+    const token = Cookies.get('token');
+    setInitialUserType(userType);
+    setInitialUserUid(user_uid);
+    setInitialToken(token);
     if (!socket && typeof window !== 'undefined') {
       socket = io(process.env.NEXT_PUBLIC_CHAT_SERVER_URL);
     }
   }, []);
 
   // Fetch doctors (for user) or patients (for doctor) on client if needed
-  const fetchList = async () => {
-    if (!initialUserType) return;
-    if (initialUserType === 'doctor') {
+  const fetchList = async (userType) => {
+    if (!userType) return;
+    if (userType === 'doctor') {
       const res = await fetch('/api/getPatientsForDoctor');
       const data = await res.json();
       setList(data.patients || []);
@@ -39,8 +46,9 @@ const Chat = ({
   };
 
   useEffect(() => {
-    // Optionally re-fetch list on client if userType changes
-    // fetchList();
+    if (initialUserType) {
+      fetchList(initialUserType);
+    }
   }, [initialUserType]);
 
   useEffect(() => {
@@ -170,7 +178,7 @@ const Chat = ({
           ) : (
             ''
           )}
-          <ChatNavbar className='border border-black'/>
+          <ChatNavbar className='border border-black' />
         </div>
         <div className='flex-1  overflow-y-auto p-3 bg-[#f8fafc]'>
           {messages.length > 0
@@ -196,9 +204,11 @@ const Chat = ({
                   >
                     {/* Logo on left if NOT user */}
                     {!isUser && (
-                      <img
+                      <Image
                         src={imageSrc}
                         alt={msg.sender}
+                        width={32}
+                        height={32}
                         className='lg:w-8 lg:h-8 h-6 w-6 mr-2 mb-2'
                       />
                     )}
@@ -219,9 +229,11 @@ const Chat = ({
 
                     {/* Logo on right if user */}
                     {isUser && (
-                      <img
+                      <Image
                         src={imageSrc}
                         alt={msg.sender}
+                        width={24}
+                        height={24}
                         className='lg:w-6 lg:h-6 h-4 w-4 ml-2 mb-2'
                       />
                     )}
@@ -274,58 +286,5 @@ const Chat = ({
     </div>
   );
 };
-
-export async function getServerSideProps(context) {
-  // Read cookies from the request
-  const { req } = context;
-  const cookie = req.headers.cookie || '';
-  const getCookie = (name) => {
-    const match = cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    return match ? decodeURIComponent(match[2]) : null;
-  };
-  const userType = getCookie('userType');
-  const user_uid = getCookie('user_uid');
-  const token = getCookie('token');
-
-  // console.log("Server", { userType }, {user_uid}, {token});
-
-  let initialList = [];
-  try {
-    if (userType === 'doctor') {
-      const res = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-        }/api/getPatientsForDoctor`,
-        {
-          headers: { Cookie: cookie },
-        }
-      );
-      const data = await res.json();
-      initialList = data.patients || [];
-    } else if (userType) {
-      const res = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-        }/api/getDoctors`,
-        {
-          headers: { Cookie: cookie },
-        }
-      );
-      const data = await res.json();
-      initialList = data.doctors || [];
-    }
-  } catch (e) {
-    initialList = [];
-  }
-
-  return {
-    props: {
-      initialList,
-      initialUserType: userType || null,
-      initialUserUid: user_uid || null,
-      initialToken: token || null,
-    },
-  };
-}
 
 export default Chat;

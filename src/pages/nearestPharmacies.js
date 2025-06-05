@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getNearbyPharmacies } from "../../lib/getNearbyPharmacies";
-import MapComponent from "../../components/Map/GoogleMap";
-import useTrackUserLocation from "../../hooks/trackUserLocation";
-import Navbar from "../../components/Navbar/Navbar";
-import PageLoader from "../../components/PageLoader/PageLoader"; // <-- Loader Component
-import styles from "../styles/nearestHospitals.module.css"; // reuse CSS
-import ProtectedRoute from "@/components/ProtectedRoute";
+import React, { useEffect, useState } from 'react';
+import { getNearbyPharmacies } from '../../lib/getNearbyPharmacies';
+import MapComponent from '../../components/Map/GoogleMap';
+import useTrackUserLocation from '../../hooks/trackUserLocation';
+import Navbar from '../../components/Navbar/Navbar';
+import PageLoader from '../../components/PageLoader/PageLoader'; // <-- Loader Component
+import styles from '../styles/nearestHospitals.module.css'; // reuse CSS
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const FindNearestPharmacies = () => {
   const [pharmacyDetails, setPharmacyDetails] = useState([]);
@@ -20,7 +20,7 @@ const FindNearestPharmacies = () => {
         const pharmacies = await getNearbyPharmacies({ latitude, longitude });
         setPharmacyDetails(pharmacies);
       } catch (error) {
-        console.error("Error fetching pharmacies:", error);
+        console.error('Error fetching pharmacies:', error);
         setPharmacyDetails([]);
       } finally {
         setDataLoading(false);
@@ -43,7 +43,7 @@ const FindNearestPharmacies = () => {
   const shouldShowLoader = !latitude || !longitude || dataLoading;
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
     <div className={styles.extra_bg}>
       <Navbar />
 
@@ -61,16 +61,18 @@ const FindNearestPharmacies = () => {
           longitude={longitude}
         />
       )}
-      {
-        !shouldShowLoader && (
-          <div className="flex flex-col gap-8">
-            <p className="text-4xl text-blue-400 font-semibold">Quick access to nearby care</p>
-            <p className="text-gray-300 text-md">* Tap on pointer to expand the address</p>
-          </div>
-        )
-      }
+      {!shouldShowLoader && (
+        <div className='flex flex-col gap-8'>
+          <p className='text-4xl text-blue-400 font-semibold'>
+            Quick access to nearby care
+          </p>
+          <p className='text-gray-300 text-md'>
+            * Tap on pointer to expand the address
+          </p>
+        </div>
+      )}
     </div>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   );
 };
 

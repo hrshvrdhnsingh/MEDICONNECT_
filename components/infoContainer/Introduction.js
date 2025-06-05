@@ -4,6 +4,7 @@ import Link from 'next/link';
 //import AOS from 'aos';
 //import 'aos/dist/aos.css';
 import { AOSInit } from '/aos.tsx';
+import Image from 'next/image';
 
 const Introduction = () => {
   return (
@@ -48,9 +49,11 @@ const Introduction = () => {
             data-aos-easing='ease'
             data-aos-delay='400'
           >
-            <img
+            <Image
               src='https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738337085/wej239olrvm6gkde7fsq.jpg'
               alt='Health Solution'
+              width={600}
+              height={400}
               className='w-full h-full object-cover rounded-xl'
             />
             <AOSInit />
@@ -85,14 +88,16 @@ const Introduction = () => {
         </div> */}
         <div className={styles.card_wrapper}>
           <div
-            className={`${styles.image_container} ${styles['data-aos']} ${styles['data-aos-easing']} ${styles['data-aos-delay']} `}
+            className={`${styles.image_container} ${styles['data-aos']} ${styles['data-aos-easing']} ${styles['data-aos-delay']}`}
             data-aos='zoom-out-right'
             data-aos-easing='ease'
             data-aos-delay='300'
           >
-            <img
+            <Image
               src='https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738342138/pexels-pixabay-139398_n6cxb6.jpg'
               alt='Pharmacy'
+              width={600}
+              height={400}
               className='w-full h-full object-cover rounded-xl'
             />
           </div>
@@ -151,9 +156,11 @@ const Introduction = () => {
             data-aos-easing='ease'
             data-aos-delay='300'
           >
-            <img
+            <Image
               src='https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738342139/pexels-shvetsa-3844581_umccde.jpg'
               alt='Pharmacy'
+              width={600}
+              height={400}
               className='w-full h-full object-cover rounded-xl'
             />
             <AOSInit />
@@ -166,9 +173,11 @@ const Introduction = () => {
             data-aos-easing='ease'
             data-aos-delay='300'
           >
-            <img
+            <Image
               src='https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738337085/wej239olrvm6gkde7fsq.jpg'
               alt='Pharmacy'
+              width={600}
+              height={400}
               className='w-full h-full object-cover rounded-xl'
             />
             <AOSInit />
@@ -227,9 +236,11 @@ const Introduction = () => {
             data-aos-easing='ease'
             data-aos-delay='300'
           >
-            <img
+            <Image
               src='https://res.cloudinary.com/dv6bqnxqf/image/upload/v1738342139/pexels-pavel-danilyuk-7653089_bdzw3j.jpg'
               alt='Pharmacy'
+              width={600}
+              height={400}
               className='w-full h-full object-cover rounded-xl'
             />
             <AOSInit />

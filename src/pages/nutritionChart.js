@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import nutritionDetails from '../../data/nutritionDetails.json';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from '../styles/nutritionChart.module.css';
 import { Input } from '@nextui-org/react';
@@ -7,7 +6,13 @@ import { Checkbox } from '@nextui-org/react';
 import NutritionCard from '../../components/NutritionCard/NutritionCard';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
-const NutritionChart = () => {
+// SSG for static nutrition data
+export async function getStaticProps() {
+  const nutritionDetails = require('../../data/nutritionDetails.json');
+  return { props: { nutritionDetails } };
+}
+
+const NutritionChart = ({ nutritionDetails }) => {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [bmi, setBMI] = useState(null);
@@ -113,7 +118,7 @@ const NutritionChart = () => {
   };
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
     <div className={styles.nutrition_bg}>
       <Navbar />
       <form
@@ -155,18 +160,22 @@ const NutritionChart = () => {
             isSelected={isVegetarian}
             onChange={() => handleDietTypeChange('veg')}
             className='flex justify-center items-center'
-            classNames={{ base: "flex items-center" }}
+            classNames={{ base: 'flex items-center' }}
           >
-            <p className='text-blue-400 h-full lg:text-xl text-lg flex justify-center items-center'>Vegetarian</p>
+            <p className='text-blue-400 h-full lg:text-xl text-lg flex justify-center items-center'>
+              Vegetarian
+            </p>
           </Checkbox>
           <Checkbox
             radius='md'
             isSelected={isNonVegetarian}
             onChange={() => handleDietTypeChange('non-veg')}
             className='flex justify-center items-center'
-            classNames={{ base: "flex items-center" }}
+            classNames={{ base: 'flex items-center' }}
           >
-            <p className='text-blue-400 h-full lg:text-xl text-lg flex justify-center items-center'>Non-Vegetarian</p>
+            <p className='text-blue-400 h-full lg:text-xl text-lg flex justify-center items-center'>
+              Non-Vegetarian
+            </p>
           </Checkbox>
         </div>
         <div className={styles.btn}>
@@ -263,7 +272,7 @@ const NutritionChart = () => {
         </div>
       </form>
     </div>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   );
 };
 

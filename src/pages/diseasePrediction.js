@@ -96,7 +96,7 @@ export default function SymptomCheckbox() {
   };
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
     <div className={styles.prediction_bg}>
       {startupLoading && (
         <div
@@ -198,6 +198,6 @@ export default function SymptomCheckbox() {
       </div>
       <Footer />
     </div>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   );
 }

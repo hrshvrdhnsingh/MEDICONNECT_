@@ -39,14 +39,14 @@ export async function getServerSideProps({ req }) {
         type,
       },
     };
-  } catch(err) {
-    console.error(err)
-    console.log("here")
+  } catch (err) {
+    console.error(err);
+    console.log('here');
     return { redirect: { destination: '/login', permanent: false } };
   }
 }
 
-export default function Dashboard({data, type}) {
+export default function Dashboard({ data, type }) {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -63,7 +63,8 @@ export default function Dashboard({data, type}) {
   };
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
+    <>
       <Head>
         <title>Dashboard</title>
       </Head>
@@ -77,15 +78,32 @@ export default function Dashboard({data, type}) {
           {type === 'user' && (
             <div className={styles.card}>
               <div className={styles.tools}>
-                <div className={styles.circle}><span className={styles.red_box}></span></div>
-                <div className={styles.circle}><span className={styles.yellow_box}></span></div>
-                <div className={styles.circle}><span className={styles.green_box}></span></div>
+                <div className={styles.circle}>
+                  <span className={styles.red_box}></span>
+                </div>
+                <div className={styles.circle}>
+                  <span className={styles.yellow_box}></span>
+                </div>
+                <div className={styles.circle}>
+                  <span className={styles.green_box}></span>
+                </div>
               </div>
               <div className='pl-2 mt-2 flex flex-col gap-1 '>
-                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Email:</strong> {data?.email}</p>
-                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Age:</strong> {data?.age}</p>
-                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Weight:</strong> {data?.weight} kg</p>
-                <p className='text-xl text-cyan-300'><strong className='text-cyan-400'>Diet Type:</strong> {data?.diet}</p>
+                <p className='text-xl text-cyan-300'>
+                  <strong className='text-cyan-400'>Email:</strong>{' '}
+                  {data?.email}
+                </p>
+                <p className='text-xl text-cyan-300'>
+                  <strong className='text-cyan-400'>Age:</strong> {data?.age}
+                </p>
+                <p className='text-xl text-cyan-300'>
+                  <strong className='text-cyan-400'>Weight:</strong>{' '}
+                  {data?.weight} kg
+                </p>
+                <p className='text-xl text-cyan-300'>
+                  <strong className='text-cyan-400'>Diet Type:</strong>{' '}
+                  {data?.diet}
+                </p>
               </div>
             </div>
           )}
@@ -93,13 +111,24 @@ export default function Dashboard({data, type}) {
           {type === 'doctor' && (
             <div className={styles.card}>
               <div className={styles.tools}>
-                <div className={styles.circle}><span className={styles.red_box}></span></div>
-                <div className={styles.circle}><span className={styles.yellow_box}></span></div>
-                <div className={styles.circle}><span className={styles.green_box}></span></div>
+                <div className={styles.circle}>
+                  <span className={styles.red_box}></span>
+                </div>
+                <div className={styles.circle}>
+                  <span className={styles.yellow_box}></span>
+                </div>
+                <div className={styles.circle}>
+                  <span className={styles.green_box}></span>
+                </div>
               </div>
               <div className='pl-2 mt-2 flex flex-col gap-1 '>
-                <p className='text-xl text-cyan-300'><strong className='text-cyan-600'>Email:</strong> {data?.email}</p>
-                <strong className='text-xl text-cyan-600'>Specializations:</strong>
+                <p className='text-xl text-cyan-300'>
+                  <strong className='text-cyan-600'>Email:</strong>{' '}
+                  {data?.email}
+                </p>
+                <strong className='text-xl text-cyan-600'>
+                  Specializations:
+                </strong>
                 <ul className='list-disc list-inside ml-4 text-xl text-cyan-400'>
                   {data?.specialization?.map((spec, index) => (
                     <li key={index}>{spec}</li>
@@ -117,6 +146,7 @@ export default function Dashboard({data, type}) {
           Logout
         </button>
       </main>
-    </ProtectedRoute>
+    </>
+    // </ProtectedRoute>
   );
 }

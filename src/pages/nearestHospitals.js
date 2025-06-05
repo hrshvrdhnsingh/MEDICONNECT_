@@ -44,7 +44,7 @@ const FindNearestHospitals = () => {
   const shouldShowLoader = !latitude || !longitude || dataLoading;
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
     <div className={styles.extra_bg}>
       <Navbar />
 
@@ -71,7 +71,7 @@ const FindNearestHospitals = () => {
         )
       }
     </div>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   );
 };
 

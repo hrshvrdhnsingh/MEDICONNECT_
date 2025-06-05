@@ -6,6 +6,7 @@ import PageLoader from '../../components/PageLoader/PageLoader';
 import GPTButton from '@/components/ChatWidget/GPTButton';
 import ChatModal from '@/components/ChatWidget/ChatWidget';
 import Cookies from 'js-cookie';
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 let apisFetched = false;
 
@@ -41,6 +42,9 @@ function MyApp({ Component, pageProps }) {
     router.pathname === '/login' ||
     router.pathname == '/user-details';
 
+  const publicRoutes = ['/', '/login'];
+  const isPublicRoute = publicRoutes.includes(router.pathname);
+
   return (
     <NextUIProvider>
       <div
@@ -69,7 +73,13 @@ function MyApp({ Component, pageProps }) {
             <PageLoader />
           </div>
         )}
-        <Component {...pageProps} />
+        {isPublicRoute ? (
+          <Component {...pageProps} />
+        ) : (
+          <ProtectedRoute>
+            <Component {...pageProps} />
+          </ProtectedRoute>
+        )}
         {!isChatPage && (
           <>
             <GPTButton onClick={() => setIsChatOpen(true)} />
