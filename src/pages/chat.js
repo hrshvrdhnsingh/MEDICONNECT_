@@ -4,10 +4,47 @@ import Link from 'next/link';
 import ChatNavbar from '@/components/Navbar/chatNavbar';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
+import cookie from 'cookie';
 let socket;
 
-const Chat = () => {
-  const [list, setList] = useState([]); // doctors or patients
+export async function getServerSideProps(context) {
+  const cookies = cookie.parse(context.req.headers.cookie || '');
+  const userType = cookies.userType;
+  let list = [];
+
+  if (userType === 'doctor') {
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+      }/api/getPatientsForDoctor`,
+      {
+        headers: { Cookie: context.req.headers.cookie || '' },
+      }
+    );
+    const data = await res.json();
+    list = data.patients || [];
+  } else if (userType) {
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+      }/api/getDoctors`,
+      {
+        headers: { Cookie: context.req.headers.cookie || '' },
+      }
+    );
+    const data = await res.json();
+    list = data.doctors || [];
+  }
+
+  return {
+    props: {
+      initialList: list,
+    },
+  };
+}
+
+const Chat = ({ initialList = [] }) => {
+  const [list, setList] = useState(initialList); // doctors or patients
   const [selected, setSelected] = useState(null); // selected doctor or patient
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
@@ -29,6 +66,10 @@ const Chat = () => {
     if (!socket && typeof window !== 'undefined') {
       socket = io(process.env.NEXT_PUBLIC_CHAT_SERVER_URL);
     }
+    // Fetch list immediately after getting userType
+    if (userType) {
+      fetchList(userType);
+    }
   }, []);
 
   // Fetch doctors (for user) or patients (for doctor) on client if needed
@@ -44,12 +85,6 @@ const Chat = () => {
       setList(data.doctors || []);
     }
   };
-
-  useEffect(() => {
-    if (initialUserType) {
-      fetchList(initialUserType);
-    }
-  }, [initialUserType]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
