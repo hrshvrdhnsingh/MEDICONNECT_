@@ -4,11 +4,12 @@ import Link from 'next/link';
 import ChatNavbar from '@/components/Navbar/chatNavbar';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
-import cookie from 'cookie';
 let socket;
 
 export async function getServerSideProps(context) {
-  const cookies = cookie.parse(context.req.headers.cookie || '');
+  // Fix: Use require for 'cookie' in getServerSideProps to avoid undefined in SSR
+  const cookieLib = require('cookie');
+  const cookies = cookieLib.parse(context.req.headers.cookie || '');
   const userType = cookies.userType;
   let list = [];
 
