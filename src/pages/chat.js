@@ -4,30 +4,77 @@ import Link from 'next/link';
 import ChatNavbar from '@/components/Navbar/chatNavbar';
 import Cookies from 'js-cookie';
 import Image from 'next/image';
+// import { useRouter } from 'next/router'; // Added for redirect
 let socket;
 
-const Chat = () => {
-  const [list, setList] = useState([]); // doctors or patients
+export async function getServerSideProps(context) {
+  // Fix: Use require for 'cookie' in getServerSideProps to avoid undefined in SSR
+  const cookieLib = require('cookie');
+  const cookies = cookieLib.parse(context.req.headers.cookie || '');
+  const userType = cookies.userType;
+  const token = cookies.token;
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+  let list = [];
+
+  if (userType === 'doctor') {
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+      }/api/getPatientsForDoctor`,
+      {
+        headers: { Cookie: context.req.headers.cookie || '' },
+      }
+    );
+    const data = await res.json();
+    list = data.patients || [];
+  } else if (userType) {
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+      }/api/getDoctors`,
+      {
+        headers: { Cookie: context.req.headers.cookie || '' },
+      }
+    );
+    const data = await res.json();
+    list = data.doctors || [];
+  }
+
+  return {
+    props: {
+      initialList: list,
+    },
+  };
+}
+
+const Chat = ({ initialList = [] }) => {
+  const [list, setList] = useState(initialList); // doctors or patients
   const [selected, setSelected] = useState(null); // selected doctor or patient
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
-  const [isClient, setIsClient] = useState(false);
   const [initialUserType, setInitialUserType] = useState(null);
   const [initialUserUid, setInitialUserUid] = useState(null);
-  const [initialToken, setInitialToken] = useState(null);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    setIsClient(true);
-    // Get userType, user_uid, token from cookies
+    // Get userType, user_uid from cookies
     const userType = Cookies.get('userType');
     const user_uid = Cookies.get('user_uid');
-    const token = Cookies.get('token');
     setInitialUserType(userType);
     setInitialUserUid(user_uid);
-    setInitialToken(token);
     if (!socket && typeof window !== 'undefined') {
       socket = io(process.env.NEXT_PUBLIC_CHAT_SERVER_URL);
+    }
+    // Fetch list immediately after getting userType
+    if (userType) {
+      fetchList(userType);
     }
   }, []);
 
@@ -44,12 +91,6 @@ const Chat = () => {
       setList(data.doctors || []);
     }
   };
-
-  useEffect(() => {
-    if (initialUserType) {
-      fetchList(initialUserType);
-    }
-  }, [initialUserType]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -101,11 +142,7 @@ const Chat = () => {
   };
 
   // UI labels
-  const listTitle = isClient
-    ? initialUserType === 'doctor'
-      ? 'Patients'
-      : 'Doctors'
-    : '';
+  const listTitle = initialUserType === 'doctor' ? 'Patients' : 'Doctors';
 
   const getDisplayName = (item) =>
     initialUserType === 'doctor'
@@ -170,13 +207,11 @@ const Chat = () => {
                   </div>
                 )}
             </div>
-          ) : isClient ? (
+          ) : (
             <div className='font-medium text-xl'>
               Select a {initialUserType === 'doctor' ? 'patient' : 'doctor'} to
               chat
             </div>
-          ) : (
-            ''
           )}
           <ChatNavbar className='border border-black' />
         </div>
@@ -240,7 +275,7 @@ const Chat = () => {
                   </div>
                 );
               })
-            : isClient && (
+            : (
                 <div className='text-[#64748b] mt-8'>
                   Select a {initialUserType === 'doctor' ? 'patient' : 'doctor'}{' '}
                   to start chatting.
@@ -256,11 +291,9 @@ const Chat = () => {
             placeholder={
               selected
                 ? 'Type your message...'
-                : isClient
-                ? `Select a ${
+                : `Select a ${
                     initialUserType === 'doctor' ? 'patient' : 'doctor'
                   } to chat`
-                : ''
             }
             className={`flex-1 border border-[#cbd5e1] rounded-[6px] py-2 px-3 text-base outline-none ${
               selected ? 'bg-white' : 'bg-[#f1f5f9]'
