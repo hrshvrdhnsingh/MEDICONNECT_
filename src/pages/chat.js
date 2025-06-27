@@ -32,9 +32,13 @@ export async function getServerSideProps(context) {
         headers: { Cookie: context.req.headers.cookie || '' },
       }
     );
-
-    const data = await res.json();
-    list = data.patients || [];
+    try {
+      const data = await res.json();
+      list = data.patients || [];
+    } catch (err) {
+      console.log('Error parsing doctor patients JSON:', err);
+      list = [];
+    }
   } else if (userType) {
     const res = await fetch(
       `${
@@ -44,8 +48,13 @@ export async function getServerSideProps(context) {
         headers: { Cookie: context.req.headers.cookie || '' },
       }
     );
-    const data = await res.json();
-    list = data.doctors || [];
+    try {
+      const data = await res.json();
+      list = data.doctors || [];
+    } catch (err) {
+      console.log('Error parsing doctors JSON:', err);
+      list = [];
+    }
   }
 
   return {
@@ -199,71 +208,71 @@ const Chat = ({ initialList = [] }) => {
           <ChatNavbar className='border border-black' />
         </div>
         <div className='flex-1  overflow-y-auto p-3 bg-[#f8fafc]'>
-          {messages.length > 0
-            ? messages.map((msg, idx) => {
-                const isLast = idx === messages.length - 1;
-                const isUser = msg.sender === initialUserType;
-                const isDoctor = msg.sender === 'doctor';
-                const isPatient = msg.sender === 'patient';
-                const displayName = isUser ? 'You' : msg.sender;
+          {messages.length > 0 ? (
+            messages.map((msg, idx) => {
+              const isLast = idx === messages.length - 1;
+              const isUser = msg.sender === initialUserType;
+              const isDoctor = msg.sender === 'doctor';
+              const isPatient = msg.sender === 'patient';
+              const displayName = isUser ? 'You' : msg.sender;
 
-                // Decide the image based on the sender role
-                const imageSrc = isDoctor
-                  ? 'https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747493127/nczsnx2iewsmbo8vuv0m.png' // Replace with your doctor logo path
-                  : 'https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747493384/f1siona09tbsca88ftlv.png'; // Replace with your patient logo path
+              // Decide the image based on the sender role
+              const imageSrc = isDoctor
+                ? 'https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747493127/nczsnx2iewsmbo8vuv0m.png' // Replace with your doctor logo path
+                : 'https://res.cloudinary.com/dv6bqnxqf/image/upload/v1747493384/f1siona09tbsca88ftlv.png'; // Replace with your patient logo path
 
-                return (
+              return (
+                <div
+                  key={idx}
+                  ref={isLast ? messagesEndRef : null}
+                  className={`mb-3 flex items-end ${
+                    isUser ? 'justify-end' : 'justify-start'
+                  }`}
+                >
+                  {/* Logo on left if NOT user */}
+                  {!isUser && (
+                    <Image
+                      src={imageSrc}
+                      alt={msg.sender}
+                      width={32}
+                      height={32}
+                      className='lg:w-8 lg:h-8 h-6 w-6 mr-2 mb-2'
+                    />
+                  )}
+
+                  {/* Message bubble */}
                   <div
-                    key={idx}
-                    ref={isLast ? messagesEndRef : null}
-                    className={`mb-3 flex items-end ${
-                      isUser ? 'justify-end' : 'justify-start'
+                    className={`px-2 py-2 max-w-[50%] break-words ${
+                      isUser
+                        ? 'bg-[#2563eb] text-white rounded-l-md rounded-t-md'
+                        : 'bg-[#34d76a] text-white rounded-r-md rounded-t-md'
                     }`}
                   >
-                    {/* Logo on left if NOT user */}
-                    {!isUser && (
-                      <Image
-                        src={imageSrc}
-                        alt={msg.sender}
-                        width={32}
-                        height={32}
-                        className='lg:w-8 lg:h-8 h-6 w-6 mr-2 mb-2'
-                      />
-                    )}
-
-                    {/* Message bubble */}
-                    <div
-                      className={`px-2 py-2 max-w-[50%] break-words ${
-                        isUser
-                          ? 'bg-[#2563eb] text-white rounded-l-md rounded-t-md'
-                          : 'bg-[#34d76a] text-white rounded-r-md rounded-t-md'
-                      }`}
-                    >
-                      <div className='text-xs text-gray-200 font-bold mb-1'>
-                        {displayName}
-                      </div>
-                      <div>{msg.message}</div>
+                    <div className='text-xs text-gray-200 font-bold mb-1'>
+                      {displayName}
                     </div>
-
-                    {/* Logo on right if user */}
-                    {isUser && (
-                      <Image
-                        src={imageSrc}
-                        alt={msg.sender}
-                        width={24}
-                        height={24}
-                        className='lg:w-6 lg:h-6 h-4 w-4 ml-2 mb-2'
-                      />
-                    )}
+                    <div>{msg.message}</div>
                   </div>
-                );
-              })
-            : (
-                <div className='text-[#64748b] mt-8'>
-                  Select a {initialUserType === 'doctor' ? 'patient' : 'doctor'}{' '}
-                  to start chatting.
+
+                  {/* Logo on right if user */}
+                  {isUser && (
+                    <Image
+                      src={imageSrc}
+                      alt={msg.sender}
+                      width={24}
+                      height={24}
+                      className='lg:w-6 lg:h-6 h-4 w-4 ml-2 mb-2'
+                    />
+                  )}
                 </div>
-              )}
+              );
+            })
+          ) : (
+            <div className='text-[#64748b] mt-8'>
+              Select a {initialUserType === 'doctor' ? 'patient' : 'doctor'} to
+              start chatting.
+            </div>
+          )}
         </div>
         {/* Input */}
         <div className='p-2 border-t border-[#e5e7eb] bg-[#f1f5f9] flex gap-2'>
