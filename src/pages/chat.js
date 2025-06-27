@@ -32,6 +32,7 @@ export async function getServerSideProps(context) {
         headers: { Cookie: context.req.headers.cookie || '' },
       }
     );
+
     const data = await res.json();
     list = data.patients || [];
   } else if (userType) {
@@ -72,25 +73,7 @@ const Chat = ({ initialList = [] }) => {
     if (!socket && typeof window !== 'undefined') {
       socket = io(process.env.NEXT_PUBLIC_CHAT_SERVER_URL);
     }
-    // Fetch list immediately after getting userType
-    if (userType) {
-      fetchList(userType);
-    }
   }, []);
-
-  // Fetch doctors (for user) or patients (for doctor) on client if needed
-  const fetchList = async (userType) => {
-    if (!userType) return;
-    if (userType === 'doctor') {
-      const res = await fetch('/api/getPatientsForDoctor');
-      const data = await res.json();
-      setList(data.patients || []);
-    } else {
-      const res = await fetch('/api/getDoctors');
-      const data = await res.json();
-      setList(data.doctors || []);
-    }
-  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
