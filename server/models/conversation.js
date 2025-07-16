@@ -1,34 +1,34 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const conversationSchema = new mongoose.Schema(
-  {
+const conversationSchema = new mongoose.Schema({
     user_uid: {
-      type: String, // Reference the uid field of the User collection
-      ref: 'user', // Match the actual collection name in lowercase
-      required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", 
+        required: true,
     },
     doctor_uid: {
-      type: String, // Reference the uid field of the Doctor collection
-      ref: 'doctor', // Match the actual collection name in lowercase
-      required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Doctor", 
+        required: true,
     },
+    // Array of chats between the user and the doctor. It contains the sender type, the message and timestamp.
     chats: [
-      {
-        sender: {
-          type: String,
-          required: true,
-          enum: ['user', 'doctor'], // Restrict sender to either 'user' or 'doctor'
+        {
+            sender: {
+                type: String,
+                required: true,
+                enum: ["user", "doctor"], 
+            },
+            message: { type: String, required: true },
+            timestamp: { type: Date, default: () => Date.now() },
         },
-        message: { type: String, required: true },
-        timestamp: { type: Date, default: Date.now },
-      },
     ],
-  },
-  { timestamps: true }
-);
+}, { timestamps: true });
+
+// Index for faster lookups due to the 1:1 relationship
+conversationSchema.index({ user: 1, doctor: 1 });
 
 const Conversation =
-  mongoose.models.Conversation ||
-  mongoose.model('Conversation', conversationSchema);
+    mongoose.models.Conversation || mongoose.model("Conversation", conversationSchema);
 
-module.exports = Conversation;
+export default Conversation;
