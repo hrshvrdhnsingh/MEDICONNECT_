@@ -83,9 +83,9 @@ const Chat = ({ initialList = [] }) => {
         const user_uid = Cookies.get("user_uid");
         setInitialUserType(userType);
         setInitialUserUid(user_uid);
-        // Creates a single socket.io connection on the chat server defined in the server folder
+        // Creates a single socket.io(Websocket) connection on the chat server defined in the server folder
         if (!socket && typeof window !== "undefined") {
-            socket = io(process.env.NEXT_PUBLIC_CHAT_SERVER_URL);
+            socket = io(process.env.NEXT_PUBLIC_CHAT_SERVER_URL); // unique socket id is allocated ot the user
         }
     }, []);
 
